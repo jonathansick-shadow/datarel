@@ -54,7 +54,6 @@ What I'm really doing at the moment for initial startup
 
 Setup Environment
 ------------------
-
 Most activity is done in local copy of: datarel/pipeline/ISR/harness.
 
 0. cd datarel; setup -r .
@@ -69,6 +68,7 @@ Most activity is done in local copy of: datarel/pipeline/ISR/harness.
 
 1.2 Acquire, build, make current, then setup local versions of obs_lsstSim
     (until version with uses channel specs that same as raft specs is installed)
+        % setup obs_lsstSim
 
 1.3 Setup packages needed by datarel  (this step carries into Step 2 below)
    cd datarel; setup -r.
@@ -84,8 +84,27 @@ Most activity is done in local copy of: datarel/pipeline/ISR/harness.
          ln -s /lsst/DC3/stacks/gcc433/04jun/Linux64/afwdata/svn11397 input
          mkdir output work update scratch
 
-3. Update PYTHONPATH to find ctrl_sched/bin sendevents.py:
+3. Update PYTHONPATH to find ctrl_sched/bin/sendevents.py:
    cd ctrl_sched/examples/pipeline; setup -r .
+
+-------------------------------
+# Nicely bundled for one click use:
+cd ~/DC3b/DMS_trunk/datarel
+setup -r .
+setup ip_isr ip_isr_trunk
+setup ctrl_sched ctrl_sched_trunk
+setup sdqa sdqa_trunk
+setup obs_lsstSim obs_lsstSim_trunk
+cd ~/DC3b/DMS_trunk/datarel/pipeline/ISR/harness
+ls -ald input
+mkdir -p work scratch update output
+pushd ~/DC3b/DMS_trunk/ctrl_sched/examples/pipeline
+setup -r .
+which sendevent.py
+popd
+eups list --setup
+-----------------
+
 
 Running the Pipeline
 ----------------------
@@ -103,16 +122,11 @@ When pipeline output in Window One says "Told JobOffice, I'm ready!",
 send the  event providing the details of the specific input data to use.
 
 
-sendevent.py -r Run2 -n ISR -b lsst8 -o \
-  <originatorId # from Window One>  \
--i "raw visit=85751839 snap=0 raft=R:2,3 sensor=S:1,1 channel=C:0,0" -O "postISR visit=85751839 snap=0 raft=R:2,3 sensor=S:1,1 channel=C:0,0" assign IsrJob "ISR visit=85751839 snap=0 raft=R:2,3 sensor=S:1,1 channel=C:0,0"
+sendevent.py -r Run2 -n ISR -b lsst8 -i "raw visit=85751839 snap=0 raft=R:2,3 sensor=S:1,1 channel=C:0,0" -O "postISR visit=85751839 snap=0 raft=R:2,3 sensor=S:1,1 channel=C:0,0" assign IsrJob "ISR visit=85751839 snap=0 raft=R:2,3 sensor=S:1,1 channel=C:0,0" -o \
+  <originatorId # from Window One>  
 
    
-129439804297071
-(Note to self: determine if "-o #" can be placed at end of command.)
-
-
-
+(Note: contrary to doco, '-o' at end of command is OK; easier for mousey-click.)
 
 
 ======================================================================

@@ -4,7 +4,7 @@ parameters: {
     outputItems: {
         isrExposure: {
             datasetId: {
-                datasetType: postIsr
+                datasetType: postISR
                 fromClipboard: "name" "visit" "ccd" "snap" "filter" "channel"
             }
             storagePolicy: {
