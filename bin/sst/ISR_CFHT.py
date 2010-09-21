@@ -43,12 +43,16 @@ def isrProcess(root=None, outRoot=None, registry=None,
     outButler.put(clip['isrExposure'], "postISR", **keys)
     outButler.put(clip['sdqaRatingVector'], "sdqaAmp", **keys)
 
-    clip['plotdata'] = dict(x=17, y=3, z=['yellow','green'])
+    pdkey = 'plotdata'
+    clip[pdkey] = dict(x=17, y=3, z=['yellow','green'])
 
-    D = clip.get('plotdata')
-    if D is not None:
-        outButler.put(D, 'plotdata', **keys)
-
+	# ticket #1059
+    #if pdkey in clip: # and pdkey in outButler.mapper.getDatasetTypes():
+    if clip.contains(pdkey) and pdkey in outButler.mapper.getDatasetTypes():
+        #try:
+		outButler.put(clip[pdkey], pdkey, **keys)
+        #except:
+		#pass
 
 def isrPipe(raw, bias, flat):
     clip = {

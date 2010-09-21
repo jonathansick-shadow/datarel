@@ -72,7 +72,9 @@ def cfhtMain(processFunction, outDatasetType, need=(), defaultRoot="."):
         if "amp" in need:
             parser.add_option("-a", "--amp", action="append", type="int",
                     help="amp number (can be repeated)")
-    parser.add_option('-p', '--plotdata', dest='plotbase', help='plot data output base',
+    parser.add_option('-P', '--plotdata', dest='plotdata', help='Save plot data?',
+                      default=False, action='store_true')
+    parser.add_option('-p', '--plotbase', dest='plotbase', help='plot data output base',
                       default=None)
     (options, args) = parser.parse_args()
 
@@ -97,25 +99,25 @@ def cfhtMain(processFunction, outDatasetType, need=(), defaultRoot="."):
     obf = dafPersist.ButlerFactory(mapper=obm)
     outButler = obf.create()
 
-    plotButler = None
-    if False and options.plotbase is not None:
-        pbf = dafPersist.ButlerFactory(mapper=plotMapper.PlotMapper(
-            root=options.plotbase))
-        plotButler = pbf.create()
-
-    # Try doing this a different way...
-    plotButler = None
-    import frankenMapper
-    if options.plotbase is not None:
-        base = options.plotbase
-    else:
-        base = os.path.join(options.outRoot, 'plotdata')
-    # Omit 'filter' because it's redundant (and needs registry)
-    plotpat = os.path.join(base, 'v%(visit)d/c%(ccd)02d-a%(amp)d.pickle')
-    pm = plotMapper.PlotMapper(filepattern=plotpat) #root=options.plotbase)
-    frankenMapper.makeFrankenMapper(obm, pm)
-    print 'out butler mapper dataset types:', obm.getDatasetTypes()
-
+    # Instead of creating a separate plot butler, we can graft the
+    # map_X methods from PlotMapper onto the outputButler's mapper.
+    if options.plotdata or options.plotbase is not None:
+        import frankenMapper
+        if options.plotbase is not None:
+            base = options.plotbase
+        else:
+            base = os.path.join(options.outRoot, 'plotdata')
+        # Omit 'filter' because it's redundant (and requires the registry)
+        if "skyTile" in need:
+            pat = 'st%(skyTile)d.pickle'
+        elif "amp" in need:
+            pat = 'v%(visit)d/c%(ccd)02d-a%(amp)d.pickle'
+        elif "ccd" in need:
+            pat = 'v%(visit)d/c%(ccd)02d.pickle'
+        else:
+            pat = 'v%(visit)d.pickle'
+        pm = plotMapper.PlotMapper(filepattern=os.path.join(base, pat))
+        frankenMapper.makeFrankenMapper(obm, pm)
 
     if "skyTile" in need:
         if options.skyTile is None:
@@ -172,7 +174,6 @@ def cfhtMain(processFunction, outDatasetType, need=(), defaultRoot="."):
                                 "***** Processing visit %d ccd %d" % \
                                 (visit, ccd)
                         processFunction(inButler=inButler, outButler=outButler,
-                                        plotButler=plotButler,
                                 visit=visit, ccd=ccd)
         else:
             if options.force or \
