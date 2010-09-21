@@ -39,6 +39,7 @@ try:
 except:
     haveLsstSim = False
 
+import plotMapper
 
 def runStage(stage, policyString, clip):
     if policyString.startswith("#<?cfg "):
@@ -71,6 +72,8 @@ def cfhtMain(processFunction, outDatasetType, need=(), defaultRoot="."):
         if "amp" in need:
             parser.add_option("-a", "--amp", action="append", type="int",
                     help="amp number (can be repeated)")
+    parser.add_option('-p', '--plotdata', dest='plotbase', help='plot data output base',
+                      default=None)
     (options, args) = parser.parse_args()
 
     if options.registry is None:
@@ -93,6 +96,12 @@ def cfhtMain(processFunction, outDatasetType, need=(), defaultRoot="."):
     obf = dafPersist.ButlerFactory(mapper=CfhtMapper(
         root=options.outRoot, registry=options.registry))
     outButler = obf.create()
+
+    plotButler = None
+    if options.plotbase is not None:
+        pbf = dafPersist.ButlerFactory(mapper=plotMapper.PlotMapper(
+            root=options.plotbase))
+        plotButler = pbf.create()
 
     if "skyTile" in need:
         if options.skyTile is None:
@@ -149,6 +158,7 @@ def cfhtMain(processFunction, outDatasetType, need=(), defaultRoot="."):
                                 "***** Processing visit %d ccd %d" % \
                                 (visit, ccd)
                         processFunction(inButler=inButler, outButler=outButler,
+                                        plotButler=plotButler,
                                 visit=visit, ccd=ccd)
         else:
             if options.force or \

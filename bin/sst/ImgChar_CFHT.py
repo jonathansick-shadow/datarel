@@ -33,7 +33,8 @@ import lsst.meas.pipeline as measPipe
 from stageCtrl import *
 
 def imgCharProcess(root=None, outRoot=None, registry=None,
-                   inButler=None, outButler=None, stages=None, **keys):
+                   inButler=None, outButler=None, plotButler=None,
+				   stages=None, **keys):
     inButler, outButler = cfhtSetup(root, outRoot, registry, None,
                                     inButler, outButler)
 
@@ -44,6 +45,12 @@ def imgCharProcess(root=None, outRoot=None, registry=None,
     outButler.put(clip['sourceSet_persistable'], "icSrc", **keys)
     outButler.put(clip['measuredPsf'], "psf", **keys)
     outButler.put(clip['visitExposure'], "calexp", **keys)
+
+    if plotButler is not None:
+        D = clip.get('plotdata')
+        if D is not None:
+            plotButler.put(D, 'plotdata', filename='imgchar_cfht.pickle', **keys)
+
 
 def imgCharPipe(visitim, stages=None):
     #
