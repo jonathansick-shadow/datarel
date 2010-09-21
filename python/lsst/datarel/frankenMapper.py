@@ -22,13 +22,13 @@ def makeFrankenMapper(torso, limb):
         fname = 'map_' + t
         # lf is a bound method (bound to limb)
         lf = getattr(limb, fname)
-        # Now we make the torso's bound method...
+        # Now we bind the method to torso...
         tf = types.MethodType(Bolt(lf), torso, torso.__class__)
         if hasattr(torso, fname):
             # You can override methods, but are you sure you want to?
             #print >> sys.stderr, 'in makeFrankenMapper: overriding method', fname, 'in', torso
             pass
-        # And add it in.
+        # And add it to the torso.
         setattr(torso, fname, tf)
         #print 'Adding function', fname, 'to', torso
         #print 'tf:', tf

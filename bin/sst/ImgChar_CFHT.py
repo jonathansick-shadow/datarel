@@ -34,7 +34,7 @@ from stageCtrl import *
 
 def imgCharProcess(root=None, outRoot=None, registry=None,
                    inButler=None, outButler=None, plotButler=None,
-				   stages=None, **keys):
+                   stages=None, **keys):
     inButler, outButler = cfhtSetup(root, outRoot, registry, None,
                                     inButler, outButler)
 
@@ -45,6 +45,10 @@ def imgCharProcess(root=None, outRoot=None, registry=None,
     outButler.put(clip['sourceSet_persistable'], "icSrc", **keys)
     outButler.put(clip['measuredPsf'], "psf", **keys)
     outButler.put(clip['visitExposure'], "calexp", **keys)
+
+    D = clip.get('plotdata')
+    if D is not None:
+        outButler.put(D, 'plotdata', filename='imgchar_cfht.pickle', **keys)
 
     if plotButler is not None:
         D = clip.get('plotdata')

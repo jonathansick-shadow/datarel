@@ -93,15 +93,29 @@ def cfhtMain(processFunction, outDatasetType, need=(), defaultRoot="."):
         bf = dafPersist.ButlerFactory(mapper=CfhtMapper(
             root=options.root, registry=options.registry))
     inButler = bf.create()
-    obf = dafPersist.ButlerFactory(mapper=CfhtMapper(
-        root=options.outRoot, registry=options.registry))
+    obm = CfhtMapper(root=options.outRoot, registry=options.registry)
+    obf = dafPersist.ButlerFactory(mapper=obm)
     outButler = obf.create()
 
     plotButler = None
-    if options.plotbase is not None:
+    if False and options.plotbase is not None:
         pbf = dafPersist.ButlerFactory(mapper=plotMapper.PlotMapper(
             root=options.plotbase))
         plotButler = pbf.create()
+
+    # Try doing this a different way...
+    plotButler = None
+    import frankenMapper
+    if options.plotbase is not None:
+        base = options.plotbase
+    else:
+        base = os.path.join(options.outRoot, 'plotdata')
+    # Omit 'filter' because it's redundant (and needs registry)
+    plotpat = os.path.join(base, 'v%(visit)d/c%(ccd)02d-a%(amp)d.pickle')
+    pm = plotMapper.PlotMapper(filepattern=plotpat) #root=options.plotbase)
+    frankenMapper.makeFrankenMapper(obm, pm)
+    print 'out butler mapper dataset types:', obm.getDatasetTypes()
+
 
     if "skyTile" in need:
         if options.skyTile is None:

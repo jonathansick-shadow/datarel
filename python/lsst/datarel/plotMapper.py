@@ -1,14 +1,23 @@
-import os.path
+import os
 import lsst.daf.persistence as dafPersist
 
 class PlotMapper(dafPersist.Mapper):
-    def __init__(self, root='.'):
-        self.root = root
+    def __init__(self, filepattern=None): #root='.'):
+        #self.root = root
+        self.pattern = filepattern
 
     def map_plotdata(self, dataId):
-        print 'dataId is', dataId
-        fn = dataId.get('filename', 'plotdata.pickle')
-        path = os.path.join(self.root, fn)
+        print 'PlotMapper.map_plotdata: dataId is', dataId
+        print '(self is', self, ')'
+        print 'filename pattern is', self.pattern
+        path = self.pattern % dataId
+        #fn = dataId.get('filename', 'plotdata.pickle')
+        print 'Writing to path', path
+        dirnm = os.path.dirname(path)
+        if not os.path.exists(dirnm):
+            os.makedirs(dirnm)
+            
+        #path = os.path.join(self.root, fn)
         return dafPersist.ButlerLocation(
             None, None, 'PickleStorage', path, dataId)
 

@@ -43,6 +43,13 @@ def isrProcess(root=None, outRoot=None, registry=None,
     outButler.put(clip['isrExposure'], "postISR", **keys)
     outButler.put(clip['sdqaRatingVector'], "sdqaAmp", **keys)
 
+    clip['plotdata'] = dict(x=17, y=3, z=['yellow','green'])
+
+    D = clip.get('plotdata')
+    if D is not None:
+        outButler.put(D, 'plotdata', **keys)
+
+
 def isrPipe(raw, bias, flat):
     clip = {
         'isrExposure': raw,
