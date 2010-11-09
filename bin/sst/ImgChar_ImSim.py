@@ -41,7 +41,7 @@ def imgCharProcess(root=None, outRoot=None, registry=None,
 
     clip = imgCharPipe(visitim, stages)
 
-    outButler.put((clip['matchList'], clip['matchListMeta']), 'matchList', **keys)
+    outButler.put(clip['matchList_persistable'], 'matchList', **keys)
     outButler.put(clip['sourceSet_persistable'], 'icSrc', **keys)
     outButler.put(clip['measuredPsf'], 'psf', **keys)
     outButler.put(clip['visitExposure'], 'calexp', **keys)
@@ -160,6 +160,7 @@ def imgCharPipe(visitim, stages=None):
             inputSourceSetKey: sourceSet
             outputWcsKey: measuredWcs
             outputMatchListKey: matchList
+            outputMatchListMetaKey: matchListMeta
             numBrightStars: 150
             defaultFilterName: mag
             """, clip)
