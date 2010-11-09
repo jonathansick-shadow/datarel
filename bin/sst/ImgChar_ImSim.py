@@ -37,13 +37,14 @@ def imgCharProcess(root=None, outRoot=None, registry=None,
     inButler, outButler = lsstSimSetup(root, outRoot, registry, None,
                                        inButler, outButler)
 
-    visitim = inButler.get("visitim", **keys)
+    visitim = inButler.get('visitim', **keys)
 
     clip = imgCharPipe(visitim, stages)
 
-    outButler.put(clip['sourceSet_persistable'], "icSrc", **keys)
-    outButler.put(clip['measuredPsf'], "psf", **keys)
-    outButler.put(clip['visitExposure'], "calexp", **keys)
+    outButler.put((clip['matchList'], clip['matchListMeta']), 'matchList', **keys)
+    outButler.put(clip['sourceSet_persistable'], 'icSrc', **keys)
+    outButler.put(clip['measuredPsf'], 'psf', **keys)
+    outButler.put(clip['visitExposure'], 'calexp', **keys)
 
 def imgCharPipe(visitim, stages=None):
     #
