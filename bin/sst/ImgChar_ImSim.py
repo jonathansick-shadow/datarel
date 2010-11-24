@@ -38,8 +38,15 @@ def imgCharProcess(root=None, outRoot=None, registry=None,
                                        inButler, outButler)
 
     visitim = inButler.get("visitim", **keys)
-
-    clip = imgCharPipe(visitim, stages)
+    # outButler, or inButler?
+    kwargs = {}
+    S = inButler.get('sourceIdStart', **keys)
+    if S is not None:
+        sourceIdStart, maxSources = S
+        kwargs['sourceIdStart'] = sourceIdStart
+        kwargs['maxSources'] = maxSources
+        
+    clip = imgCharPipe(visitim, stages, **kwargs)
 
     outButler.put(clip['apCorr'], 'apCorr', **keys)
     outButler.put(clip['sourceSet_persistable'], 'icSrc', **keys)
@@ -47,7 +54,7 @@ def imgCharProcess(root=None, outRoot=None, registry=None,
     outButler.put(clip['measuredPsf'], 'psf', **keys)
     outButler.put(clip['visitExposure'], 'calexp', **keys)
 
-def imgCharPipe(visitim, stages=None):
+def imgCharPipe(visitim, stages=None, sourceIdStart=None, maxSources=None):
     #
     # Which stages to run, and prerequisites
     #
@@ -64,6 +71,11 @@ def imgCharPipe(visitim, stages=None):
     clip = {
         'visitExposure': visitim
     }
+    if sourceIdStart is not None:
+        clip['sourceIdStart'] = sourceIdStart
+    if maxSources is not None:
+        clip['maxSources'] = maxSources
+
 
     if stages & DETECT:
         clip = runStage(measPipe.SourceDetectionStage,
@@ -94,6 +106,8 @@ def imgCharPipe(visitim, stages=None):
                 psf: simplePsf
                 positiveDetection: positiveFootprintSet
                 negativeDetection: negativeFootprintSet
+                sourceIdStart: sourceIdStart
+                maxSources: maxSources
             }
             outputKeys: {
                 sources: sourceSet
