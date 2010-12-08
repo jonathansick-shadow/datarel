@@ -220,6 +220,9 @@ def load(sql, scratch):
             """ % os.path.abspath(csv)))
 
 def referenceMatch(sql, root, scratch, refCatalog, radius):
+    # Make sure mysql can dump into the scratch directory.
+    os.chmod(scratch, 0777)
+
     objectCsv = os.path.abspath(os.path.join(scratch, 'objDump.csv'))
     filtCsv = os.path.abspath(os.path.join(scratch, 'refFilt.csv'))
     matchCsv = os.path.abspath(os.path.join(scratch, 'refObjMatch.csv'))
