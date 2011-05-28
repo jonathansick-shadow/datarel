@@ -1,10 +1,10 @@
 #<?cfg paf policy ?>
 
 source: {
-    modelFlux: SHAPELET_MODEL_8
+    #modelFlux: SHAPELET_MODEL_8
 }
 photometry: {
-    SHAPELET_MODEL_8: {
-        enabled: true
-    }
+    #SHAPELET_MODEL_8: {
+    #    enabled: true
+    #}
 }
