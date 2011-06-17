@@ -95,7 +95,7 @@ def sourceAssocPipe(srcList, calexpMdList, skyTile):
         }
         sourceClusteringPolicy: {
             epsilonArcsec: 0.5
-            minNeighbors: 1
+            minNeighbors: 5
         }
         """, clip)
 
