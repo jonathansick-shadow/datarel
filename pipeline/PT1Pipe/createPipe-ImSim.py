@@ -420,40 +420,12 @@ def ccdAssemblyProcess(f):
 def crSplitProcess(f):
     print >>f, """
     appStage: {
-        name: crSplitBackgroundEstimation0
-        parallelClass: lsst.meas.pipeline.BackgroundEstimationStageParallel
-        eventTopic: None
-        stagePolicy: {
-            inputKeys: {
-                exposure: isrCcdExposure0
-            }
-            outputKeys: {
-                backgroundSubtractedExposure: bkgSubCcdExposure0
-            }
-            parameters: @PT1Pipe/CrSplit-backgroundEstimation.paf
-        }
-    }
-    appStage: {
-        name: crSplitBackgroundEstimation1
-        parallelClass: lsst.meas.pipeline.BackgroundEstimationStageParallel
-        eventTopic: None
-        stagePolicy: {
-            inputKeys: {
-                exposure: isrCcdExposure1
-            }
-            outputKeys: {
-                backgroundSubtractedExposure: bkgSubCcdExposure1
-            }
-            parameters: @PT1Pipe/CrSplit-backgroundEstimation.paf
-        }
-    }
-    appStage: {
         name: crSplitCrReject0
         parallelClass: lsst.ip.pipeline.CrRejectStageParallel
         eventTopic: None
         stagePolicy: {
             inputKeys: {
-                exposure: bkgSubCcdExposure0
+                exposure: isrCcdExposure0
             }
             outputKeys: {
                 exposure: crSubCcdExposure0
@@ -468,13 +440,86 @@ def crSplitProcess(f):
         eventTopic: None
         stagePolicy: {
             inputKeys: {
-                exposure: bkgSubCcdExposure1
+                exposure: isrCcdExposure1
             }
             outputKeys: {
                 exposure: crSubCcdExposure1
             }
             parameters: @PT1Pipe/CrSplit-crReject.paf
             crRejectPolicy: @PT1Pipe/CrSplit-crReject-algorithm.paf
+        }
+    }
+    appStage: {
+        name: crDiffIm
+        parallelClass: lsst.ip.pipeline.PairDiffImStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                snap0ExposureKey: crSubCcdExposure0
+                snap1ExposureKey: crSubCcdExposure1
+            }
+            outputKeys: {
+                differenceExposureKey: crDiffimExposure
+            }
+        }
+    }
+    appStage: {
+        name: crDetect
+        parallelClass: lsst.meas.pipeline.SourceDetectionStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: crDiffimExposure
+            }
+            outputKeys: {
+                positiveDetection: positiveCrSet
+                negativeDetection: negativeCrSet
+            }
+            psfPolicy: @PT1Pipe/CrSplit-sourceDetect-psf.paf
+            backgroundPolicy: @PT1Pipe/CrSplit-sourceDetect-background.paf
+        }
+    }
+    appStage: {
+        name: crExposureList
+        parallelClass: lsst.datarel.ObjectListStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                object: crSubCcdExposure0 crSubCcdExposure1
+            }
+            outputKeys: {
+                objectList: crSubCcdExposureList
+            }
+        }
+    }
+    appStage: {
+        name: crMerge
+        parallelClass: lsst.ip.pipeline.CrSplitCombineStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposures: crSubCcdExposureList
+                positiveDetection: positiveCrSet
+                negativeDetection: negativeCrSet
+            }
+            outputKeys: {
+                combinedExposure: crMergedExposure
+            }
+        }
+    }
+
+    appStage: {
+        name: crSplitBackgroundEstimation
+        parallelClass: lsst.meas.pipeline.BackgroundEstimationStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: crMergedExposure
+            }
+            outputKeys: {
+                backgroundSubtractedExposure: visitExposure
+            }
+            parameters: @PT1Pipe/CrSplit-backgroundEstimation.paf
         }
     }
     """
@@ -485,7 +530,7 @@ def crSplitProcess(f):
         eventTopic: None
         stagePolicy: {
             inputKeys: {
-                visitExposure: crSubCcdExposure0
+                visitExposure: visitExposure
                 jobIdentity: jobIdentity
                 originatorId: originatorId
                 targetDatasets: targetDatasets
@@ -653,12 +698,6 @@ def imgCharProcess(f):
                             fromJobIdentity: "visit" "raft" "sensor"
                         }
                     }
-                    visitExposure: {
-                        datasetId: {
-                            datasetType: calexp
-                            fromJobIdentity: "visit" "raft" "sensor"
-                        }
-                    }
                 }
             }
         }
@@ -762,6 +801,12 @@ def sfmProcess(f):
                     sourceSet_persistable: {
                         datasetId: {
                             datasetType: src
+                            fromJobIdentity: "visit" "raft" "sensor"
+                        }
+                    }
+                    scienceExposure: {
+                        datasetId: {
+                            datasetType: calexp
                             fromJobIdentity: "visit" "raft" "sensor"
                         }
                     }
