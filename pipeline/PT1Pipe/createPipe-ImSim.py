@@ -480,25 +480,12 @@ def crSplitProcess(f):
         }
     }
     appStage: {
-        name: crExposureList
-        parallelClass: lsst.datarel.ObjectListStageParallel
-        eventTopic: None
-        stagePolicy: {
-            inputKeys: {
-                object: crSubCcdExposure0 crSubCcdExposure1
-            }
-            outputKeys: {
-                objectList: crSubCcdExposureList
-            }
-        }
-    }
-    appStage: {
         name: crMerge
         parallelClass: lsst.ip.pipeline.CrSplitCombineStageParallel
         eventTopic: None
         stagePolicy: {
             inputKeys: {
-                exposures: crSubCcdExposureList
+                exposures: crSubCcdExposure0 crSubCcdExposure1
                 positiveDetection: positiveCrSet
                 negativeDetection: negativeCrSet
             }
