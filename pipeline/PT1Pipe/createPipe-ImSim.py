@@ -56,7 +56,7 @@ def isrProcess(f, doJobOffice=False):
                 inputItems: {"""
     for channelX in (0, 1):
         for channelY in (0, 1, 2, 3, 4, 5, 6, 7):
-            for snap in (0,):
+            for snap in (0, 1):
                 channelName = '"%d,%d"' % (channelX, channelY)
                 channelSnap = "%d%d_%d" % (channelX, channelY, snap)
                 print >>f, """
@@ -119,7 +119,7 @@ def isrProcess(f, doJobOffice=False):
             }
         }
     }"""
-            for snap in (0,):
+            for snap in (0, 1):
                 channelSnap = "%d%d_%d" % (channelX, channelY, snap)
                 print >>f, """
     appStage: {
@@ -239,23 +239,23 @@ def isrProcess(f, doJobOffice=False):
                             }
                         }
                     }
-#                    sdqaRatingVector1: {
-#                        datasetId: {
-#                            datasetType: sdqaAmp
-#                            fromJobIdentity: "visit" "raft" "sensor"
-#                            set: {
-#                                snap: 1
-#                                channel: """ + channelName + """
-#                            }
-#                        }
-#                    }
+                    sdqaRatingVector1: {
+                        datasetId: {
+                            datasetType: sdqaAmp
+                            fromJobIdentity: "visit" "raft" "sensor"
+                            set: {
+                                snap: 1
+                                channel: """ + channelName + """
+                            }
+                        }
+                    }
                 }
             }
         }
     }"""
 
 def ccdAssemblyProcess(f):
-    for snap in (0,):
+    for snap in (0, 1):
         print >>f, """
     appStage: {
         name: ccdAssemblyCcdList""" + str(snap) + """
@@ -337,7 +337,7 @@ def ccdAssemblyProcess(f):
             parameters: {
                 butler: @PT1Pipe/butlerUpdate.paf
                 outputItems: {"""
-    for snap in (0,):
+    for snap in (0, 1):
 #        for channelX in (0, 1):
 #            for channelY in (0, 1, 2, 3, 4, 5, 6, 7):
 #                channelName = '"%d,%d"' % (channelX, channelY)
@@ -353,17 +353,17 @@ def ccdAssemblyProcess(f):
 #                            }
 #                        }
 #                    }"""
-#        print >>f, """
-#                    isrExposure""" + str(snap) + """: {
-#                        datasetId: {
-#                            datasetType: postISRCCD
-#                            fromJobIdentity: "visit" "raft" "sensor"
-#                            set: {
-#                                snap: """ + str(snap) + """
-#                            }
-#                        }
-#                    }"""
-#        
+        print >>f, """
+                    isrExposure""" + str(snap) + """: {
+                        datasetId: {
+                            datasetType: postISRCCD
+                            fromJobIdentity: "visit" "raft" "sensor"
+                            set: {
+                                snap: """ + str(snap) + """
+                            }
+                        }
+                    }"""
+        
         print >>f, """
                     sdqaRatingVector""" + str(snap) + """: {
                         datasetId: {
@@ -412,35 +412,6 @@ def ccdAssemblyProcess(f):
 def crSplitProcess(f):
     print >>f, """
     appStage: {
-        name: crSplitBackgroundEstimation0
-        parallelClass: lsst.meas.pipeline.BackgroundEstimationStageParallel
-        eventTopic: None
-        stagePolicy: {
-            inputKeys: {
-                exposure: isrCcdExposure0
-            }
-            outputKeys: {
-                backgroundSubtractedExposure: bkgSubCcdExposure0
-            }
-            parameters: @PT1Pipe/CrSplit-backgroundEstimation.paf
-        }
-    }
-#    appStage: {
-#        name: crSplitBackgroundEstimation1
-#        parallelClass: lsst.meas.pipeline.BackgroundEstimationStageParallel
-#        eventTopic: None
-#        stagePolicy: {
-#            inputKeys: {
-#                exposure: isrCcdExposure1
-#            }
-#            outputKeys: {
-#                backgroundSubtractedExposure: bkgSubCcdExposure1
-#            }
-#            parameters: @PT1Pipe/CrSplit-backgroundEstimation.paf
-#        }
-#    }
-
-    appStage: {
         name: vigCorrInput
         parallelClass: lsst.pex.harness.IOStage.InputStageParallel
         eventTopic: None
@@ -460,66 +431,55 @@ def crSplitProcess(f):
             }
         }
     }    
+    """
+
+    for snap in (0,):
+        print >>f, """
     appStage: {
-        name: vigCorr0
+        name: crSplitBackgroundEstimation""" + str(snap) + """
+        parallelClass: lsst.meas.pipeline.BackgroundEstimationStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrCcdExposure""" + str(snap) + """
+            }
+            outputKeys: {
+                backgroundSubtractedExposure: bkgSubCcdExposure""" + str(snap) + """
+            }
+            parameters: @PT1Pipe/CrSplit-backgroundEstimation.paf
+        }
+    }
+    appStage: {
+        name: vigCorr""" + str(snap) + """
         parallelClass: lsst.datarel.VigCorrStageParallel
         eventTopic: None
         stagePolicy: {
             inputKeys: {
-                exposure: bkgSubCcdExposure0
+                exposure: bkgSubCcdExposure""" + str(snap) + """
                 vigCorrImage: vigCorrImage
             }
             outputKeys: {
-                corrExposure: vigCorrBkgSubCcdExposure0
+                corrExposure: vigCorrBkgSubCcdExposure""" + str(snap) + """
             }
         }
     }    
-#    appStage: {
-#        name: vigCorr1
-#        parallelClass: lsst.datarel.VigCorrStageParallel
-#        eventTopic: None
-#        stagePolicy: {
-#            inputKeys: {
-#                exposure: bkgSubCcdExposure1
-#                vigCorrImage: vigCorrImage
-#            }
-#            outputKeys: {
-#                corrExposure: vigCorrBkgSubCcdExposure1
-#            }
-#        }
-#    }
-
     appStage: {
-        name: crSplitCrReject0
+        name: crSplitCrReject""" + str(snap) + """
         parallelClass: lsst.ip.pipeline.CrRejectStageParallel
         eventTopic: None
         stagePolicy: {
             inputKeys: {
-                exposure: vigCorrBkgSubCcdExposure0
+                exposure: vigCorrBkgSubCcdExposure""" + str(snap) + """
             }
             outputKeys: {
-                exposure: crSubCcdExposure0
+                exposure: crSubCcdExposure""" + str(snap) + """
             }
             parameters: @PT1Pipe/CrSplit-crReject.paf
             crRejectPolicy: @PT1Pipe/CrSplit-crReject-algorithm.paf
         }
-    }
-#    appStage: {
-#        name: crSplitCrReject1
-#        parallelClass: lsst.ip.pipeline.CrRejectStageParallel
-#        eventTopic: None
-#        stagePolicy: {
-#            inputKeys: {
-#                exposure: vigCorrBkgSubCcdExposure1
-#            }
-#            outputKeys: {
-#                exposure: crSubCcdExposure1
-#            }
-#            parameters: @PT1Pipe/CrSplit-crReject.paf
-#            crRejectPolicy: @PT1Pipe/CrSplit-crReject-algorithm.paf
-#        }
-#    }
+    }"""
 
+    print >>f, """
     appStage: {
         name: crSplitFixup
         parallelClass: lsst.datarel.FixupStageParallel

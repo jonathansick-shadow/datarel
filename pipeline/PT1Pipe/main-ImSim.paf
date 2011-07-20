@@ -55,12 +55,34 @@ execute: {
                         }
                     }
 
+                    isrExposure00_1: {
+                        datasetType: raw
+                        datasetId: {
+                            fromJobIdentity: "visit" "raft" "sensor"
+                            set: {
+                                snap: 1
+                                channel: "0,0"
+                            }
+                        }
+                    }
+
                     isrExposure01_0: {
                         datasetType: raw
                         datasetId: {
                             fromJobIdentity: "visit" "raft" "sensor"
                             set: {
                                 snap: 0
+                                channel: "0,1"
+                            }
+                        }
+                    }
+
+                    isrExposure01_1: {
+                        datasetType: raw
+                        datasetId: {
+                            fromJobIdentity: "visit" "raft" "sensor"
+                            set: {
+                                snap: 1
                                 channel: "0,1"
                             }
                         }
@@ -77,12 +99,34 @@ execute: {
                         }
                     }
 
+                    isrExposure02_1: {
+                        datasetType: raw
+                        datasetId: {
+                            fromJobIdentity: "visit" "raft" "sensor"
+                            set: {
+                                snap: 1
+                                channel: "0,2"
+                            }
+                        }
+                    }
+
                     isrExposure03_0: {
                         datasetType: raw
                         datasetId: {
                             fromJobIdentity: "visit" "raft" "sensor"
                             set: {
                                 snap: 0
+                                channel: "0,3"
+                            }
+                        }
+                    }
+
+                    isrExposure03_1: {
+                        datasetType: raw
+                        datasetId: {
+                            fromJobIdentity: "visit" "raft" "sensor"
+                            set: {
+                                snap: 1
                                 channel: "0,3"
                             }
                         }
@@ -99,12 +143,34 @@ execute: {
                         }
                     }
 
+                    isrExposure04_1: {
+                        datasetType: raw
+                        datasetId: {
+                            fromJobIdentity: "visit" "raft" "sensor"
+                            set: {
+                                snap: 1
+                                channel: "0,4"
+                            }
+                        }
+                    }
+
                     isrExposure05_0: {
                         datasetType: raw
                         datasetId: {
                             fromJobIdentity: "visit" "raft" "sensor"
                             set: {
                                 snap: 0
+                                channel: "0,5"
+                            }
+                        }
+                    }
+
+                    isrExposure05_1: {
+                        datasetType: raw
+                        datasetId: {
+                            fromJobIdentity: "visit" "raft" "sensor"
+                            set: {
+                                snap: 1
                                 channel: "0,5"
                             }
                         }
@@ -121,12 +187,34 @@ execute: {
                         }
                     }
 
+                    isrExposure06_1: {
+                        datasetType: raw
+                        datasetId: {
+                            fromJobIdentity: "visit" "raft" "sensor"
+                            set: {
+                                snap: 1
+                                channel: "0,6"
+                            }
+                        }
+                    }
+
                     isrExposure07_0: {
                         datasetType: raw
                         datasetId: {
                             fromJobIdentity: "visit" "raft" "sensor"
                             set: {
                                 snap: 0
+                                channel: "0,7"
+                            }
+                        }
+                    }
+
+                    isrExposure07_1: {
+                        datasetType: raw
+                        datasetId: {
+                            fromJobIdentity: "visit" "raft" "sensor"
+                            set: {
+                                snap: 1
                                 channel: "0,7"
                             }
                         }
@@ -143,12 +231,34 @@ execute: {
                         }
                     }
 
+                    isrExposure10_1: {
+                        datasetType: raw
+                        datasetId: {
+                            fromJobIdentity: "visit" "raft" "sensor"
+                            set: {
+                                snap: 1
+                                channel: "1,0"
+                            }
+                        }
+                    }
+
                     isrExposure11_0: {
                         datasetType: raw
                         datasetId: {
                             fromJobIdentity: "visit" "raft" "sensor"
                             set: {
                                 snap: 0
+                                channel: "1,1"
+                            }
+                        }
+                    }
+
+                    isrExposure11_1: {
+                        datasetType: raw
+                        datasetId: {
+                            fromJobIdentity: "visit" "raft" "sensor"
+                            set: {
+                                snap: 1
                                 channel: "1,1"
                             }
                         }
@@ -165,12 +275,34 @@ execute: {
                         }
                     }
 
+                    isrExposure12_1: {
+                        datasetType: raw
+                        datasetId: {
+                            fromJobIdentity: "visit" "raft" "sensor"
+                            set: {
+                                snap: 1
+                                channel: "1,2"
+                            }
+                        }
+                    }
+
                     isrExposure13_0: {
                         datasetType: raw
                         datasetId: {
                             fromJobIdentity: "visit" "raft" "sensor"
                             set: {
                                 snap: 0
+                                channel: "1,3"
+                            }
+                        }
+                    }
+
+                    isrExposure13_1: {
+                        datasetType: raw
+                        datasetId: {
+                            fromJobIdentity: "visit" "raft" "sensor"
+                            set: {
+                                snap: 1
                                 channel: "1,3"
                             }
                         }
@@ -187,12 +319,34 @@ execute: {
                         }
                     }
 
+                    isrExposure14_1: {
+                        datasetType: raw
+                        datasetId: {
+                            fromJobIdentity: "visit" "raft" "sensor"
+                            set: {
+                                snap: 1
+                                channel: "1,4"
+                            }
+                        }
+                    }
+
                     isrExposure15_0: {
                         datasetType: raw
                         datasetId: {
                             fromJobIdentity: "visit" "raft" "sensor"
                             set: {
                                 snap: 0
+                                channel: "1,5"
+                            }
+                        }
+                    }
+
+                    isrExposure15_1: {
+                        datasetType: raw
+                        datasetId: {
+                            fromJobIdentity: "visit" "raft" "sensor"
+                            set: {
+                                snap: 1
                                 channel: "1,5"
                             }
                         }
@@ -209,12 +363,34 @@ execute: {
                         }
                     }
 
+                    isrExposure16_1: {
+                        datasetType: raw
+                        datasetId: {
+                            fromJobIdentity: "visit" "raft" "sensor"
+                            set: {
+                                snap: 1
+                                channel: "1,6"
+                            }
+                        }
+                    }
+
                     isrExposure17_0: {
                         datasetType: raw
                         datasetId: {
                             fromJobIdentity: "visit" "raft" "sensor"
                             set: {
                                 snap: 0
+                                channel: "1,7"
+                            }
+                        }
+                    }
+
+                    isrExposure17_1: {
+                        datasetType: raw
+                        datasetId: {
+                            fromJobIdentity: "visit" "raft" "sensor"
+                            set: {
+                                snap: 1
                                 channel: "1,7"
                             }
                         }
@@ -363,6 +539,103 @@ execute: {
     }
 
     appStage: {
+        name: isrSaturation00_1
+        parallelClass: lsst.ip.pipeline.IsrSaturationStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure00_1
+            }
+            outputKeys: {
+                saturationMaskedExposure: isrExposure00_1
+            }
+        }
+    }
+    appStage: {
+        name: isrOverscan00_1
+        parallelClass: lsst.ip.pipeline.IsrOverscanStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure00_1
+            }
+            outputKeys: {
+                overscanCorrectedExposure: isrExposure00_1
+            }
+        }
+    }
+    appStage: {
+        name: isrBias00_1
+        parallelClass: lsst.ip.pipeline.IsrBiasStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure00_1
+                biasexposure: biasExposure
+            }
+            outputKeys: {
+                biasSubtractedExposure: isrExposure00_1
+            }
+        }
+    }
+    appStage: {
+        name: isrVariance00_1
+        parallelClass: lsst.ip.pipeline.IsrVarianceStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure00_1
+            }
+            outputKeys: {
+                varianceAddedExposure: isrExposure00_1
+            }
+        }
+    }
+    appStage: {
+        name: isrDark00_1
+        parallelClass: lsst.ip.pipeline.IsrDarkStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure00_1
+                darkexposure: darkExposure
+            }
+            outputKeys: {
+                darkSubtractedExposure: isrExposure00_1
+            }
+        }
+    }
+    appStage: {
+        name: isrFlat00_1
+        parallelClass: lsst.ip.pipeline.IsrFlatStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure00_1
+                flatexposure: flatExposure
+            }
+            parameters: @PT1Pipe/ISR-flat.paf
+            outputKeys: {
+                flatCorrectedExposure: isrExposure00_1
+            }
+        }
+    }
+    appStage: {
+        name: isrSdqaAmp00_1
+        parallelClass: lsst.sdqa.pipeline.IsrSdqaStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposureKey: isrExposure00_1
+            }
+            parameters: @PT1Pipe/ISR-sdqaAmp.paf
+            outputKeys: {
+                isrPersistableSdqaRatingVectorKey: sdqaRatingVector1
+            }
+        }
+    }
+
+    appStage: {
         name: isrOutput00
         parallelClass: lsst.pex.harness.IOStage.OutputStageParallel
         eventTopic: None
@@ -380,16 +653,16 @@ execute: {
                             }
                         }
                     }
-#                    sdqaRatingVector1: {
-#                        datasetId: {
-#                            datasetType: sdqaAmp
-#                            fromJobIdentity: "visit" "raft" "sensor"
-#                            set: {
-#                                snap: 1
-#                                channel: "0,0"
-#                            }
-#                        }
-#                    }
+                    sdqaRatingVector1: {
+                        datasetId: {
+                            datasetType: sdqaAmp
+                            fromJobIdentity: "visit" "raft" "sensor"
+                            set: {
+                                snap: 1
+                                channel: "0,0"
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -533,6 +806,103 @@ execute: {
     }
 
     appStage: {
+        name: isrSaturation01_1
+        parallelClass: lsst.ip.pipeline.IsrSaturationStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure01_1
+            }
+            outputKeys: {
+                saturationMaskedExposure: isrExposure01_1
+            }
+        }
+    }
+    appStage: {
+        name: isrOverscan01_1
+        parallelClass: lsst.ip.pipeline.IsrOverscanStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure01_1
+            }
+            outputKeys: {
+                overscanCorrectedExposure: isrExposure01_1
+            }
+        }
+    }
+    appStage: {
+        name: isrBias01_1
+        parallelClass: lsst.ip.pipeline.IsrBiasStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure01_1
+                biasexposure: biasExposure
+            }
+            outputKeys: {
+                biasSubtractedExposure: isrExposure01_1
+            }
+        }
+    }
+    appStage: {
+        name: isrVariance01_1
+        parallelClass: lsst.ip.pipeline.IsrVarianceStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure01_1
+            }
+            outputKeys: {
+                varianceAddedExposure: isrExposure01_1
+            }
+        }
+    }
+    appStage: {
+        name: isrDark01_1
+        parallelClass: lsst.ip.pipeline.IsrDarkStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure01_1
+                darkexposure: darkExposure
+            }
+            outputKeys: {
+                darkSubtractedExposure: isrExposure01_1
+            }
+        }
+    }
+    appStage: {
+        name: isrFlat01_1
+        parallelClass: lsst.ip.pipeline.IsrFlatStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure01_1
+                flatexposure: flatExposure
+            }
+            parameters: @PT1Pipe/ISR-flat.paf
+            outputKeys: {
+                flatCorrectedExposure: isrExposure01_1
+            }
+        }
+    }
+    appStage: {
+        name: isrSdqaAmp01_1
+        parallelClass: lsst.sdqa.pipeline.IsrSdqaStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposureKey: isrExposure01_1
+            }
+            parameters: @PT1Pipe/ISR-sdqaAmp.paf
+            outputKeys: {
+                isrPersistableSdqaRatingVectorKey: sdqaRatingVector1
+            }
+        }
+    }
+
+    appStage: {
         name: isrOutput01
         parallelClass: lsst.pex.harness.IOStage.OutputStageParallel
         eventTopic: None
@@ -550,16 +920,16 @@ execute: {
                             }
                         }
                     }
-#                    sdqaRatingVector1: {
-#                        datasetId: {
-#                            datasetType: sdqaAmp
-#                            fromJobIdentity: "visit" "raft" "sensor"
-#                            set: {
-#                                snap: 1
-#                                channel: "0,1"
-#                            }
-#                        }
-#                    }
+                    sdqaRatingVector1: {
+                        datasetId: {
+                            datasetType: sdqaAmp
+                            fromJobIdentity: "visit" "raft" "sensor"
+                            set: {
+                                snap: 1
+                                channel: "0,1"
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -703,6 +1073,103 @@ execute: {
     }
 
     appStage: {
+        name: isrSaturation02_1
+        parallelClass: lsst.ip.pipeline.IsrSaturationStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure02_1
+            }
+            outputKeys: {
+                saturationMaskedExposure: isrExposure02_1
+            }
+        }
+    }
+    appStage: {
+        name: isrOverscan02_1
+        parallelClass: lsst.ip.pipeline.IsrOverscanStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure02_1
+            }
+            outputKeys: {
+                overscanCorrectedExposure: isrExposure02_1
+            }
+        }
+    }
+    appStage: {
+        name: isrBias02_1
+        parallelClass: lsst.ip.pipeline.IsrBiasStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure02_1
+                biasexposure: biasExposure
+            }
+            outputKeys: {
+                biasSubtractedExposure: isrExposure02_1
+            }
+        }
+    }
+    appStage: {
+        name: isrVariance02_1
+        parallelClass: lsst.ip.pipeline.IsrVarianceStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure02_1
+            }
+            outputKeys: {
+                varianceAddedExposure: isrExposure02_1
+            }
+        }
+    }
+    appStage: {
+        name: isrDark02_1
+        parallelClass: lsst.ip.pipeline.IsrDarkStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure02_1
+                darkexposure: darkExposure
+            }
+            outputKeys: {
+                darkSubtractedExposure: isrExposure02_1
+            }
+        }
+    }
+    appStage: {
+        name: isrFlat02_1
+        parallelClass: lsst.ip.pipeline.IsrFlatStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure02_1
+                flatexposure: flatExposure
+            }
+            parameters: @PT1Pipe/ISR-flat.paf
+            outputKeys: {
+                flatCorrectedExposure: isrExposure02_1
+            }
+        }
+    }
+    appStage: {
+        name: isrSdqaAmp02_1
+        parallelClass: lsst.sdqa.pipeline.IsrSdqaStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposureKey: isrExposure02_1
+            }
+            parameters: @PT1Pipe/ISR-sdqaAmp.paf
+            outputKeys: {
+                isrPersistableSdqaRatingVectorKey: sdqaRatingVector1
+            }
+        }
+    }
+
+    appStage: {
         name: isrOutput02
         parallelClass: lsst.pex.harness.IOStage.OutputStageParallel
         eventTopic: None
@@ -720,16 +1187,16 @@ execute: {
                             }
                         }
                     }
-#                    sdqaRatingVector1: {
-#                        datasetId: {
-#                            datasetType: sdqaAmp
-#                            fromJobIdentity: "visit" "raft" "sensor"
-#                            set: {
-#                                snap: 1
-#                                channel: "0,2"
-#                            }
-#                        }
-#                    }
+                    sdqaRatingVector1: {
+                        datasetId: {
+                            datasetType: sdqaAmp
+                            fromJobIdentity: "visit" "raft" "sensor"
+                            set: {
+                                snap: 1
+                                channel: "0,2"
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -873,6 +1340,103 @@ execute: {
     }
 
     appStage: {
+        name: isrSaturation03_1
+        parallelClass: lsst.ip.pipeline.IsrSaturationStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure03_1
+            }
+            outputKeys: {
+                saturationMaskedExposure: isrExposure03_1
+            }
+        }
+    }
+    appStage: {
+        name: isrOverscan03_1
+        parallelClass: lsst.ip.pipeline.IsrOverscanStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure03_1
+            }
+            outputKeys: {
+                overscanCorrectedExposure: isrExposure03_1
+            }
+        }
+    }
+    appStage: {
+        name: isrBias03_1
+        parallelClass: lsst.ip.pipeline.IsrBiasStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure03_1
+                biasexposure: biasExposure
+            }
+            outputKeys: {
+                biasSubtractedExposure: isrExposure03_1
+            }
+        }
+    }
+    appStage: {
+        name: isrVariance03_1
+        parallelClass: lsst.ip.pipeline.IsrVarianceStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure03_1
+            }
+            outputKeys: {
+                varianceAddedExposure: isrExposure03_1
+            }
+        }
+    }
+    appStage: {
+        name: isrDark03_1
+        parallelClass: lsst.ip.pipeline.IsrDarkStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure03_1
+                darkexposure: darkExposure
+            }
+            outputKeys: {
+                darkSubtractedExposure: isrExposure03_1
+            }
+        }
+    }
+    appStage: {
+        name: isrFlat03_1
+        parallelClass: lsst.ip.pipeline.IsrFlatStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure03_1
+                flatexposure: flatExposure
+            }
+            parameters: @PT1Pipe/ISR-flat.paf
+            outputKeys: {
+                flatCorrectedExposure: isrExposure03_1
+            }
+        }
+    }
+    appStage: {
+        name: isrSdqaAmp03_1
+        parallelClass: lsst.sdqa.pipeline.IsrSdqaStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposureKey: isrExposure03_1
+            }
+            parameters: @PT1Pipe/ISR-sdqaAmp.paf
+            outputKeys: {
+                isrPersistableSdqaRatingVectorKey: sdqaRatingVector1
+            }
+        }
+    }
+
+    appStage: {
         name: isrOutput03
         parallelClass: lsst.pex.harness.IOStage.OutputStageParallel
         eventTopic: None
@@ -890,16 +1454,16 @@ execute: {
                             }
                         }
                     }
-#                    sdqaRatingVector1: {
-#                        datasetId: {
-#                            datasetType: sdqaAmp
-#                            fromJobIdentity: "visit" "raft" "sensor"
-#                            set: {
-#                                snap: 1
-#                                channel: "0,3"
-#                            }
-#                        }
-#                    }
+                    sdqaRatingVector1: {
+                        datasetId: {
+                            datasetType: sdqaAmp
+                            fromJobIdentity: "visit" "raft" "sensor"
+                            set: {
+                                snap: 1
+                                channel: "0,3"
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -1043,6 +1607,103 @@ execute: {
     }
 
     appStage: {
+        name: isrSaturation04_1
+        parallelClass: lsst.ip.pipeline.IsrSaturationStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure04_1
+            }
+            outputKeys: {
+                saturationMaskedExposure: isrExposure04_1
+            }
+        }
+    }
+    appStage: {
+        name: isrOverscan04_1
+        parallelClass: lsst.ip.pipeline.IsrOverscanStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure04_1
+            }
+            outputKeys: {
+                overscanCorrectedExposure: isrExposure04_1
+            }
+        }
+    }
+    appStage: {
+        name: isrBias04_1
+        parallelClass: lsst.ip.pipeline.IsrBiasStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure04_1
+                biasexposure: biasExposure
+            }
+            outputKeys: {
+                biasSubtractedExposure: isrExposure04_1
+            }
+        }
+    }
+    appStage: {
+        name: isrVariance04_1
+        parallelClass: lsst.ip.pipeline.IsrVarianceStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure04_1
+            }
+            outputKeys: {
+                varianceAddedExposure: isrExposure04_1
+            }
+        }
+    }
+    appStage: {
+        name: isrDark04_1
+        parallelClass: lsst.ip.pipeline.IsrDarkStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure04_1
+                darkexposure: darkExposure
+            }
+            outputKeys: {
+                darkSubtractedExposure: isrExposure04_1
+            }
+        }
+    }
+    appStage: {
+        name: isrFlat04_1
+        parallelClass: lsst.ip.pipeline.IsrFlatStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure04_1
+                flatexposure: flatExposure
+            }
+            parameters: @PT1Pipe/ISR-flat.paf
+            outputKeys: {
+                flatCorrectedExposure: isrExposure04_1
+            }
+        }
+    }
+    appStage: {
+        name: isrSdqaAmp04_1
+        parallelClass: lsst.sdqa.pipeline.IsrSdqaStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposureKey: isrExposure04_1
+            }
+            parameters: @PT1Pipe/ISR-sdqaAmp.paf
+            outputKeys: {
+                isrPersistableSdqaRatingVectorKey: sdqaRatingVector1
+            }
+        }
+    }
+
+    appStage: {
         name: isrOutput04
         parallelClass: lsst.pex.harness.IOStage.OutputStageParallel
         eventTopic: None
@@ -1060,16 +1721,16 @@ execute: {
                             }
                         }
                     }
-#                    sdqaRatingVector1: {
-#                        datasetId: {
-#                            datasetType: sdqaAmp
-#                            fromJobIdentity: "visit" "raft" "sensor"
-#                            set: {
-#                                snap: 1
-#                                channel: "0,4"
-#                            }
-#                        }
-#                    }
+                    sdqaRatingVector1: {
+                        datasetId: {
+                            datasetType: sdqaAmp
+                            fromJobIdentity: "visit" "raft" "sensor"
+                            set: {
+                                snap: 1
+                                channel: "0,4"
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -1213,6 +1874,103 @@ execute: {
     }
 
     appStage: {
+        name: isrSaturation05_1
+        parallelClass: lsst.ip.pipeline.IsrSaturationStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure05_1
+            }
+            outputKeys: {
+                saturationMaskedExposure: isrExposure05_1
+            }
+        }
+    }
+    appStage: {
+        name: isrOverscan05_1
+        parallelClass: lsst.ip.pipeline.IsrOverscanStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure05_1
+            }
+            outputKeys: {
+                overscanCorrectedExposure: isrExposure05_1
+            }
+        }
+    }
+    appStage: {
+        name: isrBias05_1
+        parallelClass: lsst.ip.pipeline.IsrBiasStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure05_1
+                biasexposure: biasExposure
+            }
+            outputKeys: {
+                biasSubtractedExposure: isrExposure05_1
+            }
+        }
+    }
+    appStage: {
+        name: isrVariance05_1
+        parallelClass: lsst.ip.pipeline.IsrVarianceStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure05_1
+            }
+            outputKeys: {
+                varianceAddedExposure: isrExposure05_1
+            }
+        }
+    }
+    appStage: {
+        name: isrDark05_1
+        parallelClass: lsst.ip.pipeline.IsrDarkStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure05_1
+                darkexposure: darkExposure
+            }
+            outputKeys: {
+                darkSubtractedExposure: isrExposure05_1
+            }
+        }
+    }
+    appStage: {
+        name: isrFlat05_1
+        parallelClass: lsst.ip.pipeline.IsrFlatStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure05_1
+                flatexposure: flatExposure
+            }
+            parameters: @PT1Pipe/ISR-flat.paf
+            outputKeys: {
+                flatCorrectedExposure: isrExposure05_1
+            }
+        }
+    }
+    appStage: {
+        name: isrSdqaAmp05_1
+        parallelClass: lsst.sdqa.pipeline.IsrSdqaStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposureKey: isrExposure05_1
+            }
+            parameters: @PT1Pipe/ISR-sdqaAmp.paf
+            outputKeys: {
+                isrPersistableSdqaRatingVectorKey: sdqaRatingVector1
+            }
+        }
+    }
+
+    appStage: {
         name: isrOutput05
         parallelClass: lsst.pex.harness.IOStage.OutputStageParallel
         eventTopic: None
@@ -1230,16 +1988,16 @@ execute: {
                             }
                         }
                     }
-#                    sdqaRatingVector1: {
-#                        datasetId: {
-#                            datasetType: sdqaAmp
-#                            fromJobIdentity: "visit" "raft" "sensor"
-#                            set: {
-#                                snap: 1
-#                                channel: "0,5"
-#                            }
-#                        }
-#                    }
+                    sdqaRatingVector1: {
+                        datasetId: {
+                            datasetType: sdqaAmp
+                            fromJobIdentity: "visit" "raft" "sensor"
+                            set: {
+                                snap: 1
+                                channel: "0,5"
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -1383,6 +2141,103 @@ execute: {
     }
 
     appStage: {
+        name: isrSaturation06_1
+        parallelClass: lsst.ip.pipeline.IsrSaturationStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure06_1
+            }
+            outputKeys: {
+                saturationMaskedExposure: isrExposure06_1
+            }
+        }
+    }
+    appStage: {
+        name: isrOverscan06_1
+        parallelClass: lsst.ip.pipeline.IsrOverscanStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure06_1
+            }
+            outputKeys: {
+                overscanCorrectedExposure: isrExposure06_1
+            }
+        }
+    }
+    appStage: {
+        name: isrBias06_1
+        parallelClass: lsst.ip.pipeline.IsrBiasStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure06_1
+                biasexposure: biasExposure
+            }
+            outputKeys: {
+                biasSubtractedExposure: isrExposure06_1
+            }
+        }
+    }
+    appStage: {
+        name: isrVariance06_1
+        parallelClass: lsst.ip.pipeline.IsrVarianceStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure06_1
+            }
+            outputKeys: {
+                varianceAddedExposure: isrExposure06_1
+            }
+        }
+    }
+    appStage: {
+        name: isrDark06_1
+        parallelClass: lsst.ip.pipeline.IsrDarkStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure06_1
+                darkexposure: darkExposure
+            }
+            outputKeys: {
+                darkSubtractedExposure: isrExposure06_1
+            }
+        }
+    }
+    appStage: {
+        name: isrFlat06_1
+        parallelClass: lsst.ip.pipeline.IsrFlatStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure06_1
+                flatexposure: flatExposure
+            }
+            parameters: @PT1Pipe/ISR-flat.paf
+            outputKeys: {
+                flatCorrectedExposure: isrExposure06_1
+            }
+        }
+    }
+    appStage: {
+        name: isrSdqaAmp06_1
+        parallelClass: lsst.sdqa.pipeline.IsrSdqaStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposureKey: isrExposure06_1
+            }
+            parameters: @PT1Pipe/ISR-sdqaAmp.paf
+            outputKeys: {
+                isrPersistableSdqaRatingVectorKey: sdqaRatingVector1
+            }
+        }
+    }
+
+    appStage: {
         name: isrOutput06
         parallelClass: lsst.pex.harness.IOStage.OutputStageParallel
         eventTopic: None
@@ -1400,16 +2255,16 @@ execute: {
                             }
                         }
                     }
-#                    sdqaRatingVector1: {
-#                        datasetId: {
-#                            datasetType: sdqaAmp
-#                            fromJobIdentity: "visit" "raft" "sensor"
-#                            set: {
-#                                snap: 1
-#                                channel: "0,6"
-#                            }
-#                        }
-#                    }
+                    sdqaRatingVector1: {
+                        datasetId: {
+                            datasetType: sdqaAmp
+                            fromJobIdentity: "visit" "raft" "sensor"
+                            set: {
+                                snap: 1
+                                channel: "0,6"
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -1553,6 +2408,103 @@ execute: {
     }
 
     appStage: {
+        name: isrSaturation07_1
+        parallelClass: lsst.ip.pipeline.IsrSaturationStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure07_1
+            }
+            outputKeys: {
+                saturationMaskedExposure: isrExposure07_1
+            }
+        }
+    }
+    appStage: {
+        name: isrOverscan07_1
+        parallelClass: lsst.ip.pipeline.IsrOverscanStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure07_1
+            }
+            outputKeys: {
+                overscanCorrectedExposure: isrExposure07_1
+            }
+        }
+    }
+    appStage: {
+        name: isrBias07_1
+        parallelClass: lsst.ip.pipeline.IsrBiasStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure07_1
+                biasexposure: biasExposure
+            }
+            outputKeys: {
+                biasSubtractedExposure: isrExposure07_1
+            }
+        }
+    }
+    appStage: {
+        name: isrVariance07_1
+        parallelClass: lsst.ip.pipeline.IsrVarianceStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure07_1
+            }
+            outputKeys: {
+                varianceAddedExposure: isrExposure07_1
+            }
+        }
+    }
+    appStage: {
+        name: isrDark07_1
+        parallelClass: lsst.ip.pipeline.IsrDarkStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure07_1
+                darkexposure: darkExposure
+            }
+            outputKeys: {
+                darkSubtractedExposure: isrExposure07_1
+            }
+        }
+    }
+    appStage: {
+        name: isrFlat07_1
+        parallelClass: lsst.ip.pipeline.IsrFlatStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure07_1
+                flatexposure: flatExposure
+            }
+            parameters: @PT1Pipe/ISR-flat.paf
+            outputKeys: {
+                flatCorrectedExposure: isrExposure07_1
+            }
+        }
+    }
+    appStage: {
+        name: isrSdqaAmp07_1
+        parallelClass: lsst.sdqa.pipeline.IsrSdqaStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposureKey: isrExposure07_1
+            }
+            parameters: @PT1Pipe/ISR-sdqaAmp.paf
+            outputKeys: {
+                isrPersistableSdqaRatingVectorKey: sdqaRatingVector1
+            }
+        }
+    }
+
+    appStage: {
         name: isrOutput07
         parallelClass: lsst.pex.harness.IOStage.OutputStageParallel
         eventTopic: None
@@ -1570,16 +2522,16 @@ execute: {
                             }
                         }
                     }
-#                    sdqaRatingVector1: {
-#                        datasetId: {
-#                            datasetType: sdqaAmp
-#                            fromJobIdentity: "visit" "raft" "sensor"
-#                            set: {
-#                                snap: 1
-#                                channel: "0,7"
-#                            }
-#                        }
-#                    }
+                    sdqaRatingVector1: {
+                        datasetId: {
+                            datasetType: sdqaAmp
+                            fromJobIdentity: "visit" "raft" "sensor"
+                            set: {
+                                snap: 1
+                                channel: "0,7"
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -1723,6 +2675,103 @@ execute: {
     }
 
     appStage: {
+        name: isrSaturation10_1
+        parallelClass: lsst.ip.pipeline.IsrSaturationStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure10_1
+            }
+            outputKeys: {
+                saturationMaskedExposure: isrExposure10_1
+            }
+        }
+    }
+    appStage: {
+        name: isrOverscan10_1
+        parallelClass: lsst.ip.pipeline.IsrOverscanStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure10_1
+            }
+            outputKeys: {
+                overscanCorrectedExposure: isrExposure10_1
+            }
+        }
+    }
+    appStage: {
+        name: isrBias10_1
+        parallelClass: lsst.ip.pipeline.IsrBiasStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure10_1
+                biasexposure: biasExposure
+            }
+            outputKeys: {
+                biasSubtractedExposure: isrExposure10_1
+            }
+        }
+    }
+    appStage: {
+        name: isrVariance10_1
+        parallelClass: lsst.ip.pipeline.IsrVarianceStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure10_1
+            }
+            outputKeys: {
+                varianceAddedExposure: isrExposure10_1
+            }
+        }
+    }
+    appStage: {
+        name: isrDark10_1
+        parallelClass: lsst.ip.pipeline.IsrDarkStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure10_1
+                darkexposure: darkExposure
+            }
+            outputKeys: {
+                darkSubtractedExposure: isrExposure10_1
+            }
+        }
+    }
+    appStage: {
+        name: isrFlat10_1
+        parallelClass: lsst.ip.pipeline.IsrFlatStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure10_1
+                flatexposure: flatExposure
+            }
+            parameters: @PT1Pipe/ISR-flat.paf
+            outputKeys: {
+                flatCorrectedExposure: isrExposure10_1
+            }
+        }
+    }
+    appStage: {
+        name: isrSdqaAmp10_1
+        parallelClass: lsst.sdqa.pipeline.IsrSdqaStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposureKey: isrExposure10_1
+            }
+            parameters: @PT1Pipe/ISR-sdqaAmp.paf
+            outputKeys: {
+                isrPersistableSdqaRatingVectorKey: sdqaRatingVector1
+            }
+        }
+    }
+
+    appStage: {
         name: isrOutput10
         parallelClass: lsst.pex.harness.IOStage.OutputStageParallel
         eventTopic: None
@@ -1740,16 +2789,16 @@ execute: {
                             }
                         }
                     }
-#                    sdqaRatingVector1: {
-#                        datasetId: {
-#                            datasetType: sdqaAmp
-#                            fromJobIdentity: "visit" "raft" "sensor"
-#                            set: {
-#                                snap: 1
-#                                channel: "1,0"
-#                            }
-#                        }
-#                    }
+                    sdqaRatingVector1: {
+                        datasetId: {
+                            datasetType: sdqaAmp
+                            fromJobIdentity: "visit" "raft" "sensor"
+                            set: {
+                                snap: 1
+                                channel: "1,0"
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -1893,6 +2942,103 @@ execute: {
     }
 
     appStage: {
+        name: isrSaturation11_1
+        parallelClass: lsst.ip.pipeline.IsrSaturationStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure11_1
+            }
+            outputKeys: {
+                saturationMaskedExposure: isrExposure11_1
+            }
+        }
+    }
+    appStage: {
+        name: isrOverscan11_1
+        parallelClass: lsst.ip.pipeline.IsrOverscanStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure11_1
+            }
+            outputKeys: {
+                overscanCorrectedExposure: isrExposure11_1
+            }
+        }
+    }
+    appStage: {
+        name: isrBias11_1
+        parallelClass: lsst.ip.pipeline.IsrBiasStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure11_1
+                biasexposure: biasExposure
+            }
+            outputKeys: {
+                biasSubtractedExposure: isrExposure11_1
+            }
+        }
+    }
+    appStage: {
+        name: isrVariance11_1
+        parallelClass: lsst.ip.pipeline.IsrVarianceStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure11_1
+            }
+            outputKeys: {
+                varianceAddedExposure: isrExposure11_1
+            }
+        }
+    }
+    appStage: {
+        name: isrDark11_1
+        parallelClass: lsst.ip.pipeline.IsrDarkStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure11_1
+                darkexposure: darkExposure
+            }
+            outputKeys: {
+                darkSubtractedExposure: isrExposure11_1
+            }
+        }
+    }
+    appStage: {
+        name: isrFlat11_1
+        parallelClass: lsst.ip.pipeline.IsrFlatStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure11_1
+                flatexposure: flatExposure
+            }
+            parameters: @PT1Pipe/ISR-flat.paf
+            outputKeys: {
+                flatCorrectedExposure: isrExposure11_1
+            }
+        }
+    }
+    appStage: {
+        name: isrSdqaAmp11_1
+        parallelClass: lsst.sdqa.pipeline.IsrSdqaStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposureKey: isrExposure11_1
+            }
+            parameters: @PT1Pipe/ISR-sdqaAmp.paf
+            outputKeys: {
+                isrPersistableSdqaRatingVectorKey: sdqaRatingVector1
+            }
+        }
+    }
+
+    appStage: {
         name: isrOutput11
         parallelClass: lsst.pex.harness.IOStage.OutputStageParallel
         eventTopic: None
@@ -1910,16 +3056,16 @@ execute: {
                             }
                         }
                     }
-#                    sdqaRatingVector1: {
-#                        datasetId: {
-#                            datasetType: sdqaAmp
-#                            fromJobIdentity: "visit" "raft" "sensor"
-#                            set: {
-#                                snap: 1
-#                                channel: "1,1"
-#                            }
-#                        }
-#                    }
+                    sdqaRatingVector1: {
+                        datasetId: {
+                            datasetType: sdqaAmp
+                            fromJobIdentity: "visit" "raft" "sensor"
+                            set: {
+                                snap: 1
+                                channel: "1,1"
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -2063,6 +3209,103 @@ execute: {
     }
 
     appStage: {
+        name: isrSaturation12_1
+        parallelClass: lsst.ip.pipeline.IsrSaturationStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure12_1
+            }
+            outputKeys: {
+                saturationMaskedExposure: isrExposure12_1
+            }
+        }
+    }
+    appStage: {
+        name: isrOverscan12_1
+        parallelClass: lsst.ip.pipeline.IsrOverscanStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure12_1
+            }
+            outputKeys: {
+                overscanCorrectedExposure: isrExposure12_1
+            }
+        }
+    }
+    appStage: {
+        name: isrBias12_1
+        parallelClass: lsst.ip.pipeline.IsrBiasStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure12_1
+                biasexposure: biasExposure
+            }
+            outputKeys: {
+                biasSubtractedExposure: isrExposure12_1
+            }
+        }
+    }
+    appStage: {
+        name: isrVariance12_1
+        parallelClass: lsst.ip.pipeline.IsrVarianceStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure12_1
+            }
+            outputKeys: {
+                varianceAddedExposure: isrExposure12_1
+            }
+        }
+    }
+    appStage: {
+        name: isrDark12_1
+        parallelClass: lsst.ip.pipeline.IsrDarkStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure12_1
+                darkexposure: darkExposure
+            }
+            outputKeys: {
+                darkSubtractedExposure: isrExposure12_1
+            }
+        }
+    }
+    appStage: {
+        name: isrFlat12_1
+        parallelClass: lsst.ip.pipeline.IsrFlatStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure12_1
+                flatexposure: flatExposure
+            }
+            parameters: @PT1Pipe/ISR-flat.paf
+            outputKeys: {
+                flatCorrectedExposure: isrExposure12_1
+            }
+        }
+    }
+    appStage: {
+        name: isrSdqaAmp12_1
+        parallelClass: lsst.sdqa.pipeline.IsrSdqaStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposureKey: isrExposure12_1
+            }
+            parameters: @PT1Pipe/ISR-sdqaAmp.paf
+            outputKeys: {
+                isrPersistableSdqaRatingVectorKey: sdqaRatingVector1
+            }
+        }
+    }
+
+    appStage: {
         name: isrOutput12
         parallelClass: lsst.pex.harness.IOStage.OutputStageParallel
         eventTopic: None
@@ -2080,16 +3323,16 @@ execute: {
                             }
                         }
                     }
-#                    sdqaRatingVector1: {
-#                        datasetId: {
-#                            datasetType: sdqaAmp
-#                            fromJobIdentity: "visit" "raft" "sensor"
-#                            set: {
-#                                snap: 1
-#                                channel: "1,2"
-#                            }
-#                        }
-#                    }
+                    sdqaRatingVector1: {
+                        datasetId: {
+                            datasetType: sdqaAmp
+                            fromJobIdentity: "visit" "raft" "sensor"
+                            set: {
+                                snap: 1
+                                channel: "1,2"
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -2233,6 +3476,103 @@ execute: {
     }
 
     appStage: {
+        name: isrSaturation13_1
+        parallelClass: lsst.ip.pipeline.IsrSaturationStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure13_1
+            }
+            outputKeys: {
+                saturationMaskedExposure: isrExposure13_1
+            }
+        }
+    }
+    appStage: {
+        name: isrOverscan13_1
+        parallelClass: lsst.ip.pipeline.IsrOverscanStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure13_1
+            }
+            outputKeys: {
+                overscanCorrectedExposure: isrExposure13_1
+            }
+        }
+    }
+    appStage: {
+        name: isrBias13_1
+        parallelClass: lsst.ip.pipeline.IsrBiasStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure13_1
+                biasexposure: biasExposure
+            }
+            outputKeys: {
+                biasSubtractedExposure: isrExposure13_1
+            }
+        }
+    }
+    appStage: {
+        name: isrVariance13_1
+        parallelClass: lsst.ip.pipeline.IsrVarianceStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure13_1
+            }
+            outputKeys: {
+                varianceAddedExposure: isrExposure13_1
+            }
+        }
+    }
+    appStage: {
+        name: isrDark13_1
+        parallelClass: lsst.ip.pipeline.IsrDarkStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure13_1
+                darkexposure: darkExposure
+            }
+            outputKeys: {
+                darkSubtractedExposure: isrExposure13_1
+            }
+        }
+    }
+    appStage: {
+        name: isrFlat13_1
+        parallelClass: lsst.ip.pipeline.IsrFlatStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure13_1
+                flatexposure: flatExposure
+            }
+            parameters: @PT1Pipe/ISR-flat.paf
+            outputKeys: {
+                flatCorrectedExposure: isrExposure13_1
+            }
+        }
+    }
+    appStage: {
+        name: isrSdqaAmp13_1
+        parallelClass: lsst.sdqa.pipeline.IsrSdqaStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposureKey: isrExposure13_1
+            }
+            parameters: @PT1Pipe/ISR-sdqaAmp.paf
+            outputKeys: {
+                isrPersistableSdqaRatingVectorKey: sdqaRatingVector1
+            }
+        }
+    }
+
+    appStage: {
         name: isrOutput13
         parallelClass: lsst.pex.harness.IOStage.OutputStageParallel
         eventTopic: None
@@ -2250,16 +3590,16 @@ execute: {
                             }
                         }
                     }
-#                    sdqaRatingVector1: {
-#                        datasetId: {
-#                            datasetType: sdqaAmp
-#                            fromJobIdentity: "visit" "raft" "sensor"
-#                            set: {
-#                                snap: 1
-#                                channel: "1,3"
-#                            }
-#                        }
-#                    }
+                    sdqaRatingVector1: {
+                        datasetId: {
+                            datasetType: sdqaAmp
+                            fromJobIdentity: "visit" "raft" "sensor"
+                            set: {
+                                snap: 1
+                                channel: "1,3"
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -2403,6 +3743,103 @@ execute: {
     }
 
     appStage: {
+        name: isrSaturation14_1
+        parallelClass: lsst.ip.pipeline.IsrSaturationStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure14_1
+            }
+            outputKeys: {
+                saturationMaskedExposure: isrExposure14_1
+            }
+        }
+    }
+    appStage: {
+        name: isrOverscan14_1
+        parallelClass: lsst.ip.pipeline.IsrOverscanStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure14_1
+            }
+            outputKeys: {
+                overscanCorrectedExposure: isrExposure14_1
+            }
+        }
+    }
+    appStage: {
+        name: isrBias14_1
+        parallelClass: lsst.ip.pipeline.IsrBiasStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure14_1
+                biasexposure: biasExposure
+            }
+            outputKeys: {
+                biasSubtractedExposure: isrExposure14_1
+            }
+        }
+    }
+    appStage: {
+        name: isrVariance14_1
+        parallelClass: lsst.ip.pipeline.IsrVarianceStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure14_1
+            }
+            outputKeys: {
+                varianceAddedExposure: isrExposure14_1
+            }
+        }
+    }
+    appStage: {
+        name: isrDark14_1
+        parallelClass: lsst.ip.pipeline.IsrDarkStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure14_1
+                darkexposure: darkExposure
+            }
+            outputKeys: {
+                darkSubtractedExposure: isrExposure14_1
+            }
+        }
+    }
+    appStage: {
+        name: isrFlat14_1
+        parallelClass: lsst.ip.pipeline.IsrFlatStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure14_1
+                flatexposure: flatExposure
+            }
+            parameters: @PT1Pipe/ISR-flat.paf
+            outputKeys: {
+                flatCorrectedExposure: isrExposure14_1
+            }
+        }
+    }
+    appStage: {
+        name: isrSdqaAmp14_1
+        parallelClass: lsst.sdqa.pipeline.IsrSdqaStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposureKey: isrExposure14_1
+            }
+            parameters: @PT1Pipe/ISR-sdqaAmp.paf
+            outputKeys: {
+                isrPersistableSdqaRatingVectorKey: sdqaRatingVector1
+            }
+        }
+    }
+
+    appStage: {
         name: isrOutput14
         parallelClass: lsst.pex.harness.IOStage.OutputStageParallel
         eventTopic: None
@@ -2420,16 +3857,16 @@ execute: {
                             }
                         }
                     }
-#                    sdqaRatingVector1: {
-#                        datasetId: {
-#                            datasetType: sdqaAmp
-#                            fromJobIdentity: "visit" "raft" "sensor"
-#                            set: {
-#                                snap: 1
-#                                channel: "1,4"
-#                            }
-#                        }
-#                    }
+                    sdqaRatingVector1: {
+                        datasetId: {
+                            datasetType: sdqaAmp
+                            fromJobIdentity: "visit" "raft" "sensor"
+                            set: {
+                                snap: 1
+                                channel: "1,4"
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -2573,6 +4010,103 @@ execute: {
     }
 
     appStage: {
+        name: isrSaturation15_1
+        parallelClass: lsst.ip.pipeline.IsrSaturationStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure15_1
+            }
+            outputKeys: {
+                saturationMaskedExposure: isrExposure15_1
+            }
+        }
+    }
+    appStage: {
+        name: isrOverscan15_1
+        parallelClass: lsst.ip.pipeline.IsrOverscanStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure15_1
+            }
+            outputKeys: {
+                overscanCorrectedExposure: isrExposure15_1
+            }
+        }
+    }
+    appStage: {
+        name: isrBias15_1
+        parallelClass: lsst.ip.pipeline.IsrBiasStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure15_1
+                biasexposure: biasExposure
+            }
+            outputKeys: {
+                biasSubtractedExposure: isrExposure15_1
+            }
+        }
+    }
+    appStage: {
+        name: isrVariance15_1
+        parallelClass: lsst.ip.pipeline.IsrVarianceStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure15_1
+            }
+            outputKeys: {
+                varianceAddedExposure: isrExposure15_1
+            }
+        }
+    }
+    appStage: {
+        name: isrDark15_1
+        parallelClass: lsst.ip.pipeline.IsrDarkStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure15_1
+                darkexposure: darkExposure
+            }
+            outputKeys: {
+                darkSubtractedExposure: isrExposure15_1
+            }
+        }
+    }
+    appStage: {
+        name: isrFlat15_1
+        parallelClass: lsst.ip.pipeline.IsrFlatStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure15_1
+                flatexposure: flatExposure
+            }
+            parameters: @PT1Pipe/ISR-flat.paf
+            outputKeys: {
+                flatCorrectedExposure: isrExposure15_1
+            }
+        }
+    }
+    appStage: {
+        name: isrSdqaAmp15_1
+        parallelClass: lsst.sdqa.pipeline.IsrSdqaStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposureKey: isrExposure15_1
+            }
+            parameters: @PT1Pipe/ISR-sdqaAmp.paf
+            outputKeys: {
+                isrPersistableSdqaRatingVectorKey: sdqaRatingVector1
+            }
+        }
+    }
+
+    appStage: {
         name: isrOutput15
         parallelClass: lsst.pex.harness.IOStage.OutputStageParallel
         eventTopic: None
@@ -2590,16 +4124,16 @@ execute: {
                             }
                         }
                     }
-#                    sdqaRatingVector1: {
-#                        datasetId: {
-#                            datasetType: sdqaAmp
-#                            fromJobIdentity: "visit" "raft" "sensor"
-#                            set: {
-#                                snap: 1
-#                                channel: "1,5"
-#                            }
-#                        }
-#                    }
+                    sdqaRatingVector1: {
+                        datasetId: {
+                            datasetType: sdqaAmp
+                            fromJobIdentity: "visit" "raft" "sensor"
+                            set: {
+                                snap: 1
+                                channel: "1,5"
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -2743,6 +4277,103 @@ execute: {
     }
 
     appStage: {
+        name: isrSaturation16_1
+        parallelClass: lsst.ip.pipeline.IsrSaturationStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure16_1
+            }
+            outputKeys: {
+                saturationMaskedExposure: isrExposure16_1
+            }
+        }
+    }
+    appStage: {
+        name: isrOverscan16_1
+        parallelClass: lsst.ip.pipeline.IsrOverscanStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure16_1
+            }
+            outputKeys: {
+                overscanCorrectedExposure: isrExposure16_1
+            }
+        }
+    }
+    appStage: {
+        name: isrBias16_1
+        parallelClass: lsst.ip.pipeline.IsrBiasStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure16_1
+                biasexposure: biasExposure
+            }
+            outputKeys: {
+                biasSubtractedExposure: isrExposure16_1
+            }
+        }
+    }
+    appStage: {
+        name: isrVariance16_1
+        parallelClass: lsst.ip.pipeline.IsrVarianceStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure16_1
+            }
+            outputKeys: {
+                varianceAddedExposure: isrExposure16_1
+            }
+        }
+    }
+    appStage: {
+        name: isrDark16_1
+        parallelClass: lsst.ip.pipeline.IsrDarkStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure16_1
+                darkexposure: darkExposure
+            }
+            outputKeys: {
+                darkSubtractedExposure: isrExposure16_1
+            }
+        }
+    }
+    appStage: {
+        name: isrFlat16_1
+        parallelClass: lsst.ip.pipeline.IsrFlatStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure16_1
+                flatexposure: flatExposure
+            }
+            parameters: @PT1Pipe/ISR-flat.paf
+            outputKeys: {
+                flatCorrectedExposure: isrExposure16_1
+            }
+        }
+    }
+    appStage: {
+        name: isrSdqaAmp16_1
+        parallelClass: lsst.sdqa.pipeline.IsrSdqaStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposureKey: isrExposure16_1
+            }
+            parameters: @PT1Pipe/ISR-sdqaAmp.paf
+            outputKeys: {
+                isrPersistableSdqaRatingVectorKey: sdqaRatingVector1
+            }
+        }
+    }
+
+    appStage: {
         name: isrOutput16
         parallelClass: lsst.pex.harness.IOStage.OutputStageParallel
         eventTopic: None
@@ -2760,16 +4391,16 @@ execute: {
                             }
                         }
                     }
-#                    sdqaRatingVector1: {
-#                        datasetId: {
-#                            datasetType: sdqaAmp
-#                            fromJobIdentity: "visit" "raft" "sensor"
-#                            set: {
-#                                snap: 1
-#                                channel: "1,6"
-#                            }
-#                        }
-#                    }
+                    sdqaRatingVector1: {
+                        datasetId: {
+                            datasetType: sdqaAmp
+                            fromJobIdentity: "visit" "raft" "sensor"
+                            set: {
+                                snap: 1
+                                channel: "1,6"
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -2913,6 +4544,103 @@ execute: {
     }
 
     appStage: {
+        name: isrSaturation17_1
+        parallelClass: lsst.ip.pipeline.IsrSaturationStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure17_1
+            }
+            outputKeys: {
+                saturationMaskedExposure: isrExposure17_1
+            }
+        }
+    }
+    appStage: {
+        name: isrOverscan17_1
+        parallelClass: lsst.ip.pipeline.IsrOverscanStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure17_1
+            }
+            outputKeys: {
+                overscanCorrectedExposure: isrExposure17_1
+            }
+        }
+    }
+    appStage: {
+        name: isrBias17_1
+        parallelClass: lsst.ip.pipeline.IsrBiasStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure17_1
+                biasexposure: biasExposure
+            }
+            outputKeys: {
+                biasSubtractedExposure: isrExposure17_1
+            }
+        }
+    }
+    appStage: {
+        name: isrVariance17_1
+        parallelClass: lsst.ip.pipeline.IsrVarianceStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure17_1
+            }
+            outputKeys: {
+                varianceAddedExposure: isrExposure17_1
+            }
+        }
+    }
+    appStage: {
+        name: isrDark17_1
+        parallelClass: lsst.ip.pipeline.IsrDarkStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure17_1
+                darkexposure: darkExposure
+            }
+            outputKeys: {
+                darkSubtractedExposure: isrExposure17_1
+            }
+        }
+    }
+    appStage: {
+        name: isrFlat17_1
+        parallelClass: lsst.ip.pipeline.IsrFlatStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrExposure17_1
+                flatexposure: flatExposure
+            }
+            parameters: @PT1Pipe/ISR-flat.paf
+            outputKeys: {
+                flatCorrectedExposure: isrExposure17_1
+            }
+        }
+    }
+    appStage: {
+        name: isrSdqaAmp17_1
+        parallelClass: lsst.sdqa.pipeline.IsrSdqaStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposureKey: isrExposure17_1
+            }
+            parameters: @PT1Pipe/ISR-sdqaAmp.paf
+            outputKeys: {
+                isrPersistableSdqaRatingVectorKey: sdqaRatingVector1
+            }
+        }
+    }
+
+    appStage: {
         name: isrOutput17
         parallelClass: lsst.pex.harness.IOStage.OutputStageParallel
         eventTopic: None
@@ -2930,16 +4658,16 @@ execute: {
                             }
                         }
                     }
-#                    sdqaRatingVector1: {
-#                        datasetId: {
-#                            datasetType: sdqaAmp
-#                            fromJobIdentity: "visit" "raft" "sensor"
-#                            set: {
-#                                snap: 1
-#                                channel: "1,7"
-#                            }
-#                        }
-#                    }
+                    sdqaRatingVector1: {
+                        datasetId: {
+                            datasetType: sdqaAmp
+                            fromJobIdentity: "visit" "raft" "sensor"
+                            set: {
+                                snap: 1
+                                channel: "1,7"
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -3029,6 +4757,89 @@ execute: {
     }
 
     appStage: {
+        name: ccdAssemblyCcdList1
+        parallelClass: lsst.datarel.ObjectListStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+            object: isrExposure00_1
+            object: isrExposure01_1
+            object: isrExposure02_1
+            object: isrExposure03_1
+            object: isrExposure04_1
+            object: isrExposure05_1
+            object: isrExposure06_1
+            object: isrExposure07_1
+            object: isrExposure10_1
+            object: isrExposure11_1
+            object: isrExposure12_1
+            object: isrExposure13_1
+            object: isrExposure14_1
+            object: isrExposure15_1
+            object: isrExposure16_1
+            object: isrExposure17_1
+
+            }
+            outputKeys: {
+                objectList: exposureList1
+            }
+        }
+    }
+    appStage: {
+        name: ccdAssemblyIsrCcdAssembly1
+        parallelClass: lsst.ip.pipeline.IsrCcdAssemblyStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposureList: exposureList1
+            }
+            outputKeys: {
+                assembledCcdExposure: isrExposure1
+            }
+        }
+    }
+    appStage: {
+        name: ccdAssemblyIsrCcdDefect1
+        parallelClass: lsst.ip.pipeline.IsrCcdDefectStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                ccdExposure: isrExposure1
+            }
+            outputKeys: {
+                defectMaskedCcdExposure: isrExposure1
+            }
+        }
+    }
+    appStage: {
+        name: ccdAssemblyIsrCcdSdqa1
+        parallelClass: lsst.ip.pipeline.IsrCcdSdqaStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                ccdExposure: isrExposure1
+            }
+            outputKeys: {
+                sdqaCcdExposure: isrExposure1
+            }
+        }
+    }
+    appStage: {
+        name: ccdAssemblySdqaCcd1
+        parallelClass: lsst.sdqa.pipeline.IsrSdqaStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposureKey: isrExposure1
+            }
+            parameters: @PT1Pipe/ISR-sdqaCcd.paf
+            outputKeys: {
+                isrPersistableSdqaRatingVectorKey: sdqaRatingVector1
+            }
+        }
+    }
+
+    appStage: {
         name: ccdAssemblyOutput
         parallelClass: lsst.pex.harness.IOStage.OutputStageParallel
         eventTopic: None
@@ -3037,12 +4848,42 @@ execute: {
                 butler: @PT1Pipe/butlerUpdate.paf
                 outputItems: {
 
+                    isrExposure0: {
+                        datasetId: {
+                            datasetType: postISRCCD
+                            fromJobIdentity: "visit" "raft" "sensor"
+                            set: {
+                                snap: 0
+                            }
+                        }
+                    }
+
                     sdqaRatingVector0: {
                         datasetId: {
                             datasetType: sdqaCcd
                             fromJobIdentity: "visit" "raft" "sensor"
                             set: {
                                 snap: 0
+                            }
+                        }
+                    }
+
+                    isrExposure1: {
+                        datasetId: {
+                            datasetType: postISRCCD
+                            fromJobIdentity: "visit" "raft" "sensor"
+                            set: {
+                                snap: 1
+                            }
+                        }
+                    }
+
+                    sdqaRatingVector1: {
+                        datasetId: {
+                            datasetType: sdqaCcd
+                            fromJobIdentity: "visit" "raft" "sensor"
+                            set: {
+                                snap: 1
                             }
                         }
                     }
@@ -3082,35 +4923,6 @@ execute: {
     }
 
     appStage: {
-        name: crSplitBackgroundEstimation0
-        parallelClass: lsst.meas.pipeline.BackgroundEstimationStageParallel
-        eventTopic: None
-        stagePolicy: {
-            inputKeys: {
-                exposure: isrCcdExposure0
-            }
-            outputKeys: {
-                backgroundSubtractedExposure: bkgSubCcdExposure0
-            }
-            parameters: @PT1Pipe/CrSplit-backgroundEstimation.paf
-        }
-    }
-#    appStage: {
-#        name: crSplitBackgroundEstimation1
-#        parallelClass: lsst.meas.pipeline.BackgroundEstimationStageParallel
-#        eventTopic: None
-#        stagePolicy: {
-#            inputKeys: {
-#                exposure: isrCcdExposure1
-#            }
-#            outputKeys: {
-#                backgroundSubtractedExposure: bkgSubCcdExposure1
-#            }
-#            parameters: @PT1Pipe/CrSplit-backgroundEstimation.paf
-#        }
-#    }
-
-    appStage: {
         name: vigCorrInput
         parallelClass: lsst.pex.harness.IOStage.InputStageParallel
         eventTopic: None
@@ -3130,6 +4942,22 @@ execute: {
             }
         }
     }    
+    
+
+    appStage: {
+        name: crSplitBackgroundEstimation0
+        parallelClass: lsst.meas.pipeline.BackgroundEstimationStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrCcdExposure0
+            }
+            outputKeys: {
+                backgroundSubtractedExposure: bkgSubCcdExposure0
+            }
+            parameters: @PT1Pipe/CrSplit-backgroundEstimation.paf
+        }
+    }
     appStage: {
         name: vigCorr0
         parallelClass: lsst.datarel.VigCorrStageParallel
@@ -3144,21 +4972,6 @@ execute: {
             }
         }
     }    
-#    appStage: {
-#        name: vigCorr1
-#        parallelClass: lsst.datarel.VigCorrStageParallel
-#        eventTopic: None
-#        stagePolicy: {
-#            inputKeys: {
-#                exposure: bkgSubCcdExposure1
-#                vigCorrImage: vigCorrImage
-#            }
-#            outputKeys: {
-#                corrExposure: vigCorrBkgSubCcdExposure1
-#            }
-#        }
-#    }
-
     appStage: {
         name: crSplitCrReject0
         parallelClass: lsst.ip.pipeline.CrRejectStageParallel
@@ -3174,21 +4987,6 @@ execute: {
             crRejectPolicy: @PT1Pipe/CrSplit-crReject-algorithm.paf
         }
     }
-#    appStage: {
-#        name: crSplitCrReject1
-#        parallelClass: lsst.ip.pipeline.CrRejectStageParallel
-#        eventTopic: None
-#        stagePolicy: {
-#            inputKeys: {
-#                exposure: vigCorrBkgSubCcdExposure1
-#            }
-#            outputKeys: {
-#                exposure: crSubCcdExposure1
-#            }
-#            parameters: @PT1Pipe/CrSplit-crReject.paf
-#            crRejectPolicy: @PT1Pipe/CrSplit-crReject-algorithm.paf
-#        }
-#    }
 
     appStage: {
         name: crSplitFixup
