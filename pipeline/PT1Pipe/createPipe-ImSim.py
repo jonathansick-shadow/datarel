@@ -56,7 +56,7 @@ def isrProcess(f, doJobOffice=False):
                 inputItems: {"""
     for channelX in (0, 1):
         for channelY in (0, 1, 2, 3, 4, 5, 6, 7):
-            for snap in (0, 1):
+            for snap in (0,):
                 channelName = '"%d,%d"' % (channelX, channelY)
                 channelSnap = "%d%d_%d" % (channelX, channelY, snap)
                 print >>f, """
@@ -119,7 +119,7 @@ def isrProcess(f, doJobOffice=False):
             }
         }
     }"""
-            for snap in (0, 1):
+            for snap in (0,):
                 channelSnap = "%d%d_%d" % (channelX, channelY, snap)
                 print >>f, """
     appStage: {
@@ -239,23 +239,23 @@ def isrProcess(f, doJobOffice=False):
                             }
                         }
                     }
-                    sdqaRatingVector1: {
-                        datasetId: {
-                            datasetType: sdqaAmp
-                            fromJobIdentity: "visit" "raft" "sensor"
-                            set: {
-                                snap: 1
-                                channel: """ + channelName + """
-                            }
-                        }
-                    }
+#                    sdqaRatingVector1: {
+#                        datasetId: {
+#                            datasetType: sdqaAmp
+#                            fromJobIdentity: "visit" "raft" "sensor"
+#                            set: {
+#                                snap: 1
+#                                channel: """ + channelName + """
+#                            }
+#                        }
+#                    }
                 }
             }
         }
     }"""
 
 def ccdAssemblyProcess(f):
-    for snap in (0, 1):
+    for snap in (0,):
         print >>f, """
     appStage: {
         name: ccdAssemblyCcdList""" + str(snap) + """
@@ -337,7 +337,7 @@ def ccdAssemblyProcess(f):
             parameters: {
                 butler: @PT1Pipe/butlerUpdate.paf
                 outputItems: {"""
-    for snap in (0, 1):
+    for snap in (0,):
 #        for channelX in (0, 1):
 #            for channelY in (0, 1, 2, 3, 4, 5, 6, 7):
 #                channelName = '"%d,%d"' % (channelX, channelY)
@@ -387,7 +387,7 @@ def ccdAssemblyProcess(f):
         stagePolicy: {
             inputKeys: {
                 isrCcdExposure0: isrExposure0
-                isrCcdExposure1: isrExposure1
+#                isrCcdExposure1: isrExposure1
                 jobIdentity: jobIdentity
                 originatorId: originatorId
                 targetDatasets: targetDatasets
@@ -399,7 +399,7 @@ def ccdAssemblyProcess(f):
             }
             outputKeys: {
                 isrCcdExposure0: isrCcdExposure0
-                isrCcdExposure1: isrCcdExposure1
+#                isrCcdExposure1: isrCcdExposure1
                 jobIdentity: jobIdentity
                 originatorId: originatorId
                 targetDatasets: targetDatasets
@@ -425,20 +425,20 @@ def crSplitProcess(f):
             parameters: @PT1Pipe/CrSplit-backgroundEstimation.paf
         }
     }
-    appStage: {
-        name: crSplitBackgroundEstimation1
-        parallelClass: lsst.meas.pipeline.BackgroundEstimationStageParallel
-        eventTopic: None
-        stagePolicy: {
-            inputKeys: {
-                exposure: isrCcdExposure1
-            }
-            outputKeys: {
-                backgroundSubtractedExposure: bkgSubCcdExposure1
-            }
-            parameters: @PT1Pipe/CrSplit-backgroundEstimation.paf
-        }
-    }
+#    appStage: {
+#        name: crSplitBackgroundEstimation1
+#        parallelClass: lsst.meas.pipeline.BackgroundEstimationStageParallel
+#        eventTopic: None
+#        stagePolicy: {
+#            inputKeys: {
+#                exposure: isrCcdExposure1
+#            }
+#            outputKeys: {
+#                backgroundSubtractedExposure: bkgSubCcdExposure1
+#            }
+#            parameters: @PT1Pipe/CrSplit-backgroundEstimation.paf
+#        }
+#    }
 
     appStage: {
         name: vigCorrInput
@@ -474,20 +474,20 @@ def crSplitProcess(f):
             }
         }
     }    
-    appStage: {
-        name: vigCorr1
-        parallelClass: lsst.datarel.VigCorrStageParallel
-        eventTopic: None
-        stagePolicy: {
-            inputKeys: {
-                exposure: bkgSubCcdExposure1
-                vigCorrImage: vigCorrImage
-            }
-            outputKeys: {
-                corrExposure: vigCorrBkgSubCcdExposure1
-            }
-        }
-    }
+#    appStage: {
+#        name: vigCorr1
+#        parallelClass: lsst.datarel.VigCorrStageParallel
+#        eventTopic: None
+#        stagePolicy: {
+#            inputKeys: {
+#                exposure: bkgSubCcdExposure1
+#                vigCorrImage: vigCorrImage
+#            }
+#            outputKeys: {
+#                corrExposure: vigCorrBkgSubCcdExposure1
+#            }
+#        }
+#    }
 
     appStage: {
         name: crSplitCrReject0
@@ -504,21 +504,21 @@ def crSplitProcess(f):
             crRejectPolicy: @PT1Pipe/CrSplit-crReject-algorithm.paf
         }
     }
-    appStage: {
-        name: crSplitCrReject1
-        parallelClass: lsst.ip.pipeline.CrRejectStageParallel
-        eventTopic: None
-        stagePolicy: {
-            inputKeys: {
-                exposure: vigCorrBkgSubCcdExposure1
-            }
-            outputKeys: {
-                exposure: crSubCcdExposure1
-            }
-            parameters: @PT1Pipe/CrSplit-crReject.paf
-            crRejectPolicy: @PT1Pipe/CrSplit-crReject-algorithm.paf
-        }
-    }
+#    appStage: {
+#        name: crSplitCrReject1
+#        parallelClass: lsst.ip.pipeline.CrRejectStageParallel
+#        eventTopic: None
+#        stagePolicy: {
+#            inputKeys: {
+#                exposure: vigCorrBkgSubCcdExposure1
+#            }
+#            outputKeys: {
+#                exposure: crSubCcdExposure1
+#            }
+#            parameters: @PT1Pipe/CrSplit-crReject.paf
+#            crRejectPolicy: @PT1Pipe/CrSplit-crReject-algorithm.paf
+#        }
+#    }
 
     appStage: {
         name: crSplitFixup
