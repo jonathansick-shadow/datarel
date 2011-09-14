@@ -27,18 +27,9 @@ execute: {
     }
 
     appStage: {
-        name: getAJob
-        parallelClass: lsst.ctrl.sched.pipeline.GetAJobParallelProcessing
-        eventTopic: None
-        stagePolicy: {
-            pipelineEvent: CcdJob
-        }
-    }
-
-    appStage: {
         name: isrInputRaw
         parallelClass: lsst.pex.harness.IOStage.InputStageParallel
-        eventTopic: None
+        eventTopic: jobIdentity
         stagePolicy: {
             parameters: {
                 butler: @PT1Pipe/butlerInput.paf
@@ -5272,13 +5263,41 @@ execute: {
         }
     }
 
+    appStage: { 
+        name: crSplitBackgroundEstimation0 
+        parallelClass: lsst.meas.pipeline.BackgroundEstimationStageParallel 
+        eventTopic: None 
+        stagePolicy: { 
+            inputKeys: { 
+                exposure: isrCcdExposure0 
+            } 
+            outputKeys: { 
+                backgroundSubtractedExposure: bkgSubCcdExposure0 
+            } 
+            parameters: @PT1Pipe/CrSplit-backgroundEstimation.paf 
+        } 
+    } 
+    appStage: { 
+        name: crSplitBackgroundEstimation1 
+        parallelClass: lsst.meas.pipeline.BackgroundEstimationStageParallel 
+        eventTopic: None 
+        stagePolicy: { 
+            inputKeys: { 
+                exposure: isrCcdExposure1 
+            } 
+            outputKeys: { 
+                backgroundSubtractedExposure: bkgSubCcdExposure1 
+            } 
+            parameters: @PT1Pipe/CrSplit-backgroundEstimation.paf 
+        } 
+    } 
     appStage: {
         name: crSplitCrReject0
         parallelClass: lsst.ip.pipeline.CrRejectStageParallel
         eventTopic: None
         stagePolicy: {
             inputKeys: {
-                exposure: isrCcdExposure0
+                exposure: bkgSubCcdExposure0
             }
             outputKeys: {
                 exposure: crSubCcdExposure0
@@ -5293,7 +5312,7 @@ execute: {
         eventTopic: None
         stagePolicy: {
             inputKeys: {
-                exposure: isrCcdExposure1
+                exposure: bkgSubCcdExposure1
             }
             outputKeys: {
                 exposure: crSubCcdExposure1
@@ -5333,12 +5352,27 @@ execute: {
         }
     }
     appStage: {
+        name: crSourceMeasure
+        parallelClass: lsst.meas.pipeline.SourceMeasurementStageParallel
+        eventTopic: None
+        stagePolicy: { 
+            inputKeys: {
+                exposure: crDiffimExposure
+                positiveDetection: positiveCrSet
+                negativeDetection: negativeCrSet
+            }
+            outputKeys: {
+                sources: sourceSet
+            }
+        }
+    }
+    appStage: {
         name: crMerge
         parallelClass: lsst.ip.pipeline.CrSplitCombineStageParallel
         eventTopic: None
         stagePolicy: {
             inputKeys: {
-                exposures: "crSubCcdExposure0" "crSubCcdExposure1"
+                exposures: crSubCcdExposure0 crSubCcdExposure1
                 positiveDetection: positiveCrSet
                 negativeDetection: negativeCrSet
             }
@@ -5648,26 +5682,6 @@ execute: {
                     }
                 }
             }
-        }
-    }
-
-    appStage: {
-        name: jobDone
-        parallelClass: lsst.ctrl.sched.pipeline.JobDoneParallelProcessing
-        eventTopic: None
-        stagePolicy: {
-            pipelineEvent:  CcdJob
-            datasets.dataReadyEvent:  CalexpAvailable
-        }
-    }
-    failureStage: {
-        name: failure
-        parallelClass: lsst.ctrl.sched.pipeline.JobDoneParallelProcessing
-        eventTopic: None
-        stagePolicy: {
-            pipelineEvent:  CcdJob
-            datasets.dataReadyEvent:  CalexpAvailable
-            jobSuccess: false
         }
     }
 }

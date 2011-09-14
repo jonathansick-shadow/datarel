@@ -419,13 +419,41 @@ def ccdAssemblyProcess(f):
 
 def crSplitProcess(f):
     print >>f, """
+    appStage: { 
+        name: crSplitBackgroundEstimation0 
+        parallelClass: lsst.meas.pipeline.BackgroundEstimationStageParallel 
+        eventTopic: None 
+        stagePolicy: { 
+            inputKeys: { 
+                exposure: isrCcdExposure0 
+            } 
+            outputKeys: { 
+                backgroundSubtractedExposure: bkgSubCcdExposure0 
+            } 
+            parameters: @PT1Pipe/CrSplit-backgroundEstimation.paf 
+        } 
+    } 
+    appStage: { 
+        name: crSplitBackgroundEstimation1 
+        parallelClass: lsst.meas.pipeline.BackgroundEstimationStageParallel 
+        eventTopic: None 
+        stagePolicy: { 
+            inputKeys: { 
+                exposure: isrCcdExposure1 
+            } 
+            outputKeys: { 
+                backgroundSubtractedExposure: bkgSubCcdExposure1 
+            } 
+            parameters: @PT1Pipe/CrSplit-backgroundEstimation.paf 
+        } 
+    } 
     appStage: {
         name: crSplitCrReject0
         parallelClass: lsst.ip.pipeline.CrRejectStageParallel
         eventTopic: None
         stagePolicy: {
             inputKeys: {
-                exposure: isrCcdExposure0
+                exposure: bkgSubCcdExposure0
             }
             outputKeys: {
                 exposure: crSubCcdExposure0
@@ -440,7 +468,7 @@ def crSplitProcess(f):
         eventTopic: None
         stagePolicy: {
             inputKeys: {
-                exposure: isrCcdExposure1
+                exposure: bkgSubCcdExposure1
             }
             outputKeys: {
                 exposure: crSubCcdExposure1
@@ -477,6 +505,21 @@ def crSplitProcess(f):
             }
             psfPolicy: @PT1Pipe/CrSplit-sourceDetect-psf.paf
             backgroundPolicy: @PT1Pipe/CrSplit-sourceDetect-background.paf
+        }
+    }
+    appStage: {
+        name: crSourceMeasure
+        parallelClass: lsst.meas.pipeline.SourceMeasurementStageParallel
+        eventTopic: None
+        stagePolicy: { 
+            inputKeys: {
+                exposure: crDiffimExposure
+                positiveDetection: positiveCrSet
+                negativeDetection: negativeCrSet
+            }
+            outputKeys: {
+                sources: sourceSet
+            }
         }
     }
     appStage: {
