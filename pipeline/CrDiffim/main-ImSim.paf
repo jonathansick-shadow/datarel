@@ -5352,6 +5352,45 @@ execute: {
         }
     }
     appStage: {
+        name: crSourceMeasure
+        parallelClass: lsst.meas.pipeline.SourceMeasurementStageParallel
+        eventTopic: None
+        stagePolicy: { 
+            inputKeys: {
+                exposure: crDiffimExposure
+                positiveDetection: positiveCrSet
+                negativeDetection: negativeCrSet
+            }
+            outputKeys: {
+                sources: crDiffimSourceSet
+            }
+        }
+    }
+    appStage: {
+        name: crDiffimSourceOutput
+        parallelClass: lsst.pex.harness.IOStage.OutputStageParallel
+        eventTopic: None
+        stagePolicy: {
+            parameters: {
+                butler: @PT1Pipe/butlerUpdate.paf
+                outputItems: {
+                    crDiffimSourceSet_persistable: {
+                        datasetId: {
+                            datasetType: crDiffimSrc
+                            fromJobIdentity: "visit" "raft" "sensor"
+                        }
+                    }
+                    crDiffimExposure: {
+                        datasetId: {
+                            datasetType: crDiffim
+                            fromJobIdentity: "visit" "raft" "sensor"
+                        }
+                    }
+                }
+            }
+        }
+    }
+    appStage: {
         name: crMerge
         parallelClass: lsst.ip.pipeline.CrSplitCombineStageParallel
         eventTopic: None
@@ -5362,7 +5401,7 @@ execute: {
                 negativeDetection: negativeCrSet
             }
             outputKeys: {
-                combinedExposure: visitExposure
+                combinedExposure: mergedExposure
             }
         }
     }
@@ -5374,7 +5413,7 @@ execute: {
         eventTopic: None
         stagePolicy: {
             inputKeys: {
-                visitExposure: visitExposure
+                visitExposure: mergedExposure
                 jobIdentity: jobIdentity
                 originatorId: originatorId
                 targetDatasets: targetDatasets
@@ -5391,266 +5430,6 @@ execute: {
                 targetDatasets: targetDatasets
                 inputDataSets: inputDatasets
                 outputDatasets: outputDatasets
-            }
-        }
-    }
-
-    appStage: {
-        name: icSourceDetect
-        parallelClass: lsst.meas.pipeline.SourceDetectionStageParallel
-        eventTopic: None
-        stagePolicy: {
-            inputKeys: {
-                exposure: visitExposure
-            }
-            outputKeys: {
-                positiveDetection: positiveFootprintSet
-                negativeDetection: negativeFootprintSet
-                psf: simplePsf
-            }
-            psfPolicy: @PT1Pipe/ImgChar-sourceDetect-psf.paf
-            backgroundPolicy: @PT1Pipe/ImgChar-sourceDetect-background.paf
-        }
-    }
-    appStage: {
-        name: icSourceMeasure
-        parallelClass: lsst.meas.pipeline.SourceMeasurementStageParallel
-        eventTopic: None
-        stagePolicy: {
-            inputKeys: {
-                exposure: visitExposure
-                psf: simplePsf
-                positiveDetection: positiveFootprintSet
-                negativeDetection: negativeFootprintSet
-            }
-            outputKeys: {
-                sources: sourceSet
-            }
-        }
-    }
-    appStage: {
-        name: icPsfDetermination
-        parallelClass: lsst.meas.pipeline.PsfDeterminationStageParallel
-        eventTopic: None
-        stagePolicy: {
-            inputKeys: {
-                exposure: visitExposure
-                sourceSet: sourceSet
-            }
-            outputKeys: {
-                psf: measuredPsf
-                cellSet: cellSet
-                sdqa: sdqa
-            }
-        }
-    }
-    appStage: {
-        name: icRemeasure
-        parallelClass: lsst.meas.pipeline.SourceMeasurementPsfFluxStageParallel
-        eventTopic: None
-        stagePolicy: {
-            inputKeys: {
-                exposure: visitExposure
-                sourceSet: sourceSet
-            }
-            outputKeys: {
-                sourceSet: sourceSet
-            }
-        }
-    }
-    appStage: {
-        name: icApCorrect
-        parallelClass: lsst.meas.pipeline.ApertureCorrectionStageParallel
-        eventTopic: None
-        stagePolicy: {
-            inputKeys: {
-                exposure: visitExposure
-                cellSet: cellSet
-            }
-            outputKeys: {
-                apCorr: apCorr
-                sdqa: sdqa
-            }
-        }
-    }
-    appStage: {
-        name: icApCorrectApply
-        parallelClass: lsst.meas.pipeline.ApertureCorrectionApplyStageParallel
-        eventTopic: None
-        stagePolicy: {
-            inputKeys: {
-                apCorr: apCorr
-                sourceSet: sourceSet
-            }
-        }
-    }
-    appStage: {
-        name: icWcsDetermination
-        parallelClass: lsst.meas.pipeline.WcsDeterminationStageParallel
-        eventTopic: None
-        stagePolicy: @PT1Pipe/ImgChar-wcsDetermination.paf
-    }
-    appStage: {
-        name: icWcsVerification
-        parallelClass: lsst.meas.pipeline.WcsVerificationParallel
-        eventTopic: None
-        stagePolicy: {
-            sourceMatchSetKey: matchList
-        }
-    }
-    appStage: {
-        name: icPhotoCal
-        parallelClass: lsst.meas.pipeline.PhotoCalStageParallel
-        eventTopic: None
-        stagePolicy: {
-            sourceMatchSetKey: matchList
-            outputValueKey: photometricMagnitudeObject
-        }
-    }
-
-    appStage: {
-        name: icOutput
-        parallelClass: lsst.pex.harness.IOStage.OutputStageParallel
-        eventTopic: None
-        stagePolicy: {
-            parameters: {
-                butler: @PT1Pipe/butlerUpdate.paf
-                outputItems: {
-                    sourceSet_persistable: {
-                        datasetId: {
-                            datasetType: icSrc
-                            fromJobIdentity: "visit" "raft" "sensor"
-                        }
-                    }
-                    matchList_persistable: {
-                        datasetId: {
-                            datasetType: icMatch
-                            fromJobIdentity: "visit" "raft" "sensor"
-                        }
-                    }
-                    measuredPsf: {
-                        datasetId: {
-                            datasetType: psf
-                            fromJobIdentity: "visit" "raft" "sensor"
-                        }
-                    }
-                    apCorr: {
-                        datasetId: {
-                            datasetType: apCorr
-                            fromJobIdentity: "visit" "raft" "sensor"
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    appStage: {
-        name: icFixup
-        parallelClass: lsst.datarel.FixupStageParallel
-        eventTopic: None
-        stagePolicy: {
-            inputKeys: {
-                calibratedExposure: visitExposure
-                psf: measuredPsf
-                jobIdentity: jobIdentity
-                apCorr: apCorr
-                originatorId: originatorId
-                targetDatasets: targetDatasets
-                inputDataSets: inputDatasets
-                outputDatasets: outputDatasets
-            }
-            parameters: {
-                pipeline: ImgChar
-            }
-            outputKeys: {
-                calibratedExposure: scienceExposure
-                psf: psf
-                jobIdentity: jobIdentity
-                apCorr: apCorr
-                originatorId: originatorId
-                targetDatasets: targetDatasets
-                inputDataSets: inputDatasets
-                outputDatasets: outputDatasets
-            }
-        }
-    }
-
-    appStage: {
-        name: sfmSourceDetect
-        parallelClass: lsst.meas.pipeline.SourceDetectionStageParallel
-        eventTopic: None
-        stagePolicy: {
-            inputKeys: {
-                exposure: scienceExposure
-                psf: psf
-            }
-            outputKeys: {
-                positiveDetection: positiveFootprintSet
-            }
-            backgroundPolicy: @PT1Pipe/SFM-sourceDetect-background.paf
-        }
-    }
-    appStage: {
-        name: sfmSourceMeasure
-        parallelClass: lsst.meas.pipeline.SourceMeasurementStageParallel
-        eventTopic: None
-        stagePolicy: {
-            inputKeys: {
-                exposure: scienceExposure
-                psf: psf
-                positiveDetection: positiveFootprintSet
-            }
-            outputKeys: {
-                sources: sourceSet
-            }
-            measureSources: @PT1Pipe/SFM-sourceMeasure.paf
-        }
-    }
-    appStage: {
-        name: sfmApCorrectApply
-        parallelClass: lsst.meas.pipeline.ApertureCorrectionApplyStageParallel
-        eventTopic: None
-        stagePolicy: {
-            inputKeys: {
-                apCorr: apCorr
-                sourceSet: sourceSet
-            }
-        }
-    }
-    appStage: {
-        name: sfmComputeSourceSkyCoords
-        parallelClass: lsst.meas.pipeline.ComputeSourceSkyCoordsStageParallel
-        eventTopic: None
-        stagePolicy: {
-            inputKeys: {
-                sources: sourceSet
-                exposure: scienceExposure
-            }
-        }
-    }
-
-    appStage: {
-        name: sfmOutput
-        parallelClass: lsst.pex.harness.IOStage.OutputStageParallel
-        eventTopic: None
-        stagePolicy: {
-            parameters: {
-                butler: @PT1Pipe/butlerUpdateFootprints.paf
-                outputItems: {
-                    sourceSet_persistable: {
-                        datasetId: {
-                            datasetType: src
-                            fromJobIdentity: "visit" "raft" "sensor"
-                        }
-                    }
-                    scienceExposure: {
-                        datasetId: {
-                            datasetType: calexp
-                            fromJobIdentity: "visit" "raft" "sensor"
-                        }
-                    }
-                }
             }
         }
     }

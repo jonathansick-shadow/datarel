@@ -1,0 +1,11 @@
+#<?cfg paf policy ?>
+
+source: {
+    modelFlux: SHAPELET_MODEL
+    instFlux: GAUSSIAN
+}
+photometry: {
+    SHAPELET_MODEL: {
+        enabled: true
+    }
+}

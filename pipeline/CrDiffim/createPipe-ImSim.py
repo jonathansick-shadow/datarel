@@ -508,6 +508,45 @@ def crSplitProcess(f):
         }
     }
     appStage: {
+        name: crSourceMeasure
+        parallelClass: lsst.meas.pipeline.SourceMeasurementStageParallel
+        eventTopic: None
+        stagePolicy: { 
+            inputKeys: {
+                exposure: crDiffimExposure
+                positiveDetection: positiveCrSet
+                negativeDetection: negativeCrSet
+            }
+            outputKeys: {
+                sources: crDiffimSourceSet
+            }
+        }
+    }
+    appStage: {
+        name: crDiffimSourceOutput
+        parallelClass: lsst.pex.harness.IOStage.OutputStageParallel
+        eventTopic: None
+        stagePolicy: {
+            parameters: {
+                butler: @PT1Pipe/butlerUpdate.paf
+                outputItems: {
+                    crDiffimSourceSet_persistable: {
+                        datasetId: {
+                            datasetType: crDiffimSrc
+                            fromJobIdentity: "visit" "raft" "sensor"
+                        }
+                    }
+                    crDiffimExposure: {
+                        datasetId: {
+                            datasetType: crDiffim
+                            fromJobIdentity: "visit" "raft" "sensor"
+                        }
+                    }
+                }
+            }
+        }
+    }
+    appStage: {
         name: crMerge
         parallelClass: lsst.ip.pipeline.CrSplitCombineStageParallel
         eventTopic: None
@@ -518,7 +557,7 @@ def crSplitProcess(f):
                 negativeDetection: negativeCrSet
             }
             outputKeys: {
-                combinedExposure: visitExposure
+                combinedExposure: mergedExposure
             }
         }
     }
@@ -530,7 +569,7 @@ def crSplitProcess(f):
         eventTopic: None
         stagePolicy: {
             inputKeys: {
-                visitExposure: visitExposure
+                visitExposure: mergedExposure
                 jobIdentity: jobIdentity
                 originatorId: originatorId
                 targetDatasets: targetDatasets
@@ -847,8 +886,6 @@ def createPolicy(f, doJobOffice=False):
     isrProcess(f, doJobOffice)
     ccdAssemblyProcess(f)
     crSplitProcess(f)
-    imgCharProcess(f)
-    sfmProcess(f)
     if doJobOffice:
         jobFinish(f)
     print >>f, "}"
