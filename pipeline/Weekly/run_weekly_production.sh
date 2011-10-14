@@ -36,7 +36,7 @@ echo $i
 # Production will make a directory 'thisrun' under base.
 # 
 base="/lsst3/weekly/datarel-runs"
-dbuser="buildbot"
+dbuser=$USER
 
 # stackType="tags" stackType="trunk"
 stackType=$1
@@ -117,8 +117,8 @@ fi
 
 # Ingest source association data
 mkdir csv-SourceAssoc
-echo "${DATAREL_DIR}/bin/ingest/ingestSourceAssoc.py -m -u ${dbuser} -R /lsst/DC3/data/obs/ImSim/ref/simRefObject-2011-06-20-0.csv -e /lsst3/weekly/datarel-runs/${thisrun}/Science_Ccd_Exposure_Metadata.csv -H lsst10.ncsa.uiuc.edu -j 1 ${dbuser}_PT1_2_u_${thisrun}  SourceAssoc  csv-SourceAssoc";
-${DATAREL_DIR}/bin/ingest/ingestSourceAssoc.py -m -u ${dbuser} -R /lsst/DC3/data/obs/ImSim/ref/simRefObject-2011-06-20-0.csv -e /lsst3/weekly/datarel-runs/${thisrun}/Science_Ccd_Exposure_Metadata.csv -H lsst10.ncsa.uiuc.edu -j 1 ${dbuser}_PT1_2_u_${thisrun}  SourceAssoc  csv-SourceAssoc >& ingestSourceAssoc.log 
+echo "${DATAREL_DIR}/bin/ingest/ingestSourceAssoc.py -m -u ${dbuser} -R input/refObject.csv  -e Science_Ccd_Exposure_Metadata.csv -H lsst10.ncsa.uiuc.edu -j 1 ${dbuser}_PT1_2_u_${thisrun}  SourceAssoc  csv-SourceAssoc";
+${DATAREL_DIR}/bin/ingest/ingestSourceAssoc.py -m -u ${dbuser} -R input/refObject.csv -e Science_Ccd_Exposure_Metadata.csv -H lsst10.ncsa.uiuc.edu -j 1 ${dbuser}_PT1_2_u_${thisrun}  SourceAssoc  csv-SourceAssoc >& ingestSourceAssoc.log 
 if [ $? -ne 0 ]; then
      echo "------------------------------------"
      echo "FATAL: Failed in ingestSourceAssoc execution."
@@ -155,14 +155,34 @@ if [ $? -ne 0 ]; then
      exit 1
 fi
 
+# Only continue processing  if NOT Debug mode.
+# Having to approximate by checking if input list is very short
+if [ `cat ${startDir}/weekly.input | wc -l` -le 21 ] ; then
+    echo "Not altering latest_${stackType} since DEBUG mode."
+    exit 0
+fi
+
+
 # Update sym link: latest_<type>
-if [ `cat ${startDir}/weekly.input | wc -l` -gt 21 ] ; then
-    # Only switch sym link to latest production run if NOT Debug mode.
-    # Having to approximate by checking if input list is very short
+#     Don't change the rundir latest_* link if this is One-Off
+#     Don't want to bundle both sym link sets 'cuz pipeQA might fail
+NOT_ONEOFF=`cat ${startDir}/weekly_production.paf | grep OneOff | grep -v '.*#.*dataRepository:' | grep 'dataRepository:' | wc -l `
+echo "Not ONEOFF=${NOT_ONEOFF}"
+if [ ${NOT_ONEOFF} -eq 0  ] ; then
     rm -f ${base}/latest_${stackType}
     echo "ln -s ${base}/${thisrun} ${base}/latest_${stackType}"
     ln -s ${base}/${thisrun} ${base}/latest_${stackType}
-else
-    echo "Not altering latest_${stackType} since DEBUG mode."
 fi
 
+# Initiate pipeQA
+setup testing_pipeQA
+setup testing_displayQA
+export WWW_ROOT=/lsst/public_html/pipeQA/html/dev
+export WWW_RERUN="${dbuser}_PT1_2_u_${thisrun}"
+newQa.py ${WWW_RERUN}
+${TESTING_PIPEQA_DIR}/bin/pipeQa.py -d -f -k -b ccd -v ".*" ${WWW_RERUN}
+
+# Don't change the pipeQA latest_* link if this is a One-Off
+if [ $NOT_ONEOFF -eq 0  ] ; then
+    ln -sf ${WWW_ROOT}/${WWW_RERUN} ${WWW_ROOT}/latest_${stackType}
+fi

@@ -27,9 +27,18 @@ execute: {
     }
 
     appStage: {
+        name: getAJob
+        parallelClass: lsst.ctrl.sched.pipeline.GetAJobParallelProcessing
+        eventTopic: None
+        stagePolicy: {
+            pipelineEvent: CcdJob
+        }
+    }
+
+    appStage: {
         name: isrInputRaw
         parallelClass: lsst.pex.harness.IOStage.InputStageParallel
-        eventTopic: jobIdentity
+        eventTopic: None
         stagePolicy: {
             parameters: {
                 butler: @PT1Pipe/butlerInput.paf
@@ -4839,378 +4848,6 @@ execute: {
                 butler: @PT1Pipe/butlerUpdate.paf
                 outputItems: {
 
-                    isrExposure00_0: {
-                        datasetId: {
-                            datasetType: postISR
-                            fromJobIdentity: "visit" "raft" "sensor"
-                            set: {
-                                snap: 0
-                                channel: "0,0"
-                            }
-                        }
-                    }
-
-                    isrExposure01_0: {
-                        datasetId: {
-                            datasetType: postISR
-                            fromJobIdentity: "visit" "raft" "sensor"
-                            set: {
-                                snap: 0
-                                channel: "0,1"
-                            }
-                        }
-                    }
-
-                    isrExposure02_0: {
-                        datasetId: {
-                            datasetType: postISR
-                            fromJobIdentity: "visit" "raft" "sensor"
-                            set: {
-                                snap: 0
-                                channel: "0,2"
-                            }
-                        }
-                    }
-
-                    isrExposure03_0: {
-                        datasetId: {
-                            datasetType: postISR
-                            fromJobIdentity: "visit" "raft" "sensor"
-                            set: {
-                                snap: 0
-                                channel: "0,3"
-                            }
-                        }
-                    }
-
-                    isrExposure04_0: {
-                        datasetId: {
-                            datasetType: postISR
-                            fromJobIdentity: "visit" "raft" "sensor"
-                            set: {
-                                snap: 0
-                                channel: "0,4"
-                            }
-                        }
-                    }
-
-                    isrExposure05_0: {
-                        datasetId: {
-                            datasetType: postISR
-                            fromJobIdentity: "visit" "raft" "sensor"
-                            set: {
-                                snap: 0
-                                channel: "0,5"
-                            }
-                        }
-                    }
-
-                    isrExposure06_0: {
-                        datasetId: {
-                            datasetType: postISR
-                            fromJobIdentity: "visit" "raft" "sensor"
-                            set: {
-                                snap: 0
-                                channel: "0,6"
-                            }
-                        }
-                    }
-
-                    isrExposure07_0: {
-                        datasetId: {
-                            datasetType: postISR
-                            fromJobIdentity: "visit" "raft" "sensor"
-                            set: {
-                                snap: 0
-                                channel: "0,7"
-                            }
-                        }
-                    }
-
-                    isrExposure10_0: {
-                        datasetId: {
-                            datasetType: postISR
-                            fromJobIdentity: "visit" "raft" "sensor"
-                            set: {
-                                snap: 0
-                                channel: "1,0"
-                            }
-                        }
-                    }
-
-                    isrExposure11_0: {
-                        datasetId: {
-                            datasetType: postISR
-                            fromJobIdentity: "visit" "raft" "sensor"
-                            set: {
-                                snap: 0
-                                channel: "1,1"
-                            }
-                        }
-                    }
-
-                    isrExposure12_0: {
-                        datasetId: {
-                            datasetType: postISR
-                            fromJobIdentity: "visit" "raft" "sensor"
-                            set: {
-                                snap: 0
-                                channel: "1,2"
-                            }
-                        }
-                    }
-
-                    isrExposure13_0: {
-                        datasetId: {
-                            datasetType: postISR
-                            fromJobIdentity: "visit" "raft" "sensor"
-                            set: {
-                                snap: 0
-                                channel: "1,3"
-                            }
-                        }
-                    }
-
-                    isrExposure14_0: {
-                        datasetId: {
-                            datasetType: postISR
-                            fromJobIdentity: "visit" "raft" "sensor"
-                            set: {
-                                snap: 0
-                                channel: "1,4"
-                            }
-                        }
-                    }
-
-                    isrExposure15_0: {
-                        datasetId: {
-                            datasetType: postISR
-                            fromJobIdentity: "visit" "raft" "sensor"
-                            set: {
-                                snap: 0
-                                channel: "1,5"
-                            }
-                        }
-                    }
-
-                    isrExposure16_0: {
-                        datasetId: {
-                            datasetType: postISR
-                            fromJobIdentity: "visit" "raft" "sensor"
-                            set: {
-                                snap: 0
-                                channel: "1,6"
-                            }
-                        }
-                    }
-
-                    isrExposure17_0: {
-                        datasetId: {
-                            datasetType: postISR
-                            fromJobIdentity: "visit" "raft" "sensor"
-                            set: {
-                                snap: 0
-                                channel: "1,7"
-                            }
-                        }
-                    }
-
-                    isrCcdExposure0: {
-                        datasetId: {
-                            datasetType: postISRCCD
-                            fromJobIdentity: "visit" "raft" "sensor"
-                            set: {
-                                snap: 0
-                            }
-                        }
-                    }
-
-                    isrExposure00_1: {
-                        datasetId: {
-                            datasetType: postISR
-                            fromJobIdentity: "visit" "raft" "sensor"
-                            set: {
-                                snap: 1
-                                channel: "0,0"
-                            }
-                        }
-                    }
-
-                    isrExposure01_1: {
-                        datasetId: {
-                            datasetType: postISR
-                            fromJobIdentity: "visit" "raft" "sensor"
-                            set: {
-                                snap: 1
-                                channel: "0,1"
-                            }
-                        }
-                    }
-
-                    isrExposure02_1: {
-                        datasetId: {
-                            datasetType: postISR
-                            fromJobIdentity: "visit" "raft" "sensor"
-                            set: {
-                                snap: 1
-                                channel: "0,2"
-                            }
-                        }
-                    }
-
-                    isrExposure03_1: {
-                        datasetId: {
-                            datasetType: postISR
-                            fromJobIdentity: "visit" "raft" "sensor"
-                            set: {
-                                snap: 1
-                                channel: "0,3"
-                            }
-                        }
-                    }
-
-                    isrExposure04_1: {
-                        datasetId: {
-                            datasetType: postISR
-                            fromJobIdentity: "visit" "raft" "sensor"
-                            set: {
-                                snap: 1
-                                channel: "0,4"
-                            }
-                        }
-                    }
-
-                    isrExposure05_1: {
-                        datasetId: {
-                            datasetType: postISR
-                            fromJobIdentity: "visit" "raft" "sensor"
-                            set: {
-                                snap: 1
-                                channel: "0,5"
-                            }
-                        }
-                    }
-
-                    isrExposure06_1: {
-                        datasetId: {
-                            datasetType: postISR
-                            fromJobIdentity: "visit" "raft" "sensor"
-                            set: {
-                                snap: 1
-                                channel: "0,6"
-                            }
-                        }
-                    }
-
-                    isrExposure07_1: {
-                        datasetId: {
-                            datasetType: postISR
-                            fromJobIdentity: "visit" "raft" "sensor"
-                            set: {
-                                snap: 1
-                                channel: "0,7"
-                            }
-                        }
-                    }
-
-                    isrExposure10_1: {
-                        datasetId: {
-                            datasetType: postISR
-                            fromJobIdentity: "visit" "raft" "sensor"
-                            set: {
-                                snap: 1
-                                channel: "1,0"
-                            }
-                        }
-                    }
-
-                    isrExposure11_1: {
-                        datasetId: {
-                            datasetType: postISR
-                            fromJobIdentity: "visit" "raft" "sensor"
-                            set: {
-                                snap: 1
-                                channel: "1,1"
-                            }
-                        }
-                    }
-
-                    isrExposure12_1: {
-                        datasetId: {
-                            datasetType: postISR
-                            fromJobIdentity: "visit" "raft" "sensor"
-                            set: {
-                                snap: 1
-                                channel: "1,2"
-                            }
-                        }
-                    }
-
-                    isrExposure13_1: {
-                        datasetId: {
-                            datasetType: postISR
-                            fromJobIdentity: "visit" "raft" "sensor"
-                            set: {
-                                snap: 1
-                                channel: "1,3"
-                            }
-                        }
-                    }
-
-                    isrExposure14_1: {
-                        datasetId: {
-                            datasetType: postISR
-                            fromJobIdentity: "visit" "raft" "sensor"
-                            set: {
-                                snap: 1
-                                channel: "1,4"
-                            }
-                        }
-                    }
-
-                    isrExposure15_1: {
-                        datasetId: {
-                            datasetType: postISR
-                            fromJobIdentity: "visit" "raft" "sensor"
-                            set: {
-                                snap: 1
-                                channel: "1,5"
-                            }
-                        }
-                    }
-
-                    isrExposure16_1: {
-                        datasetId: {
-                            datasetType: postISR
-                            fromJobIdentity: "visit" "raft" "sensor"
-                            set: {
-                                snap: 1
-                                channel: "1,6"
-                            }
-                        }
-                    }
-
-                    isrExposure17_1: {
-                        datasetId: {
-                            datasetType: postISR
-                            fromJobIdentity: "visit" "raft" "sensor"
-                            set: {
-                                snap: 1
-                                channel: "1,7"
-                            }
-                        }
-                    }
-
-                    isrCcdExposure1: {
-                        datasetId: {
-                            datasetType: postISRCCD
-                            fromJobIdentity: "visit" "raft" "sensor"
-                            set: {
-                                snap: 1
-                            }
-                        }
-                    }
-
                     sdqaRatingVector0: {
                         datasetId: {
                             datasetType: sdqaCcd
@@ -5220,6 +4857,7 @@ execute: {
                             }
                         }
                     }
+
                     sdqaRatingVector1: {
                         datasetId: {
                             datasetType: sdqaCcd
@@ -5229,6 +4867,7 @@ execute: {
                             }
                         }
                     }
+
                 }
             }
         }
@@ -5263,41 +4902,91 @@ execute: {
         }
     }
 
-    appStage: { 
-        name: crSplitBackgroundEstimation0 
-        parallelClass: lsst.meas.pipeline.BackgroundEstimationStageParallel 
-        eventTopic: None 
-        stagePolicy: { 
-            inputKeys: { 
-                exposure: isrCcdExposure0 
-            } 
-            outputKeys: { 
-                backgroundSubtractedExposure: bkgSubCcdExposure0 
-            } 
-            parameters: @PT1Pipe/CrSplit-backgroundEstimation.paf 
-        } 
-    } 
-    appStage: { 
-        name: crSplitBackgroundEstimation1 
-        parallelClass: lsst.meas.pipeline.BackgroundEstimationStageParallel 
-        eventTopic: None 
-        stagePolicy: { 
-            inputKeys: { 
-                exposure: isrCcdExposure1 
-            } 
-            outputKeys: { 
-                backgroundSubtractedExposure: bkgSubCcdExposure1 
-            } 
-            parameters: @PT1Pipe/CrSplit-backgroundEstimation.paf 
-        } 
-    } 
+    appStage: {
+        name: crSplitBackgroundEstimation0
+        parallelClass: lsst.meas.pipeline.BackgroundEstimationStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrCcdExposure0
+            }
+            outputKeys: {
+                backgroundSubtractedExposure: bkgSubCcdExposure0
+            }
+            parameters: @PT1Pipe/CrSplit-backgroundEstimation.paf
+        }
+    }
+    appStage: {
+        name: crSplitBackgroundEstimation1
+        parallelClass: lsst.meas.pipeline.BackgroundEstimationStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: isrCcdExposure1
+            }
+            outputKeys: {
+                backgroundSubtractedExposure: bkgSubCcdExposure1
+            }
+            parameters: @PT1Pipe/CrSplit-backgroundEstimation.paf
+        }
+    }
+
+    appStage: {
+        name: vigCorrInput
+        parallelClass: lsst.pex.harness.IOStage.InputStageParallel
+        eventTopic: None
+        stagePolicy: {
+            parameters: {
+                additionalData: "raft=jobIdentity.raft" "sensor=jobIdentity.sensor"
+                inputItems: {
+                   vigCorrImage: {
+                       type: ImageF
+                       pythonType: lsst.afw.image.ImageF
+                       storagePolicy: {
+                           storage: FitsStorage
+                           location: "%(input)/vigcorrdata/DM_R:%(raft)_S:%(sensor).fits"
+                       }
+                   }
+                }
+            }
+        }
+    }    
+    appStage: {
+        name: vigCorr0
+        parallelClass: lsst.datarel.VigCorrStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: bkgSubCcdExposure0
+                vigCorrImage: vigCorrImage
+            }
+            outputKeys: {
+                corrExposure: vigCorrBkgSubCcdExposure0
+            }
+        }
+    }    
+    appStage: {
+        name: vigCorr1
+        parallelClass: lsst.datarel.VigCorrStageParallel
+        eventTopic: None
+        stagePolicy: {
+            inputKeys: {
+                exposure: bkgSubCcdExposure1
+                vigCorrImage: vigCorrImage
+            }
+            outputKeys: {
+                corrExposure: vigCorrBkgSubCcdExposure1
+            }
+        }
+    }
+
     appStage: {
         name: crSplitCrReject0
         parallelClass: lsst.ip.pipeline.CrRejectStageParallel
         eventTopic: None
         stagePolicy: {
             inputKeys: {
-                exposure: bkgSubCcdExposure0
+                exposure: vigCorrBkgSubCcdExposure0
             }
             outputKeys: {
                 exposure: crSubCcdExposure0
@@ -5312,7 +5001,7 @@ execute: {
         eventTopic: None
         stagePolicy: {
             inputKeys: {
-                exposure: bkgSubCcdExposure1
+                exposure: vigCorrBkgSubCcdExposure1
             }
             outputKeys: {
                 exposure: crSubCcdExposure1
@@ -5321,52 +5010,6 @@ execute: {
             crRejectPolicy: @PT1Pipe/CrSplit-crReject-algorithm.paf
         }
     }
-    appStage: {
-        name: crDiffIm
-        parallelClass: lsst.ip.pipeline.PairDiffImStageParallel
-        eventTopic: None
-        stagePolicy: {
-            inputKeys: {
-                snap0ExposureKey: crSubCcdExposure0
-                snap1ExposureKey: crSubCcdExposure1
-            }
-            outputKeys: {
-                differenceExposureKey: crDiffimExposure
-            }
-        }
-    }
-    appStage: {
-        name: crDetect
-        parallelClass: lsst.meas.pipeline.SourceDetectionStageParallel
-        eventTopic: None
-        stagePolicy: {
-            inputKeys: {
-                exposure: crDiffimExposure
-            }
-            outputKeys: {
-                positiveDetection: positiveCrSet
-                negativeDetection: negativeCrSet
-            }
-            psfPolicy: @PT1Pipe/CrSplit-sourceDetect-psf.paf
-            backgroundPolicy: @PT1Pipe/CrSplit-sourceDetect-background.paf
-        }
-    }
-    appStage: {
-        name: crMerge
-        parallelClass: lsst.ip.pipeline.CrSplitCombineStageParallel
-        eventTopic: None
-        stagePolicy: {
-            inputKeys: {
-                exposures: crSubCcdExposure0 crSubCcdExposure1
-                positiveDetection: positiveCrSet
-                negativeDetection: negativeCrSet
-            }
-            outputKeys: {
-                combinedExposure: visitExposure
-            }
-        }
-    }
-    
 
     appStage: {
         name: crSplitFixup
@@ -5374,7 +5017,7 @@ execute: {
         eventTopic: None
         stagePolicy: {
             inputKeys: {
-                visitExposure: visitExposure
+                visitExposure: crSubCcdExposure0
                 jobIdentity: jobIdentity
                 originatorId: originatorId
                 targetDatasets: targetDatasets
@@ -5652,6 +5295,26 @@ execute: {
                     }
                 }
             }
+        }
+    }
+
+    appStage: {
+        name: jobDone
+        parallelClass: lsst.ctrl.sched.pipeline.JobDoneParallelProcessing
+        eventTopic: None
+        stagePolicy: {
+            pipelineEvent:  CcdJob
+            datasets.dataReadyEvent:  CalexpAvailable
+        }
+    }
+    failureStage: {
+        name: failure
+        parallelClass: lsst.ctrl.sched.pipeline.JobDoneParallelProcessing
+        eventTopic: None
+        stagePolicy: {
+            pipelineEvent:  CcdJob
+            datasets.dataReadyEvent:  CalexpAvailable
+            jobSuccess: false
         }
     }
 }
