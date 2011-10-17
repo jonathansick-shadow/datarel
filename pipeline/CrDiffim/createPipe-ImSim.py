@@ -492,7 +492,7 @@ def crSplitProcess(f):
         }
     }
     appStage: {
-        name: crDetect
+        name: crDiffimSourceDetect
         parallelClass: lsst.meas.pipeline.SourceDetectionStageParallel
         eventTopic: None
         stagePolicy: {
@@ -505,10 +505,11 @@ def crSplitProcess(f):
             }
             psfPolicy: @PT1Pipe/CrSplit-sourceDetect-psf.paf
             backgroundPolicy: @PT1Pipe/CrSplit-sourceDetect-background.paf
+            detectionPolicy: @PT1Pipe/CrSplit-sourceDetect-detection.paf
         }
     }
     appStage: {
-        name: crSourceMeasure
+        name: crDiffimSourceMeasure
         parallelClass: lsst.meas.pipeline.SourceMeasurementStageParallel
         eventTopic: None
         stagePolicy: { 
@@ -547,7 +548,7 @@ def crSplitProcess(f):
         }
     }
     appStage: {
-        name: crMerge
+        name: crSplitCombine
         parallelClass: lsst.ip.pipeline.CrSplitCombineStageParallel
         eventTopic: None
         stagePolicy: {
