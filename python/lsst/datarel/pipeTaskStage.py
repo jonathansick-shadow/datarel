@@ -31,7 +31,7 @@ class PipeTaskStageParallel(harnessStage.ParallelProcessing):
             self.policy = pexPolicy.Policy()
         self.policy.mergeDefaults(defPolicy.getDictionary())
 
-        self.parser = ArgumentParser()
+        self.parser = ArgumentParser(name="processCcd")
         self.cmdTemplate = self.policy.get("parameters.cmdTemplate")
         taskModule = self.policy.get("parameters.taskModule")
         taskClass = self.policy.get("parameters.taskClass")
