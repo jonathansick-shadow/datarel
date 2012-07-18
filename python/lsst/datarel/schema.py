@@ -834,7 +834,7 @@ def forcedSourceTableSql(coaddName,
     createStmt, loadStmt = genericTableSql(
         schema,
         sourceConversionConfig,
-        _sourceIndexes(sourceProcessingConfig))
+        _sourceIndexes(sourceProcessingConfig).add("objectId"))
     # build substitution parameters for mapping table
     if sourceProcessingConfig.clusterPrefix is None:
         sourceProcessingConfig.clusterPrefix = ""
