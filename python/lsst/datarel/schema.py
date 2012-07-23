@@ -831,10 +831,10 @@ def forcedSourceTableSql(coaddName,
         Prefix for measurement field names.
     """
     # Generate SQL for run specific table
+    indexes = _sourceIndexes(sourceProcessingConfig)
+    indexes.add("objectId")
     createStmt, loadStmt = genericTableSql(
-        schema,
-        sourceConversionConfig,
-        _sourceIndexes(sourceProcessingConfig).add("objectId"))
+            schema, sourceConversionConfig, indexes)
     # build substitution parameters for mapping table
     if sourceProcessingConfig.clusterPrefix is None:
         sourceProcessingConfig.clusterPrefix = ""
