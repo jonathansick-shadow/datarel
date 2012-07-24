@@ -1,0 +1,123 @@
+#!/bin/sh
+
+export HERE=$PWD
+
+export HOME=/home/ux453102
+export SHELL=/bin/sh
+export USER=ux453102
+source /etc/bashrc
+
+# processSdssCcd reference run
+referenceRun="s2012prod_sd0202"
+
+# v5_2
+export LSST_HOME=/oasis/scratch/ux453102/temp_project/lsst/beta-0713/lsst_home
+export EUPS_PATH=/oasis/scratch/ux453102/temp_project/lsst/beta-0713/lsst_home
+
+module add gnu/4.6.1
+
+echo ${HERE}
+
+/bin/hostname -f 
+shost=`/bin/hostname -s`
+
+# Parse command line args
+count=0
+check=0
+while [ $check == 0 ]; do
+
+filter_tract_patch=$1" "$2" "$3
+
+echo filter_tract_patch 
+echo $filter_tract_patch 
+names[$count]=$filter_tract_patch
+
+if [ $4 == 'X' ]
+    then
+    echo YES 
+    shift 4
+    count=`expr $count + 1`
+else
+    check=1
+fi
+
+done
+
+
+runid=$4 
+echo runid
+echo $runid
+workerid=$5 
+rundir=${HERE}/$runid
+cd ${rundir}
+
+echo _CONDOR_SLOT
+echo ${_CONDOR_SLOT}
+cslot=${_CONDOR_SLOT}
+
+mkdir -p logs/$shost/$cslot
+
+# source ./env.sh
+source ${HERE}/${referenceRun}/env.sh
+
+temp=""
+temp1=""
+
+cd ${rundir}
+
+for (( i = 0 ; i < ${#names[@]} ; i++ )) do
+echo "Loop iteration "
+echo $i 
+echo ${names[$i]}
+
+# filter_tract_patch=$1" "$2" "$3" "$4 
+temp=$temp" --id "${names[$i]}
+temp1=$temp1" "${names[$i]} 
+
+# filter_tract_patch=${names[$i]}
+done
+
+filter_tract_patch_cmd=$temp
+filter_tract_patch=$temp1
+
+echo filter_tract_patch_cmd
+echo ${filter_tract_patch_cmd}
+
+echo "==== Prior to processCoadd "
+
+modstring=""
+time1=0
+time2=0
+time3=0
+modstring=`echo ${filter_tract_patch} | sed -e 's/ /:/g' -e 's/=/-/g' -e 's/,/_/g' -e 's/filter/f/g' -e 's/patch/p/g' -e 's/tract/t/g'`
+
+modstring=${workerid}
+echo modstring
+echo ${modstring}
+
+time1=$(date -d "`date`" "+%s")
+
+
+# echo "${CTRL_ORCA_DIR}/bin/wrapperProcessCcdSdss.py ${runid} ${workerid} sdss ${rundir}/runs ${filter_tract_patch_cmd} --output ${rundir}/output  > ${rundir}/logs/$shost/$cslot/S2012Pipe-${modstring}.log"
+
+
+echo "${PIPE_TASKS_DIR}/bin/processCoadd.py sdss myCoaddDir  ${filter_tract_patch_cmd} --output ${rundir} --config coaddName=goodSeeing calibrate.initialPsf.fwhm=1.7 > ${rundir}/logs/$shost/$cslot/processCoadd-${modstring}.log"
+
+# ${CTRL_ORCA_DIR}/bin/wrapperProcessCcdSdss.py ${runid} ${workerid} sdss ${rundir}/runs ${filter_tract_patch_cmd} --output ${rundir}/output --config daf.persistence.butler.verbosity=10 >  ${rundir}/logs/$shost/$cslot/S2012Pipe-${modstring}.log  2>&1
+
+${PIPE_TASKS_DIR}/bin/processCoadd.py sdss myCoaddDir  ${filter_tract_patch_cmd} --output ${rundir} --config coaddName=goodSeeing calibrate.initialPsf.fwhm=1.7 > ${rundir}/logs/$shost/$cslot/processCoadd-${modstring}.log 2>&1
+
+time2=$(date -d "`date`" "+%s")
+
+let time3=$time2-$time1
+
+echo "===================== After processCoadd "
+
+echo STAMP2 $time2
+echo STAMP1 $time1
+
+echo TIMING $time3
+
+
+date
+

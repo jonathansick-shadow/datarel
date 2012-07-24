@@ -1,0 +1,84 @@
+#!/bin/tcsh
+#  Sample Batch Script for a Serial job
+#
+#  Submit this script using the command: qsub <script_name>
+#
+#  Use the "qstat" command to check the status of a job.
+#
+# The following are embedded QSUB options. The syntax is #PBS (the # does
+# _not_  denote that the lines are commented out so do not remove).
+#
+# walltime : maximum wall clock time (hh:mm:ss)
+#PBS -l walltime=12:00:00
+#
+# nodes: number of 8-core nodes
+#   ppn: how many cores per node to use (1 through 8)
+#       (you are always charged for the entire node)
+#PBS -l nodes=4:ppn=1
+#
+# export all my environment variables to the job
+### #PBS -V
+#
+# job name (default = name of script file)
+#PBS -N testGor
+#        -------------------------------------------------- shimem1
+#PBS -q normal
+#
+##
+# Send a notification email when the job (b)egins and when the (e)nds
+# # remove the line below to disable email notification.
+#PBS -m be
+# #
+# #
+# # filename for standard output (default = <job_name>.o<job_id>)
+# # at end of job, it is in directory from which qsub was executed
+# # remove extra ## from the line below if you want to name your own file
+#PBS -o testjob.out
+# #
+# # filename for standard error (default = <job_name>.e<job_id>)
+# # at end of job, it is in directory from which qsub was executed
+# # remove extra ## from the line below if you want to name your own file
+#PBS -e testjob.err
+#
+# #
+# # End of embedded QSUB options
+# #
+# # set echo               # echo commands before execution; use for debugging
+# #
+#
+# set JOBID=`echo $PBS_JOBID | cut -d'.' -f1`
+#
+# # cd $SCR                # change to job scratch directory
+
+/bin/echo $PBS_JOBID 
+
+cd /oasis/scratch/ux453102/temp_project/lsst
+
+/bin/echo Beginning_Glidein_Setup
+
+hostname -f 
+
+set pbs_nodes=`cat ${PBS_NODEFILE}`
+
+# /bin/echo pbs_nodes
+/bin/echo ${pbs_nodes}
+
+set host1 = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[1]}'`
+set host2 = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[2]}'`
+set host3 = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[3]}'`
+set host4 = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[4]}'`
+
+
+ssh $host1 'export CONDOR_CONFIG=/home/ux453102/Condor_glidein/glidein_lsst_condor_config;export _condor_CONDOR_HOST=lsst8.ncsa.uiuc.edu;export _condor_GLIDEIN_HOST=lsst8.ncsa.uiuc.edu;export _condor_LOCAL_DIR=/home/ux453102/condor_local;export _condor_SBIN=/oasis/projects/nsf/nsa101/ux453102/condor-7.4.4-r1/sbin;export _condor_NUM_CPUS=2;export _condor_UID_DOMAIN=ncsa.uiuc.edu;export _condor_FILESYSTEM_DOMAIN=ncsa.uiuc.edu;export _condor_MAIL=/bin/mail;export _condor_STARTD_NOCLAIM_SHUTDOWN=1800; /home/ux453102/Condor_glidein/glidein_startup_gordon -dyn -f' & 
+
+ssh $host2 'export CONDOR_CONFIG=/home/ux453102/Condor_glidein/glidein_lsst_condor_config;export _condor_CONDOR_HOST=lsst8.ncsa.uiuc.edu;export _condor_GLIDEIN_HOST=lsst8.ncsa.uiuc.edu;export _condor_LOCAL_DIR=/home/ux453102/condor_local;export _condor_SBIN=/oasis/projects/nsf/nsa101/ux453102/condor-7.4.4-r1/sbin;export _condor_NUM_CPUS=2;export _condor_UID_DOMAIN=ncsa.uiuc.edu;export _condor_FILESYSTEM_DOMAIN=ncsa.uiuc.edu;export _condor_MAIL=/bin/mail;export _condor_STARTD_NOCLAIM_SHUTDOWN=1800; /home/ux453102/Condor_glidein/glidein_startup_gordon -dyn -f' & 
+
+ssh $host3 'export CONDOR_CONFIG=/home/ux453102/Condor_glidein/glidein_lsst_condor_config;export _condor_CONDOR_HOST=lsst8.ncsa.uiuc.edu;export _condor_GLIDEIN_HOST=lsst8.ncsa.uiuc.edu;export _condor_LOCAL_DIR=/home/ux453102/condor_local;export _condor_SBIN=/oasis/projects/nsf/nsa101/ux453102/condor-7.4.4-r1/sbin;export _condor_NUM_CPUS=2;export _condor_UID_DOMAIN=ncsa.uiuc.edu;export _condor_FILESYSTEM_DOMAIN=ncsa.uiuc.edu;export _condor_MAIL=/bin/mail;export _condor_STARTD_NOCLAIM_SHUTDOWN=1800; /home/ux453102/Condor_glidein/glidein_startup_gordon -dyn -f' & 
+
+ssh $host4 'export CONDOR_CONFIG=/home/ux453102/Condor_glidein/glidein_lsst_condor_config;export _condor_CONDOR_HOST=lsst8.ncsa.uiuc.edu;export _condor_GLIDEIN_HOST=lsst8.ncsa.uiuc.edu;export _condor_LOCAL_DIR=/home/ux453102/condor_local;export _condor_SBIN=/oasis/projects/nsf/nsa101/ux453102/condor-7.4.4-r1/sbin;export _condor_NUM_CPUS=2;export _condor_UID_DOMAIN=ncsa.uiuc.edu;export _condor_FILESYSTEM_DOMAIN=ncsa.uiuc.edu;export _condor_MAIL=/bin/mail;export _condor_STARTD_NOCLAIM_SHUTDOWN=1800; /home/ux453102/Condor_glidein/glidein_startup_gordon -dyn -f' & 
+
+wait
+
+date 
+
+

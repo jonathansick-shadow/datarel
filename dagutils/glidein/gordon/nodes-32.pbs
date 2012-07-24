@@ -1,0 +1,212 @@
+#!/bin/tcsh
+#  Sample Batch Script for a Serial job
+#
+#  Submit this script using the command: qsub <script_name>
+#
+#  Use the "qstat" command to check the status of a job.
+#
+# The following are embedded QSUB options. The syntax is #PBS (the # does
+# _not_  denote that the lines are commented out so do not remove).
+#
+# walltime : maximum wall clock time (hh:mm:ss)
+#PBS -l walltime=09:00:00
+#
+# nodes: number of 8-core nodes
+#   ppn: how many cores per node to use (1 through 8)
+#       (you are always charged for the entire node)
+#PBS -l nodes=32:ppn=1
+#
+# export all my environment variables to the job
+### #PBS -V
+#
+# job name (default = name of script file)
+#PBS -N testGor
+#        -------------------------------------------------- shimem1
+#PBS -q normal
+#
+##
+# Send a notification email when the job (b)egins and when the (e)nds
+# # remove the line below to disable email notification.
+#PBS -m be
+# #
+# #
+# # filename for standard output (default = <job_name>.o<job_id>)
+# # at end of job, it is in directory from which qsub was executed
+# # remove extra ## from the line below if you want to name your own file
+#PBS -o test32.out
+# #
+# # filename for standard error (default = <job_name>.e<job_id>)
+# # at end of job, it is in directory from which qsub was executed
+# # remove extra ## from the line below if you want to name your own file
+#PBS -e test32.err
+#
+# #
+# # End of embedded QSUB options
+# #
+# # set echo               # echo commands before execution; use for debugging
+# #
+#
+# set JOBID=`echo $PBS_JOBID | cut -d'.' -f1`
+#
+# # cd $SCR                # change to job scratch directory
+
+/bin/echo $PBS_JOBID 
+
+cd /oasis/scratch/ux453102/temp_project/lsst
+
+# mkdir run4 
+# env > run4/env
+# env | grep PBS  > run4/pbsinfo
+
+/bin/echo Beginning_Glidein_Setup
+
+hostname -f 
+
+set pbs_nodes=`cat ${PBS_NODEFILE}`
+
+# /bin/echo pbs_nodes
+/bin/echo ${pbs_nodes}
+
+set host1 = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[1]}'`
+set host2 = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[2]}'`
+set host3 = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[3]}'`
+set host4 = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[4]}'`
+set host5 = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[5]}'`
+set host6 = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[6]}'`
+set host7 = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[7]}'`
+set host8 = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[8]}'`
+set host9 = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[9]}'`
+set host10 = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[10]}'`
+set host11 = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[11]}'`
+set host12 = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[12]}'`
+set host13 = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[13]}'`
+set host14 = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[14]}'`
+set host15 = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[15]}'`
+set host16 = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[16]}'`
+
+set host17 = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[17]}'`
+set host18 = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[18]}'`
+set host19 = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[19]}'`
+set host20 = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[20]}'`
+set host21 = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[21]}'`
+set host22 = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[22]}'`
+set host23 = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[23]}'`
+set host24 = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[24]}'`
+set host25 = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[25]}'`
+set host26 = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[26]}'`
+set host27 = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[27]}'`
+set host28 = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[28]}'`
+set host29 = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[29]}'`
+set host30 = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[30]}'`
+set host31 = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[31]}'`
+set host32 = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[32]}'`
+
+
+ssh $host1 'export CONDOR_CONFIG=/home/ux453102/Condor_glidein/glidein_lsst_condor_config;export _condor_CONDOR_HOST=lsst8.ncsa.uiuc.edu;export _condor_GLIDEIN_HOST=lsst8.ncsa.uiuc.edu;export _condor_LOCAL_DIR=/home/ux453102/condor_local;export _condor_SBIN=/oasis/projects/nsf/nsa101/ux453102/condor-7.4.4-r1/sbin;export _condor_NUM_CPUS=6;export _condor_UID_DOMAIN=ncsa.uiuc.edu;export _condor_FILESYSTEM_DOMAIN=ncsa.uiuc.edu;export _condor_MAIL=/bin/mail;export _condor_STARTD_NOCLAIM_SHUTDOWN=1800; /home/ux453102/Condor_glidein/glidein_startup_gordon -dyn -f' & 
+
+sleep 2
+
+ssh $host2 'export CONDOR_CONFIG=/home/ux453102/Condor_glidein/glidein_lsst_condor_config;export _condor_CONDOR_HOST=lsst8.ncsa.uiuc.edu;export _condor_GLIDEIN_HOST=lsst8.ncsa.uiuc.edu;export _condor_LOCAL_DIR=/home/ux453102/condor_local;export _condor_SBIN=/oasis/projects/nsf/nsa101/ux453102/condor-7.4.4-r1/sbin;export _condor_NUM_CPUS=6;export _condor_UID_DOMAIN=ncsa.uiuc.edu;export _condor_FILESYSTEM_DOMAIN=ncsa.uiuc.edu;export _condor_MAIL=/bin/mail;export _condor_STARTD_NOCLAIM_SHUTDOWN=1800; /home/ux453102/Condor_glidein/glidein_startup_gordon -dyn -f' & 
+
+sleep 2
+
+ssh $host3 'export CONDOR_CONFIG=/home/ux453102/Condor_glidein/glidein_lsst_condor_config;export _condor_CONDOR_HOST=lsst8.ncsa.uiuc.edu;export _condor_GLIDEIN_HOST=lsst8.ncsa.uiuc.edu;export _condor_LOCAL_DIR=/home/ux453102/condor_local;export _condor_SBIN=/oasis/projects/nsf/nsa101/ux453102/condor-7.4.4-r1/sbin;export _condor_NUM_CPUS=6;export _condor_UID_DOMAIN=ncsa.uiuc.edu;export _condor_FILESYSTEM_DOMAIN=ncsa.uiuc.edu;export _condor_MAIL=/bin/mail;export _condor_STARTD_NOCLAIM_SHUTDOWN=1800; /home/ux453102/Condor_glidein/glidein_startup_gordon -dyn -f' & 
+
+sleep 2
+
+ssh $host4 'export CONDOR_CONFIG=/home/ux453102/Condor_glidein/glidein_lsst_condor_config;export _condor_CONDOR_HOST=lsst8.ncsa.uiuc.edu;export _condor_GLIDEIN_HOST=lsst8.ncsa.uiuc.edu;export _condor_LOCAL_DIR=/home/ux453102/condor_local;export _condor_SBIN=/oasis/projects/nsf/nsa101/ux453102/condor-7.4.4-r1/sbin;export _condor_NUM_CPUS=6;export _condor_UID_DOMAIN=ncsa.uiuc.edu;export _condor_FILESYSTEM_DOMAIN=ncsa.uiuc.edu;export _condor_MAIL=/bin/mail;export _condor_STARTD_NOCLAIM_SHUTDOWN=1800; /home/ux453102/Condor_glidein/glidein_startup_gordon -dyn -f' & 
+
+sleep 2
+
+ssh $host5 'export CONDOR_CONFIG=/home/ux453102/Condor_glidein/glidein_lsst_condor_config;export _condor_CONDOR_HOST=lsst8.ncsa.uiuc.edu;export _condor_GLIDEIN_HOST=lsst8.ncsa.uiuc.edu;export _condor_LOCAL_DIR=/home/ux453102/condor_local;export _condor_SBIN=/oasis/projects/nsf/nsa101/ux453102/condor-7.4.4-r1/sbin;export _condor_NUM_CPUS=6;export _condor_UID_DOMAIN=ncsa.uiuc.edu;export _condor_FILESYSTEM_DOMAIN=ncsa.uiuc.edu;export _condor_MAIL=/bin/mail;export _condor_STARTD_NOCLAIM_SHUTDOWN=1800; /home/ux453102/Condor_glidein/glidein_startup_gordon -dyn -f' & 
+
+sleep 2
+
+ssh $host6 'export CONDOR_CONFIG=/home/ux453102/Condor_glidein/glidein_lsst_condor_config;export _condor_CONDOR_HOST=lsst8.ncsa.uiuc.edu;export _condor_GLIDEIN_HOST=lsst8.ncsa.uiuc.edu;export _condor_LOCAL_DIR=/home/ux453102/condor_local;export _condor_SBIN=/oasis/projects/nsf/nsa101/ux453102/condor-7.4.4-r1/sbin;export _condor_NUM_CPUS=6;export _condor_UID_DOMAIN=ncsa.uiuc.edu;export _condor_FILESYSTEM_DOMAIN=ncsa.uiuc.edu;export _condor_MAIL=/bin/mail;export _condor_STARTD_NOCLAIM_SHUTDOWN=1800; /home/ux453102/Condor_glidein/glidein_startup_gordon -dyn -f' & 
+
+sleep 2
+
+ssh $host7 'export CONDOR_CONFIG=/home/ux453102/Condor_glidein/glidein_lsst_condor_config;export _condor_CONDOR_HOST=lsst8.ncsa.uiuc.edu;export _condor_GLIDEIN_HOST=lsst8.ncsa.uiuc.edu;export _condor_LOCAL_DIR=/home/ux453102/condor_local;export _condor_SBIN=/oasis/projects/nsf/nsa101/ux453102/condor-7.4.4-r1/sbin;export _condor_NUM_CPUS=6;export _condor_UID_DOMAIN=ncsa.uiuc.edu;export _condor_FILESYSTEM_DOMAIN=ncsa.uiuc.edu;export _condor_MAIL=/bin/mail;export _condor_STARTD_NOCLAIM_SHUTDOWN=1800; /home/ux453102/Condor_glidein/glidein_startup_gordon -dyn -f' & 
+
+sleep 2
+
+ssh $host8 'export CONDOR_CONFIG=/home/ux453102/Condor_glidein/glidein_lsst_condor_config;export _condor_CONDOR_HOST=lsst8.ncsa.uiuc.edu;export _condor_GLIDEIN_HOST=lsst8.ncsa.uiuc.edu;export _condor_LOCAL_DIR=/home/ux453102/condor_local;export _condor_SBIN=/oasis/projects/nsf/nsa101/ux453102/condor-7.4.4-r1/sbin;export _condor_NUM_CPUS=6;export _condor_UID_DOMAIN=ncsa.uiuc.edu;export _condor_FILESYSTEM_DOMAIN=ncsa.uiuc.edu;export _condor_MAIL=/bin/mail;export _condor_STARTD_NOCLAIM_SHUTDOWN=1800; /home/ux453102/Condor_glidein/glidein_startup_gordon -dyn -f' & 
+
+sleep 2
+
+ssh $host9 'export CONDOR_CONFIG=/home/ux453102/Condor_glidein/glidein_lsst_condor_config;export _condor_CONDOR_HOST=lsst8.ncsa.uiuc.edu;export _condor_GLIDEIN_HOST=lsst8.ncsa.uiuc.edu;export _condor_LOCAL_DIR=/home/ux453102/condor_local;export _condor_SBIN=/oasis/projects/nsf/nsa101/ux453102/condor-7.4.4-r1/sbin;export _condor_NUM_CPUS=6;export _condor_UID_DOMAIN=ncsa.uiuc.edu;export _condor_FILESYSTEM_DOMAIN=ncsa.uiuc.edu;export _condor_MAIL=/bin/mail;export _condor_STARTD_NOCLAIM_SHUTDOWN=1800; /home/ux453102/Condor_glidein/glidein_startup_gordon -dyn -f' & 
+
+sleep 2
+
+ssh $host10 'export CONDOR_CONFIG=/home/ux453102/Condor_glidein/glidein_lsst_condor_config;export _condor_CONDOR_HOST=lsst8.ncsa.uiuc.edu;export _condor_GLIDEIN_HOST=lsst8.ncsa.uiuc.edu;export _condor_LOCAL_DIR=/home/ux453102/condor_local;export _condor_SBIN=/oasis/projects/nsf/nsa101/ux453102/condor-7.4.4-r1/sbin;export _condor_NUM_CPUS=6;export _condor_UID_DOMAIN=ncsa.uiuc.edu;export _condor_FILESYSTEM_DOMAIN=ncsa.uiuc.edu;export _condor_MAIL=/bin/mail;export _condor_STARTD_NOCLAIM_SHUTDOWN=1800; /home/ux453102/Condor_glidein/glidein_startup_gordon -dyn -f' & 
+
+sleep 2
+ssh $host11 'export CONDOR_CONFIG=/home/ux453102/Condor_glidein/glidein_lsst_condor_config;export _condor_CONDOR_HOST=lsst8.ncsa.uiuc.edu;export _condor_GLIDEIN_HOST=lsst8.ncsa.uiuc.edu;export _condor_LOCAL_DIR=/home/ux453102/condor_local;export _condor_SBIN=/oasis/projects/nsf/nsa101/ux453102/condor-7.4.4-r1/sbin;export _condor_NUM_CPUS=6;export _condor_UID_DOMAIN=ncsa.uiuc.edu;export _condor_FILESYSTEM_DOMAIN=ncsa.uiuc.edu;export _condor_MAIL=/bin/mail;export _condor_STARTD_NOCLAIM_SHUTDOWN=1800; /home/ux453102/Condor_glidein/glidein_startup_gordon -dyn -f' & 
+
+sleep 2
+ssh $host12 'export CONDOR_CONFIG=/home/ux453102/Condor_glidein/glidein_lsst_condor_config;export _condor_CONDOR_HOST=lsst8.ncsa.uiuc.edu;export _condor_GLIDEIN_HOST=lsst8.ncsa.uiuc.edu;export _condor_LOCAL_DIR=/home/ux453102/condor_local;export _condor_SBIN=/oasis/projects/nsf/nsa101/ux453102/condor-7.4.4-r1/sbin;export _condor_NUM_CPUS=6;export _condor_UID_DOMAIN=ncsa.uiuc.edu;export _condor_FILESYSTEM_DOMAIN=ncsa.uiuc.edu;export _condor_MAIL=/bin/mail;export _condor_STARTD_NOCLAIM_SHUTDOWN=1800; /home/ux453102/Condor_glidein/glidein_startup_gordon -dyn -f' & 
+
+sleep 2
+ssh $host13 'export CONDOR_CONFIG=/home/ux453102/Condor_glidein/glidein_lsst_condor_config;export _condor_CONDOR_HOST=lsst8.ncsa.uiuc.edu;export _condor_GLIDEIN_HOST=lsst8.ncsa.uiuc.edu;export _condor_LOCAL_DIR=/home/ux453102/condor_local;export _condor_SBIN=/oasis/projects/nsf/nsa101/ux453102/condor-7.4.4-r1/sbin;export _condor_NUM_CPUS=6;export _condor_UID_DOMAIN=ncsa.uiuc.edu;export _condor_FILESYSTEM_DOMAIN=ncsa.uiuc.edu;export _condor_MAIL=/bin/mail;export _condor_STARTD_NOCLAIM_SHUTDOWN=1800; /home/ux453102/Condor_glidein/glidein_startup_gordon -dyn -f' & 
+
+sleep 2
+ssh $host14 'export CONDOR_CONFIG=/home/ux453102/Condor_glidein/glidein_lsst_condor_config;export _condor_CONDOR_HOST=lsst8.ncsa.uiuc.edu;export _condor_GLIDEIN_HOST=lsst8.ncsa.uiuc.edu;export _condor_LOCAL_DIR=/home/ux453102/condor_local;export _condor_SBIN=/oasis/projects/nsf/nsa101/ux453102/condor-7.4.4-r1/sbin;export _condor_NUM_CPUS=6;export _condor_UID_DOMAIN=ncsa.uiuc.edu;export _condor_FILESYSTEM_DOMAIN=ncsa.uiuc.edu;export _condor_MAIL=/bin/mail;export _condor_STARTD_NOCLAIM_SHUTDOWN=1800; /home/ux453102/Condor_glidein/glidein_startup_gordon -dyn -f' & 
+
+sleep 2
+ssh $host15 'export CONDOR_CONFIG=/home/ux453102/Condor_glidein/glidein_lsst_condor_config;export _condor_CONDOR_HOST=lsst8.ncsa.uiuc.edu;export _condor_GLIDEIN_HOST=lsst8.ncsa.uiuc.edu;export _condor_LOCAL_DIR=/home/ux453102/condor_local;export _condor_SBIN=/oasis/projects/nsf/nsa101/ux453102/condor-7.4.4-r1/sbin;export _condor_NUM_CPUS=6;export _condor_UID_DOMAIN=ncsa.uiuc.edu;export _condor_FILESYSTEM_DOMAIN=ncsa.uiuc.edu;export _condor_MAIL=/bin/mail;export _condor_STARTD_NOCLAIM_SHUTDOWN=1800; /home/ux453102/Condor_glidein/glidein_startup_gordon -dyn -f' & 
+
+sleep 2
+ssh $host16 'export CONDOR_CONFIG=/home/ux453102/Condor_glidein/glidein_lsst_condor_config;export _condor_CONDOR_HOST=lsst8.ncsa.uiuc.edu;export _condor_GLIDEIN_HOST=lsst8.ncsa.uiuc.edu;export _condor_LOCAL_DIR=/home/ux453102/condor_local;export _condor_SBIN=/oasis/projects/nsf/nsa101/ux453102/condor-7.4.4-r1/sbin;export _condor_NUM_CPUS=6;export _condor_UID_DOMAIN=ncsa.uiuc.edu;export _condor_FILESYSTEM_DOMAIN=ncsa.uiuc.edu;export _condor_MAIL=/bin/mail;export _condor_STARTD_NOCLAIM_SHUTDOWN=1800; /home/ux453102/Condor_glidein/glidein_startup_gordon -dyn -f' & 
+
+sleep 2
+ssh $host17 'export CONDOR_CONFIG=/home/ux453102/Condor_glidein/glidein_lsst_condor_config;export _condor_CONDOR_HOST=lsst8.ncsa.uiuc.edu;export _condor_GLIDEIN_HOST=lsst8.ncsa.uiuc.edu;export _condor_LOCAL_DIR=/home/ux453102/condor_local;export _condor_SBIN=/oasis/projects/nsf/nsa101/ux453102/condor-7.4.4-r1/sbin;export _condor_NUM_CPUS=6;export _condor_UID_DOMAIN=ncsa.uiuc.edu;export _condor_FILESYSTEM_DOMAIN=ncsa.uiuc.edu;export _condor_MAIL=/bin/mail;export _condor_STARTD_NOCLAIM_SHUTDOWN=1800; /home/ux453102/Condor_glidein/glidein_startup_gordon -dyn -f' & 
+
+sleep 2
+ssh $host18 'export CONDOR_CONFIG=/home/ux453102/Condor_glidein/glidein_lsst_condor_config;export _condor_CONDOR_HOST=lsst8.ncsa.uiuc.edu;export _condor_GLIDEIN_HOST=lsst8.ncsa.uiuc.edu;export _condor_LOCAL_DIR=/home/ux453102/condor_local;export _condor_SBIN=/oasis/projects/nsf/nsa101/ux453102/condor-7.4.4-r1/sbin;export _condor_NUM_CPUS=6;export _condor_UID_DOMAIN=ncsa.uiuc.edu;export _condor_FILESYSTEM_DOMAIN=ncsa.uiuc.edu;export _condor_MAIL=/bin/mail;export _condor_STARTD_NOCLAIM_SHUTDOWN=1800; /home/ux453102/Condor_glidein/glidein_startup_gordon -dyn -f' & 
+
+sleep 2
+ssh $host19 'export CONDOR_CONFIG=/home/ux453102/Condor_glidein/glidein_lsst_condor_config;export _condor_CONDOR_HOST=lsst8.ncsa.uiuc.edu;export _condor_GLIDEIN_HOST=lsst8.ncsa.uiuc.edu;export _condor_LOCAL_DIR=/home/ux453102/condor_local;export _condor_SBIN=/oasis/projects/nsf/nsa101/ux453102/condor-7.4.4-r1/sbin;export _condor_NUM_CPUS=6;export _condor_UID_DOMAIN=ncsa.uiuc.edu;export _condor_FILESYSTEM_DOMAIN=ncsa.uiuc.edu;export _condor_MAIL=/bin/mail;export _condor_STARTD_NOCLAIM_SHUTDOWN=1800; /home/ux453102/Condor_glidein/glidein_startup_gordon -dyn -f' & 
+
+sleep 2
+ssh $host20 'export CONDOR_CONFIG=/home/ux453102/Condor_glidein/glidein_lsst_condor_config;export _condor_CONDOR_HOST=lsst8.ncsa.uiuc.edu;export _condor_GLIDEIN_HOST=lsst8.ncsa.uiuc.edu;export _condor_LOCAL_DIR=/home/ux453102/condor_local;export _condor_SBIN=/oasis/projects/nsf/nsa101/ux453102/condor-7.4.4-r1/sbin;export _condor_NUM_CPUS=6;export _condor_UID_DOMAIN=ncsa.uiuc.edu;export _condor_FILESYSTEM_DOMAIN=ncsa.uiuc.edu;export _condor_MAIL=/bin/mail;export _condor_STARTD_NOCLAIM_SHUTDOWN=1800; /home/ux453102/Condor_glidein/glidein_startup_gordon -dyn -f' & 
+
+sleep 2
+ssh $host21 'export CONDOR_CONFIG=/home/ux453102/Condor_glidein/glidein_lsst_condor_config;export _condor_CONDOR_HOST=lsst8.ncsa.uiuc.edu;export _condor_GLIDEIN_HOST=lsst8.ncsa.uiuc.edu;export _condor_LOCAL_DIR=/home/ux453102/condor_local;export _condor_SBIN=/oasis/projects/nsf/nsa101/ux453102/condor-7.4.4-r1/sbin;export _condor_NUM_CPUS=6;export _condor_UID_DOMAIN=ncsa.uiuc.edu;export _condor_FILESYSTEM_DOMAIN=ncsa.uiuc.edu;export _condor_MAIL=/bin/mail;export _condor_STARTD_NOCLAIM_SHUTDOWN=1800; /home/ux453102/Condor_glidein/glidein_startup_gordon -dyn -f' & 
+
+sleep 2
+ssh $host22 'export CONDOR_CONFIG=/home/ux453102/Condor_glidein/glidein_lsst_condor_config;export _condor_CONDOR_HOST=lsst8.ncsa.uiuc.edu;export _condor_GLIDEIN_HOST=lsst8.ncsa.uiuc.edu;export _condor_LOCAL_DIR=/home/ux453102/condor_local;export _condor_SBIN=/oasis/projects/nsf/nsa101/ux453102/condor-7.4.4-r1/sbin;export _condor_NUM_CPUS=6;export _condor_UID_DOMAIN=ncsa.uiuc.edu;export _condor_FILESYSTEM_DOMAIN=ncsa.uiuc.edu;export _condor_MAIL=/bin/mail;export _condor_STARTD_NOCLAIM_SHUTDOWN=1800; /home/ux453102/Condor_glidein/glidein_startup_gordon -dyn -f' & 
+
+sleep 2
+ssh $host23 'export CONDOR_CONFIG=/home/ux453102/Condor_glidein/glidein_lsst_condor_config;export _condor_CONDOR_HOST=lsst8.ncsa.uiuc.edu;export _condor_GLIDEIN_HOST=lsst8.ncsa.uiuc.edu;export _condor_LOCAL_DIR=/home/ux453102/condor_local;export _condor_SBIN=/oasis/projects/nsf/nsa101/ux453102/condor-7.4.4-r1/sbin;export _condor_NUM_CPUS=6;export _condor_UID_DOMAIN=ncsa.uiuc.edu;export _condor_FILESYSTEM_DOMAIN=ncsa.uiuc.edu;export _condor_MAIL=/bin/mail;export _condor_STARTD_NOCLAIM_SHUTDOWN=1800; /home/ux453102/Condor_glidein/glidein_startup_gordon -dyn -f' & 
+
+sleep 2
+ssh $host24 'export CONDOR_CONFIG=/home/ux453102/Condor_glidein/glidein_lsst_condor_config;export _condor_CONDOR_HOST=lsst8.ncsa.uiuc.edu;export _condor_GLIDEIN_HOST=lsst8.ncsa.uiuc.edu;export _condor_LOCAL_DIR=/home/ux453102/condor_local;export _condor_SBIN=/oasis/projects/nsf/nsa101/ux453102/condor-7.4.4-r1/sbin;export _condor_NUM_CPUS=6;export _condor_UID_DOMAIN=ncsa.uiuc.edu;export _condor_FILESYSTEM_DOMAIN=ncsa.uiuc.edu;export _condor_MAIL=/bin/mail;export _condor_STARTD_NOCLAIM_SHUTDOWN=1800; /home/ux453102/Condor_glidein/glidein_startup_gordon -dyn -f' & 
+
+sleep 2
+ssh $host25 'export CONDOR_CONFIG=/home/ux453102/Condor_glidein/glidein_lsst_condor_config;export _condor_CONDOR_HOST=lsst8.ncsa.uiuc.edu;export _condor_GLIDEIN_HOST=lsst8.ncsa.uiuc.edu;export _condor_LOCAL_DIR=/home/ux453102/condor_local;export _condor_SBIN=/oasis/projects/nsf/nsa101/ux453102/condor-7.4.4-r1/sbin;export _condor_NUM_CPUS=6;export _condor_UID_DOMAIN=ncsa.uiuc.edu;export _condor_FILESYSTEM_DOMAIN=ncsa.uiuc.edu;export _condor_MAIL=/bin/mail;export _condor_STARTD_NOCLAIM_SHUTDOWN=1800; /home/ux453102/Condor_glidein/glidein_startup_gordon -dyn -f' & 
+
+sleep 2
+ssh $host26 'export CONDOR_CONFIG=/home/ux453102/Condor_glidein/glidein_lsst_condor_config;export _condor_CONDOR_HOST=lsst8.ncsa.uiuc.edu;export _condor_GLIDEIN_HOST=lsst8.ncsa.uiuc.edu;export _condor_LOCAL_DIR=/home/ux453102/condor_local;export _condor_SBIN=/oasis/projects/nsf/nsa101/ux453102/condor-7.4.4-r1/sbin;export _condor_NUM_CPUS=6;export _condor_UID_DOMAIN=ncsa.uiuc.edu;export _condor_FILESYSTEM_DOMAIN=ncsa.uiuc.edu;export _condor_MAIL=/bin/mail;export _condor_STARTD_NOCLAIM_SHUTDOWN=1800; /home/ux453102/Condor_glidein/glidein_startup_gordon -dyn -f' & 
+
+sleep 2
+ssh $host27 'export CONDOR_CONFIG=/home/ux453102/Condor_glidein/glidein_lsst_condor_config;export _condor_CONDOR_HOST=lsst8.ncsa.uiuc.edu;export _condor_GLIDEIN_HOST=lsst8.ncsa.uiuc.edu;export _condor_LOCAL_DIR=/home/ux453102/condor_local;export _condor_SBIN=/oasis/projects/nsf/nsa101/ux453102/condor-7.4.4-r1/sbin;export _condor_NUM_CPUS=6;export _condor_UID_DOMAIN=ncsa.uiuc.edu;export _condor_FILESYSTEM_DOMAIN=ncsa.uiuc.edu;export _condor_MAIL=/bin/mail;export _condor_STARTD_NOCLAIM_SHUTDOWN=1800; /home/ux453102/Condor_glidein/glidein_startup_gordon -dyn -f' & 
+
+sleep 2
+ssh $host28 'export CONDOR_CONFIG=/home/ux453102/Condor_glidein/glidein_lsst_condor_config;export _condor_CONDOR_HOST=lsst8.ncsa.uiuc.edu;export _condor_GLIDEIN_HOST=lsst8.ncsa.uiuc.edu;export _condor_LOCAL_DIR=/home/ux453102/condor_local;export _condor_SBIN=/oasis/projects/nsf/nsa101/ux453102/condor-7.4.4-r1/sbin;export _condor_NUM_CPUS=6;export _condor_UID_DOMAIN=ncsa.uiuc.edu;export _condor_FILESYSTEM_DOMAIN=ncsa.uiuc.edu;export _condor_MAIL=/bin/mail;export _condor_STARTD_NOCLAIM_SHUTDOWN=1800; /home/ux453102/Condor_glidein/glidein_startup_gordon -dyn -f' & 
+
+sleep 2
+ssh $host29 'export CONDOR_CONFIG=/home/ux453102/Condor_glidein/glidein_lsst_condor_config;export _condor_CONDOR_HOST=lsst8.ncsa.uiuc.edu;export _condor_GLIDEIN_HOST=lsst8.ncsa.uiuc.edu;export _condor_LOCAL_DIR=/home/ux453102/condor_local;export _condor_SBIN=/oasis/projects/nsf/nsa101/ux453102/condor-7.4.4-r1/sbin;export _condor_NUM_CPUS=6;export _condor_UID_DOMAIN=ncsa.uiuc.edu;export _condor_FILESYSTEM_DOMAIN=ncsa.uiuc.edu;export _condor_MAIL=/bin/mail;export _condor_STARTD_NOCLAIM_SHUTDOWN=1800; /home/ux453102/Condor_glidein/glidein_startup_gordon -dyn -f' & 
+
+sleep 2
+ssh $host30 'export CONDOR_CONFIG=/home/ux453102/Condor_glidein/glidein_lsst_condor_config;export _condor_CONDOR_HOST=lsst8.ncsa.uiuc.edu;export _condor_GLIDEIN_HOST=lsst8.ncsa.uiuc.edu;export _condor_LOCAL_DIR=/home/ux453102/condor_local;export _condor_SBIN=/oasis/projects/nsf/nsa101/ux453102/condor-7.4.4-r1/sbin;export _condor_NUM_CPUS=6;export _condor_UID_DOMAIN=ncsa.uiuc.edu;export _condor_FILESYSTEM_DOMAIN=ncsa.uiuc.edu;export _condor_MAIL=/bin/mail;export _condor_STARTD_NOCLAIM_SHUTDOWN=1800; /home/ux453102/Condor_glidein/glidein_startup_gordon -dyn -f' & 
+
+sleep 2
+ssh $host31 'export CONDOR_CONFIG=/home/ux453102/Condor_glidein/glidein_lsst_condor_config;export _condor_CONDOR_HOST=lsst8.ncsa.uiuc.edu;export _condor_GLIDEIN_HOST=lsst8.ncsa.uiuc.edu;export _condor_LOCAL_DIR=/home/ux453102/condor_local;export _condor_SBIN=/oasis/projects/nsf/nsa101/ux453102/condor-7.4.4-r1/sbin;export _condor_NUM_CPUS=6;export _condor_UID_DOMAIN=ncsa.uiuc.edu;export _condor_FILESYSTEM_DOMAIN=ncsa.uiuc.edu;export _condor_MAIL=/bin/mail;export _condor_STARTD_NOCLAIM_SHUTDOWN=1800; /home/ux453102/Condor_glidein/glidein_startup_gordon -dyn -f' & 
+
+sleep 2
+ssh $host32 'export CONDOR_CONFIG=/home/ux453102/Condor_glidein/glidein_lsst_condor_config;export _condor_CONDOR_HOST=lsst8.ncsa.uiuc.edu;export _condor_GLIDEIN_HOST=lsst8.ncsa.uiuc.edu;export _condor_LOCAL_DIR=/home/ux453102/condor_local;export _condor_SBIN=/oasis/projects/nsf/nsa101/ux453102/condor-7.4.4-r1/sbin;export _condor_NUM_CPUS=6;export _condor_UID_DOMAIN=ncsa.uiuc.edu;export _condor_FILESYSTEM_DOMAIN=ncsa.uiuc.edu;export _condor_MAIL=/bin/mail;export _condor_STARTD_NOCLAIM_SHUTDOWN=1800; /home/ux453102/Condor_glidein/glidein_startup_gordon -dyn -f' & 
+
+
+wait
+
+date

@@ -1,0 +1,56 @@
+#!/bin/sh
+echo "working directory was:"
+echo $DEFAULTROOT/$RUNID
+
+export HOME=/home/ux453102
+export SHELL=/bin/sh
+export USER=ux453102
+source /etc/bashrc
+module add gnu/4.6.1
+
+photing=1
+
+# processSdssCcd reference run
+referenceRun="s2012prod_sd0202"
+
+
+# forced photometry reference run
+# photReferenceRun="s2012phot_sd0217"
+
+
+# database user
+dbuser="daues"
+
+# database hostname 
+dbhost="lsst-db.ncsa.illinois.edu"
+
+# database name 
+dbname="daues_S12_sdss_u_s2012prod_im0200c"
+
+cd $DEFAULTROOT
+pwd
+mkdir -p $RUNID
+cd $RUNID
+
+mkdir -p logs
+mkdir -p forcedPhot-csv
+
+# rmdir forcedPhot 
+# ln -s  $DEFAULTROOT/${photReferenceRun}/forcedPhot  forcedPhot
+
+ln -s  $DEFAULTROOT/${referenceRun}/output/registry.sqlite3   registry.sqlite3
+
+
+if [ $photing -eq 1 ]
+then
+
+source $DEFAULTROOT/${referenceRun}/env.sh
+
+echo "$DATAREL_DIR/bin/ingest/ingestForcedSource.py --camera=sdss -database=${dbname} --coadd-name=goodSeeing --create-views forcedPhot-csv forcedPhot  >& logs/ingestForcedSource.log"
+
+# $DATAREL_DIR/bin/ingest/ingestForcedSource.py --camera=sdss --user=${dbuser} --host="${dbhost}" --database=${dbname} --coadd-name=goodSeeing --create-views forcedPhot-csv forcedPhot  >& logs/finishDb.log 2>&1
+$DATAREL_DIR/bin/ingest/ingestForcedSource.py --camera=sdss -database=${dbname} --coadd-name=goodSeeing --create-views forcedPhot-csv forcedPhot  >& logs/ingestForcedSource.log 2>&1
+
+
+fi
+

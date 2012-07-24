@@ -1,0 +1,142 @@
+#!/bin/sh
+
+export HOME=/home/ux453102
+export SHELL=/bin/sh
+export USER=ux453102
+source /etc/bashrc
+module add gnu/4.6.1
+
+# dr7 coadd v5_2
+datadir="/oasis/scratch/ux453102/temp_project/lsst/dr7-coadds/deep2/field3_camcol4"
+
+# database user
+dbuser="daues"
+
+# database hostname 
+dbhost="lsst-db.ncsa.illinois.edu"
+
+# processSdssCcd reference run
+referenceRun="s2012prod_sd0202"
+
+# SA reference run
+saReferenceRun="s2012sa_sd0203"
+
+# proc coadd reference run
+procCoaddRun="s2012pcdd_sd0215"
+
+# database name 
+dbname="daues_S12_sdss_u_s2012prod_im0200c"
+
+# Select tasks to execute
+preparedb=1
+ingproc=1
+ingsa=1
+refmatch=1
+ingcoadd=1
+crefmatch=1
+finishdb=1
+
+cd $DEFAULTROOT
+
+pwd
+
+mkdir -p $RUNID
+cd $RUNID
+
+mkdir -p logs
+
+# iSA 
+mkdir -p csv-SourceAssoc
+mkdir -p myCoadd-csv
+
+### SA reference run  s2012sa_im0106
+
+ln -s $DEFAULTROOT/${saReferenceRun}/output output
+ln -s $DEFAULTROOT/${saReferenceRun}/SourceAssoc SourceAssoc
+
+
+# Needed ? for ingestProc
+# ln -s ${datadir}/registry.sqlite3 output/registry.sqlite3
+# ln -s ${datadir} runs
+
+# processSdssCcd  reference run 
+# s2012prod_im0103
+
+echo "source $DEFAULTROOT/${referenceRun}/env.sh"
+
+source $DEFAULTROOT/${referenceRun}/env.sh
+
+############### prepareDb #####################
+if [ $preparedb -eq 1 ]
+then
+
+echo "$DATAREL_DIR/bin/ingest/prepareDb.py --camera=sdss --user=${dbuser} --host=\"${dbhost}\" ${dbname} >& logs/prepareDb.log"
+
+$DATAREL_DIR/bin/ingest/prepareDb.py --camera=sdss --user=${dbuser} --host="${dbhost}" ${dbname}  >& logs/prepareDb.log 2>&1
+
+fi
+
+
+############### ingestProc #####################
+if [ $ingproc -eq 1 ]
+then
+
+echo "$DATAREL_DIR/bin/ingest/ingestProcessed.py --camera=sdss --user=${dbuser} --host=\"${dbhost}\" --database=\"${dbname}\" --registry=output/registry.sqlite3 --strict  .  $DEFAULTROOT/${referenceRun}/output >& logs/ingestProcessed.log"
+
+$DATAREL_DIR/bin/ingest/ingestProcessed.py --camera=sdss --user=${dbuser} --host="${dbhost}" --database="${dbname}" --registry=output/registry.sqlite3 --strict  .  $DEFAULTROOT/${referenceRun}/output  >&  logs/ingestProcessed.log  2>&1
+
+fi
+
+
+############### ingestSourceAssoc #####################
+if [ $ingsa -eq 1 ]
+then
+
+echo "$DATAREL_DIR/bin/ingest/ingestSourceAssoc.py --camera=sdss --user=${dbuser} --host=\"${dbhost}\" --database=\"${dbname}\" --strict --jobs=1 --create-views csv-SourceAssoc SourceAssoc  >&  logs/ingestSourceAssoc.log"
+
+$DATAREL_DIR/bin/ingest/ingestSourceAssoc.py --camera=sdss --user=${dbuser} --host="${dbhost}" --database="${dbname}" --strict --jobs=1 --create-views csv-SourceAssoc SourceAssoc  >&  logs/ingestSourceAssoc.log  2>&1
+
+fi
+
+############### referenceMatch #####################
+if [ $refmatch -eq 1 ]
+then
+
+echo "$DATAREL_DIR/bin/ingest/referenceMatch.py --camera=sdss --user=${dbuser} --host=\"${dbhost}\" --database=\"${dbname}\" --ref-catalog=$DEFAULTROOT/${referenceRun}/runs/refObject.csv --exposure-metadata=$DEFAULTROOT/$RUNID/Science_Ccd_Exposure_Metadata.csv $DEFAULTROOT/$RUNID/csv-SourceAssoc  >& logs/referenceMatch.log"
+
+$DATAREL_DIR/bin/ingest/referenceMatch.py --camera=sdss --user=${dbuser} --host="${dbhost}" --database="${dbname}" --ref-catalog=$DEFAULTROOT/${referenceRun}/runs/refObject.csv --exposure-metadata=$DEFAULTROOT/$RUNID/Science_Ccd_Exposure_Metadata.csv $DEFAULTROOT/$RUNID/csv-SourceAssoc  >& logs/referenceMatch.log 2>&1 
+
+fi
+
+############### ingestCoadd #####################
+if [ $ingcoadd -eq 1 ]
+then
+
+echo "$DATAREL_DIR/bin/ingest/ingestCoadd.py --camera=sdss --user=${dbuser} --host=\"${dbhost}\" --database=\"${dbname}\" --strict --coadd-names=goodSeeing --create-views myCoadd-csv $DEFAULTROOT/${procCoaddRun}"
+
+$DATAREL_DIR/bin/ingest/ingestCoadd.py --camera=sdss --user=${dbuser} --host="${dbhost}" --database="${dbname}" --strict --coadd-names=goodSeeing --create-views myCoadd-csv $DEFAULTROOT/${procCoaddRun} >& logs/ingestCoadd.log 2>&1 
+
+fi
+
+############### Coadd referenceMatch #####################
+if [ $crefmatch -eq 1 ]
+then
+
+echo "$DATAREL_DIR/bin/ingest/referenceMatchCoadd.py --camera=sdss  --user=${dbuser} --host=\"${dbhost}\" --database=\"${dbname}\" --coadd-names=goodSeeing --exposure-metadata=myCoadd-csv/GoodSeeingCoadd_Metadata.csv --ref-catalog=$DEFAULTROOT/${referenceRun}/runs/refObject.csv myCoadd-csv"
+
+$DATAREL_DIR/bin/ingest/referenceMatchCoadd.py --camera=sdss  --user=${dbuser} --host="${dbhost}" --database="${dbname}" --coadd-names=goodSeeing --exposure-metadata=myCoadd-csv/GoodSeeingCoadd_Metadata.csv --ref-catalog=$DEFAULTROOT/${referenceRun}/runs/refObject.csv myCoadd-csv >& logs/referenceMatchCoadd.log 2>&1 
+
+fi
+
+############### finishdb #####################
+if [ $finishdb -eq 1 ]
+then
+
+echo "$DATAREL_DIR/bin/ingest/finishDb.py --camera=sdss --user=${dbuser} --host=\"${dbhost}\" --transpose ${dbname}  >& logs/finishDb.log" 
+
+$DATAREL_DIR/bin/ingest/finishDb.py --camera=sdss --user=${dbuser} --host="${dbhost}" --transpose ${dbname}  >& logs/finishDb.log 2>&1
+
+fi
+
+
+

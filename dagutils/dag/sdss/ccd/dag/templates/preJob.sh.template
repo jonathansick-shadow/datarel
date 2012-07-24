@@ -1,0 +1,55 @@
+#!/bin/sh
+
+export HOME=/home/ux453102
+export SHELL=/bin/sh
+export USER=ux453102
+source /etc/bashrc
+module add gnu/4.6.1
+
+# dr7 coadd v5_2
+datadir="/oasis/scratch/ux453102/temp_project/lsst/dr7-coadds/deep2/field3_camcol4"
+
+cd $DEFAULTROOT
+
+mkdir -p $RUNID
+cd $RUNID
+
+mkdir -p logs
+mkdir -p output
+
+mkdir -p output/processCcd_config
+mkdir -p output/processCcd_metadata
+mkdir -p output/sci-results
+
+ln -s ${datadir}/registry.sqlite3 output/registry.sqlite3
+ln -s ${datadir} runs
+
+export LSST_HOME=/oasis/scratch/ux453102/temp_project/lsst/beta-0713/lsst_home
+export EUPS_PATH=/oasis/scratch/ux453102/temp_project/lsst/beta-0713/lsst_home
+
+cd ${LSST_HOME}
+source loadLSST.sh
+
+cd $DEFAULTROOT
+cd $RUNID
+
+eups_setup -t v5_2 datarel -t beta > env.sh
+. ./env.sh
+
+eups_setup -t v5_2 obs_sdss -t beta > tmp.sh
+
+. ./tmp.sh; cat tmp.sh >> env.sh
+# eups_setup astrometry_net_data   sdss-2012-05-01-0 > tmp.sh
+
+eups_setup astrometry_net_data   sdss-2012-05-01-0 > tmp.sh
+. ./tmp.sh; cat tmp.sh >> env.sh
+
+
+cd /oasis/scratch/ux453102/temp_project/lsst/add-ons/ctrl_orca
+eups_setup -r . > $DEFAULTROOT/$RUNID/tmp.sh
+
+cd $DEFAULTROOT
+cd $RUNID
+. ./tmp.sh; cat tmp.sh >> env.sh
+
+

@@ -1,0 +1,85 @@
+#!/bin/sh
+
+export HOME=/home/ux453102
+export SHELL=/bin/sh
+export USER=ux453102
+source /etc/bashrc
+module add gnu/4.6.1
+
+#  obs_sdss-2012-06-20-Annis patch  
+# datadir="/oasis/scratch/ux453102/temp_project/lsst/mini/obs_sdss-2012-06-20-Annis"
+
+# All the data 
+# datadir="/oasis/scratch/ux453102/temp_project/lsst/stripe82/dr7/runs"
+
+# dr7 coadd v5_2
+datadir="/oasis/scratch/ux453102/temp_project/lsst/dr7-coadds/deep2/field3_camcol4"
+
+cd $DEFAULTROOT
+
+# the_pbs_id=`cat /home/ux453102/Condor_glidein/gordon/key`
+
+# cd /oasis/scratch/trestles/$USER/$PBS_JOBID
+
+# cd /oasis/scratch/trestles/ux453102/736724.trestles-fe1.sdsc.edu
+# cd /oasis/scratch/trestles/ux453102/738213.trestles-fe1.sdsc.edu
+
+# cd /oasis/scratch/trestles/ux453102/${the_pbs_id} 
+
+pwd
+
+mkdir -p $RUNID
+cd $RUNID
+# mkdir -p html
+
+mkdir -p logs
+mkdir -p SourceAssoc
+
+# mkdir -p setup-logs
+
+# ln -s  $DEFAULTROOT/s2012prod_im0103/output output
+ln -s  $DEFAULTROOT/s2012prod_sd0202/output output
+
+# mkdir -p output/calexp
+# mkdir -p output/icMatch
+# mkdir -p output/icSrc
+# mkdir -p output/postISRCCD
+# mkdir -p output/processCcd_config
+# mkdir -p output/processCcd_metadata
+# mkdir -p output/psf
+# mkdir -p output/src
+# mkdir -p output/sci-results
+
+
+# ln -s /oasis/projects/nsf/nsa101/ux453102/lsst/pt1_2/data/obs/ImSim/bias output/bias
+# ln -s /oasis/projects/nsf/nsa101/ux453102/lsst/pt1_2/data/obs/ImSim/dark output/dark
+# ln -s /oasis/projects/nsf/nsa101/ux453102/lsst/pt1_2/data/obs/ImSim/flat output/flat
+
+# ln -s /oasis/scratch/ux453102/temp_project/lsst/lsst/pt1_2/data/obs/ImSim/bias output/bias
+# ln -s /oasis/scratch/ux453102/temp_project/lsst/lsst/pt1_2/data/obs/ImSim/dark output/dark
+# ln -s /oasis/scratch/ux453102/temp_project/lsst/lsst/pt1_2/data/obs/ImSim/flat output/flat
+
+# ln -s /oasis/scratch/ux453102/temp_project/lsst/lsst/pt1_2/data/obs/ImSim/raw  output/raw
+
+# ln -s s2012prod_im0103/output/sci-results/ output/
+
+
+# ln -s ${datadir}/registry.sqlite3 output/registry.sqlite3
+# ln -s ${datadir}/refObject.csv output/refObject.csv
+# ln -s ${datadir} runs
+
+
+# v5_1 
+# export LSST_HOME=/oasis/scratch/ux453102/temp_project/lsst/stacks/beta-0618/lsst_home
+# export EUPS_PATH=/oasis/scratch/ux453102/temp_project/lsst/stacks/beta-0618/lsst_home
+
+# export LSST_HOME=/oasis/scratch/ux453102/temp_project/lsst/beta-0713/lsst_home
+# export EUPS_PATH=/oasis/scratch/ux453102/temp_project/lsst/beta-0713/lsst_home
+
+# cd ${LSST_HOME}
+# source loadLSST.sh
+
+cd $DEFAULTROOT
+cd $RUNID
+
+
