@@ -45,11 +45,13 @@ eups_setup astrometry_net_data   sdss-2012-05-01-0 > tmp.sh
 . ./tmp.sh; cat tmp.sh >> env.sh
 
 
-cd /oasis/scratch/ux453102/temp_project/lsst/add-ons/ctrl_orca
-eups_setup -r . > $DEFAULTROOT/$RUNID/tmp.sh
+# cd /oasis/scratch/ux453102/temp_project/lsst/add-ons/ctrl_orca
+# eups_setup -r . > $DEFAULTROOT/$RUNID/tmp.sh
 
-cd $DEFAULTROOT
-cd $RUNID
-. ./tmp.sh; cat tmp.sh >> env.sh
+# cd $DEFAULTROOT
+# cd $RUNID
+# . ./tmp.sh; cat tmp.sh >> env.sh
+
+eups list > eups.list 
 
 
