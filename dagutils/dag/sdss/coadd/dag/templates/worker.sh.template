@@ -2,16 +2,14 @@
 
 export HERE=$PWD
 
-# processSdssCcd reference run
-referenceRun="s2012prod_sd0202"
-
-# skymap reference run
-skymapRun="v5-run0a"
-
-export HOME=/home/ux453102
+export HOME=$USERHOME
 export SHELL=/bin/sh
-export USER=ux453102
+export USER=$USERNAME
+
 source /etc/bashrc
+
+export LSST_HOME=$LSST_HOME
+export EUPS_PATH=$EUPS_PATH
 
 module add gnu/4.6.1
 
@@ -42,7 +40,7 @@ done
 
 runid=$4 
 workerid=$5 
-rundir=${HERE}/$runid
+rundir=${HERE}/$ORCA_RUNID
 cd ${rundir}
 
 cslot=${_CONDOR_SLOT}
@@ -50,7 +48,7 @@ cslot=${_CONDOR_SLOT}
 mkdir -p logs/$shost/$cslot
 
 # source ./env.sh
-source ${HERE}/${referenceRun}/env.sh
+source ${HERE}/$REFRUN/env.sh
 
 temp=""
 
@@ -83,11 +81,11 @@ time1=$(date -d "`date`" "+%s")
 
 # echo "${CTRL_ORCA_DIR}/bin/wrapperProcessCcdSdss.py ${runid} ${workerid} sdss ${rundir}/runs ${filter_tract_patch_cmd} --output ${rundir}/output  > ${rundir}/logs/$shost/$cslot/S2012Pipe-${modstring}.log"
 
-echo "${PIPE_TASKS_DIR}/bin/outlierRejectedCoadd.py sdss myCoaddDir ${filter_tract_patch_cmd}  --config coaddName=goodSeeing select.camcols=4,4 select.strip=S > ${rundir}/logs/$shost/$cslot/outlierRejectedCoadd-${modstring}.log"
+echo "${PIPE_TASKS_DIR}/bin/outlierRejectedCoadd.py sdss myCoaddDir ${filter_tract_patch_cmd}  --config coaddName=goodSeeing select.camcols=$CAMCOLS select.strip=$STRIP > ${rundir}/logs/$shost/$cslot/outlierRejectedCoadd-${modstring}.log"
 
 # ${CTRL_ORCA_DIR}/bin/wrapperProcessCcdSdss.py ${runid} ${workerid} sdss ${rundir}/runs ${filter_tract_patch_cmd} --output ${rundir}/output --config daf.persistence.butler.verbosity=10 >  ${rundir}/logs/$shost/$cslot/S2012Pipe-${modstring}.log  2>&1
 
-${PIPE_TASKS_DIR}/bin/outlierRejectedCoadd.py sdss myCoaddDir ${filter_tract_patch_cmd}  --config coaddName=goodSeeing select.camcols=4,4 select.strip=S > ${rundir}/logs/$shost/$cslot/outlierRejectedCoadd-${modstring}.log 2>&1
+${PIPE_TASKS_DIR}/bin/outlierRejectedCoadd.py sdss myCoaddDir ${filter_tract_patch_cmd}  --config coaddName=goodSeeing select.camcols=$CAMCOLS select.strip=$STRIP > ${rundir}/logs/$shost/$cslot/outlierRejectedCoadd-${modstring}.log 2>&1
 
 time2=$(date -d "`date`" "+%s")
 

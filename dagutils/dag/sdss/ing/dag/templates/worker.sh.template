@@ -2,12 +2,14 @@
 
 export HERE=$PWD
 
-export HOME=/home/ux453102
+export HOME=$USERHOME
 export SHELL=/bin/sh
-export USER=ux453102
+export USER=$USERNAME
 source /etc/bashrc
-
 module add gnu/4.6.1
+
+export LSST_HOME=$LSST_HOME
+export EUPS_PATH=$EUPS_PATH
 
 /bin/hostname -f 
 shost=`/bin/hostname -s`

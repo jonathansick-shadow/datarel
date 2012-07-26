@@ -1,17 +1,13 @@
 #!/bin/sh
 
-export HOME=/home/$USERHOME
+export HOME=$USERHOME
 export SHELL=/bin/sh
 export USER=$USERNAME
 source /etc/bashrc
 module add gnu/4.6.1
 
-
-# processSdssCcd reference run
-referenceRun="s2012prod_sd0202"
-
-# skymap reference run
-skymapRun="v5-run0a"
+export LSST_HOME=$LSST_HOME
+export EUPS_PATH=$EUPS_PATH
 
 cd $ORCA_DEFAULTROOT
 pwd
@@ -22,17 +18,19 @@ cd $ORCA_RUNID
 mkdir -p logs
 mkdir -p myCoaddDir
 
-
-ln -s $DEFAULTROOT/${skymapRun}/_parent  _parent
-ln -s $DEFAULTROOT/${skymapRun}/_parent  myCoaddDir/_parent
-ln -s $DEFAULTROOT/${skymapRun}/goodSeeingCoadd goodSeeingCoadd
-ln -s $DEFAULTROOT/${skymapRun}/goodSeeingCoadd myCoaddDir/goodSeeingCoadd
+ln -s $ORCA_DEFAULTROOT/$SKYMAPRUN/_parent  _parent
+ln -s $ORCA_DEFAULTROOT/$SKYMAPRUN/_parent  myCoaddDir/_parent
+ln -s $ORCA_DEFAULTROOT/$SKYMAPRUN/goodSeeingCoadd goodSeeingCoadd
+ln -s $ORCA_DEFAULTROOT/$SKYMAPRUN/goodSeeingCoadd myCoaddDir/goodSeeingCoadd
 
 # ln -s $DEFAULTROOT/s2012prod_im0103/output/sci-results sci-results
 
-ln -s $DEFAULTROOT/${referenceRun}/output/registry.sqlite3 myCoaddDir/registry.sqlite3
-ln -s $DEFAULTROOT/${referenceRun}/output/sci-results myCoaddDir/sci-results
-ln -s $DEFAULTROOT/${referenceRun}/output/sci-results sci-results
+ln -s $ORCA_DEFAULTROOT/$REFRUN/output/registry.sqlite3 myCoaddDir/registry.sqlite3
+ln -s $ORCA_DEFAULTROOT/$REFRUN/output/sci-results myCoaddDir/sci-results
+ln -s $ORCA_DEFAULTROOT/$REFRUN/output/sci-results sci-results
 
+
+# make a sky map for camcol 2, stripe N (wiki) 
+# makeSkyMap.py sdss $SKYMAPDATA --config coaddName=goodSeeing skyMap.active.decRange=$SKYMAPDEC skyMap.active.patchInnerDimensions=$SKYMAPDIM skyMap.active.tractOverlap=$SKYMAPOV --output myCoaddDir
 
 

@@ -1,25 +1,24 @@
 #!/bin/sh
 
-export HOME=/home/ux453102
+export HOME=$USERHOME
 export SHELL=/bin/sh
-export USER=ux453102
+export USER=$USERNAME
 source /etc/bashrc
 module add gnu/4.6.1
 
-# outlierRejectedCoadd reference run
-# outReferenceRun="s2012outc_sd0205"
-outReferenceRun="s2012outc_sd0214"
+export LSST_HOME=$LSST_HOME
+export EUPS_PATH=$EUPS_PATH
 
-cd $DEFAULTROOT
+cd $ORCA_DEFAULTROOT
 pwd
 
-mkdir -p $RUNID
-cd $RUNID
+mkdir -p $ORCA_RUNID
+cd $ORCA_RUNID
 
 mkdir -p logs
 mkdir -p forcedPhot
 
-ln -s $DEFAULTROOT/${outReferenceRun}/myCoaddDir myCoaddDir
+ln -s $ORCA_DEFAULTROOT/$OUTREFRUN/myCoaddDir myCoaddDir
 
 
 

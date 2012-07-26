@@ -41,50 +41,54 @@ root.workflow["association"].configuration["condor"].condorData.localScratch = "
 
 
 root.workflow["association"].task["isr"].scriptDir = "workers"
-#root.workflow["association"].task["isr"].preScript.template = "/home/srp/dag/templates/preScript.template"
-#root.workflow["association"].task["isr"].preScript.outputFile = "pre.sh"
+#root.workflow["association"].task["isr"].preScript.script.inputFile = "/home/srp/dag/templates/preScript.template"
+#root.workflow["association"].task["isr"].preScript.script.outputFile = "pre.sh"
 
-root.workflow["association"].task["isr"].preJob.script.template = "/nfs/lsst/home/daues/work/ptest/dag/sdss/ccd/dag/templates/preJob.sh.template"
+root.workflow["association"].task["isr"].preJob.script.inputFile = "$DATAREL_DIR/dagutils/dag/sdss/ccd/dag/templates/preJob.sh.template"
 root.workflow["association"].task["isr"].preJob.script.outputFile = "preJob.sh"
-root.workflow["association"].task["isr"].preJob.template = "/nfs/lsst/home/daues/work/ptest/dag/sdss/ccd/dag/templates/preJob.condor.template"
-root.workflow["association"].task["isr"].preJob.outputFile = "S2012Pipe.pre"
+root.workflow["association"].task["isr"].preJob.condor.inputFile = "$DATAREL_DIR/dagutils/dag/sdss/ccd/dag/templates/preJob.condor.template"
+root.workflow["association"].task["isr"].preJob.condor.outputFile = "S2012Pipe.pre"
 
-root.workflow["association"].task["isr"].postJob.script.template = "/nfs/lsst/home/daues/work/ptest/dag/sdss/ccd/dag/templates/postJob.sh.template"
+root.workflow["association"].task["isr"].postJob.script.inputFile = "$DATAREL_DIR/dagutils/dag/sdss/ccd/dag/templates/postJob.sh.template"
 root.workflow["association"].task["isr"].postJob.script.outputFile = "postJob.sh"
-root.workflow["association"].task["isr"].postJob.template = "/nfs/lsst/home/daues/work/ptest/dag/sdss/ccd/dag/templates/postJob.condor.template"
-root.workflow["association"].task["isr"].postJob.outputFile = "S2012Pipe.post"
+root.workflow["association"].task["isr"].postJob.condor.inputFile = "$DATAREL_DIR/dagutils/dag/sdss/ccd/dag/templates/postJob.condor.template"
+root.workflow["association"].task["isr"].postJob.condor.outputFile = "S2012Pipe.post"
 
-# root.workflow["association"].task["isr"].workerJob.script.template = "/nfs/lsst/home/daues/work/ptest/dag/sdss/ccd/dag/templates/helloworld.sh.template"
-# root.workflow["association"].task["isr"].workerJob.script.outputFile = "helloworld.sh"
-root.workflow["association"].task["isr"].workerJob.script.template = "/nfs/lsst/home/daues/work/ptest/dag/sdss/ccd/dag/templates/worker.sh.template"
+root.workflow["association"].task["isr"].workerJob.script.inputFile = "$DATAREL_DIR/dagutils/dag/sdss/ccd/dag/templates/worker.sh.template"
 root.workflow["association"].task["isr"].workerJob.script.outputFile = "worker.sh"
-root.workflow["association"].task["isr"].workerJob.template = "/nfs/lsst/home/daues/work/ptest/dag/sdss/ccd/dag/templates/workerJob.condor.template"
-root.workflow["association"].task["isr"].workerJob.outputFile = "S2012Pipeline-template.condor"
+root.workflow["association"].task["isr"].workerJob.condor.inputFile = "$DATAREL_DIR/dagutils/dag/sdss/ccd/dag/templates/workerJob.condor.template"
+root.workflow["association"].task["isr"].workerJob.condor.outputFile = "S2012Pipeline-template.condor"
+
+
+# root.workflow["association"].task["isr"].preJob.script.keywords[" "] = "
+# root.workflow["association"].task["isr"].postJob.script.keywords[" "] = "
+# root.workflow["association"].task["isr"].workerJob.script.keywords[" "] = "
+
+root.workflow["association"].task["isr"].preJob.script.keywords["USERHOME"] = "/home/ux453102"
+root.workflow["association"].task["isr"].preJob.script.keywords["USERNAME"] = "ux453102"
+root.workflow["association"].task["isr"].preJob.script.keywords["DATADIR"] = "/oasis/scratch/ux453102/temp_project/lsst/dr7-coadds/deep2/field3_camcol4"
+root.workflow["association"].task["isr"].preJob.script.keywords["EUPS_PATH"] = "/oasis/scratch/ux453102/temp_project/lsst/beta-0713/lsst_home"
+root.workflow["association"].task["isr"].preJob.script.keywords["LSST_HOME"] = "/oasis/scratch/ux453102/temp_project/lsst/beta-0713/lsst_home"
+
+root.workflow["association"].task["isr"].workerJob.script.keywords["USERHOME"] = "/home/ux453102"
+root.workflow["association"].task["isr"].workerJob.script.keywords["USERNAME"] = "ux453102"
+root.workflow["association"].task["isr"].workerJob.script.keywords["DATADIR"] = "/oasis/scratch/ux453102/temp_project/lsst/dr7-coadds/deep2/field3_camcol4"
+root.workflow["association"].task["isr"].workerJob.script.keywords["EUPS_PATH"] = "/oasis/scratch/ux453102/temp_project/lsst/beta-0713/lsst_home"
+root.workflow["association"].task["isr"].workerJob.script.keywords["LSST_HOME"] = "/oasis/scratch/ux453102/temp_project/lsst/beta-0713/lsst_home"
+
 
 root.workflow["association"].task["isr"].dagGenerator.dagName = "S2012Pipe"
-root.workflow["association"].task["isr"].dagGenerator.script = "/nfs/lsst/home/daues/work/ptest/dag/sdss/ccd/dag/scripts/newgenerateDag.py"
-# root.workflow["association"].task["isr"].dagGenerator.input = "/nfs/lsst/home/daues/work/ptest/dag/sdss/ccd/dag/input/80000.sdss.input"
+root.workflow["association"].task["isr"].dagGenerator.script = "$DATAREL_DIR/dagutils/dag/sdss/ccd/dag/scripts/newgenerateDag.py"
+# root.workflow["association"].task["isr"].dagGenerator.input = "$DATAREL_DIR/dagutils/dag/sdss/ccd/dag/input/80000.sdss.input"
 
-# root.workflow["association"].task["isr"].dagGenerator.input = "/nfs/lsst/home/daues/work/ptest/dag/sdss/ccd/dag/input/19260.sdss.input"
+# root.workflow["association"].task["isr"].dagGenerator.input = "$DATAREL_DIR/dagutils/dag/sdss/ccd/dag/input/19260.sdss.input"
 
-# root.workflow["association"].task["isr"].dagGenerator.input = "/nfs/lsst/home/daues/work/ptest/dag/sdss/ccd/dag/input/10.sdss.input"
-# root.workflow["association"].task["isr"].dagGenerator.input = "/nfs/lsst/home/daues/work/ptest/dag/sdss/ccd/dag/input/2000.sdss.input"
-# root.workflow["association"].task["isr"].dagGenerator.input = "/nfs/lsst/home/daues/work/ptest/dag/sdss/ccd/dag/input/144.sdss.input"
-# root.workflow["association"].task["isr"].dagGenerator.input = "/nfs/lsst/home/daues/work/ptest/dag/sdss/ccd/dag/input/4608.sdss.input"
-
-
-root.workflow["association"].task["isr"].dagGenerator.input = "/nfs/lsst/home/daues/work/ptest/dag/sdss/ccd/dag/input/2355.sdss.input"
+# root.workflow["association"].task["isr"].dagGenerator.input = "$DATAREL_DIR/dagutils/dag/sdss/ccd/dag/input/10.sdss.input"
+# root.workflow["association"].task["isr"].dagGenerator.input = "$DATAREL_DIR/dagutils/dag/sdss/ccd/dag/input/2000.sdss.input"
+# root.workflow["association"].task["isr"].dagGenerator.input = "$DATAREL_DIR/dagutils/dag/sdss/ccd/dag/input/144.sdss.input"
+# root.workflow["association"].task["isr"].dagGenerator.input = "$DATAREL_DIR/dagutils/dag/sdss/ccd/dag/input/4608.sdss.input"
 
 
-
-
-
-USERHOME=/home/ux453102
-USERNAME=ux453102
-
-DATADIR=/oasis/scratch/ux453102/temp_project/lsst/dr7-coadds/deep2/field3_camcol4
-
-EUPS_PATH=/oasis/scratch/ux453102/temp_project/lsst/beta-0713/lsst_home
-LSST_HOME=/oasis/scratch/ux453102/temp_project/lsst/beta-0713/lsst_home
+root.workflow["association"].task["isr"].dagGenerator.input = "/nfs/lsst/home/daues/work/dag-sdss-ccd/dag/input/2355.sdss.input"
 
 

@@ -2,19 +2,14 @@
 
 export HERE=$PWD
 
-# processSdssCcd reference run
-referenceRun="s2012prod_sd0202"
-
-# database name 
-dbname="daues_S12_sdss_u_s2012prod_im0200c"
-
-export HOME=/home/ux453102
-
+export HOME=$USERHOME
 export SHELL=/bin/sh
-export USER=ux453102
+export USER=$USERNAME
 source /etc/bashrc
-
 module add gnu/4.6.1
+
+export LSST_HOME=$LSST_HOME
+export EUPS_PATH=$EUPS_PATH
 
 /bin/hostname -f 
 shost=`/bin/hostname -s`
@@ -40,10 +35,9 @@ fi
 
 done
 
-
 runid=$5 
 workerid=$6 
-rundir=${HERE}/$runid
+rundir=${HERE}/$ORCA_RUNID
 cd ${rundir}
 
 
@@ -52,7 +46,7 @@ cslot=${_CONDOR_SLOT}
 mkdir -p logs/$shost/$cslot
 
 # source ./env.sh
-source ${HERE}/${referenceRun}/env.sh
+source ${HERE}/$REFRUN/env.sh
 
 temp=""
 
@@ -74,7 +68,7 @@ run_filter_camcol_field_cmd=$temp
 echo run_filter_camcol_field_cmd
 echo ${run_filter_camcol_field_cmd}
 
-echo "==== Prior to S2012Pipe "
+echo "==== Prior to forcedPhot "
 
 time1=0
 time2=0
@@ -85,18 +79,16 @@ modstring=${workerid}
 time1=$(date -d "`date`" "+%s")
 
 
-echo "${PIPE_TASKS_DIR}/bin/forcedPhot.py sdss myCoaddDir --output forcedPhot ${run_filter_camcol_field_cmd} -c references.dbName=\"${dbname}\" >& ${rundir}/logs/$shost/$cslot/forcedPhot-${modstring}.log" 
+echo "${PIPE_TASKS_DIR}/bin/forcedPhot.py sdss myCoaddDir --output forcedPhot ${run_filter_camcol_field_cmd} -c references.dbName=\"$DBNAME\" >& ${rundir}/logs/$shost/$cslot/forcedPhot-${modstring}.log" 
 
-${PIPE_TASKS_DIR}/bin/forcedPhot.py sdss myCoaddDir --output forcedPhot ${run_filter_camcol_field_cmd} -c references.dbName="${dbname}" >&   ${rundir}/logs/$shost/$cslot/forcedPhot-${modstring}.log 2>&1 
-
-# ${CTRL_ORCA_DIR}/bin/wrapperProcessCcdSdss.py ${runid} ${workerid} sdss ${rundir}/runs ${run_filter_camcol_field_cmd} --output ${rundir}/output --config daf.persistence.butler.verbosity=10 >  ${rundir}/logs/$shost/$cslot/S2012Pipe-${modstring}.log  2>&1
+${PIPE_TASKS_DIR}/bin/forcedPhot.py sdss myCoaddDir --output forcedPhot ${run_filter_camcol_field_cmd} -c references.dbName="$DBNAME" >&   ${rundir}/logs/$shost/$cslot/forcedPhot-${modstring}.log 2>&1 
 
 
 time2=$(date -d "`date`" "+%s")
 
 let time3=$time2-$time1
 
-echo "===================== After S2012Pipe "
+echo "===== After forcedPhot "
 
 echo STAMP2 $time2
 echo STAMP1 $time1
