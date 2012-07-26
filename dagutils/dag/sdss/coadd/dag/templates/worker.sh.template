@@ -1,0 +1,100 @@
+#!/bin/sh
+
+export HERE=$PWD
+
+export HOME=$USERHOME
+export SHELL=/bin/sh
+export USER=$USERNAME
+
+source /etc/bashrc
+
+export LSST_HOME=$LSST_HOME
+export EUPS_PATH=$EUPS_PATH
+
+module add gnu/4.6.1
+
+/bin/hostname -f 
+shost=`/bin/hostname -s`
+
+# Parse command line args
+count=0
+check=0
+while [ $check == 0 ]; do
+
+filter_tract_patch=$1" "$2" "$3
+
+echo filter_tract_patch 
+echo $filter_tract_patch 
+names[$count]=$filter_tract_patch
+
+if [ $4 == 'X' ]
+    then
+    shift 4
+    count=`expr $count + 1`
+else
+    check=1
+fi
+
+done
+
+
+runid=$4 
+workerid=$5 
+rundir=${HERE}/$ORCA_RUNID
+cd ${rundir}
+
+cslot=${_CONDOR_SLOT}
+
+mkdir -p logs/$shost/$cslot
+
+# source ./env.sh
+source ${HERE}/$REFRUN/env.sh
+
+temp=""
+
+cd ${rundir}
+
+for (( i = 0 ; i < ${#names[@]} ; i++ )) do
+echo "Loop iteration "
+echo $i 
+echo ${names[$i]}
+
+temp=$temp" --id "${names[$i]}
+
+done
+
+filter_tract_patch_cmd=$temp
+
+echo filter_tract_patch_cmd
+echo ${filter_tract_patch_cmd}
+
+echo "==== Prior to outlierRejectedCoadd "
+
+time1=0
+time2=0
+time3=0
+
+modstring=${workerid}
+
+time1=$(date -d "`date`" "+%s")
+
+
+# echo "${CTRL_ORCA_DIR}/bin/wrapperProcessCcdSdss.py ${runid} ${workerid} sdss ${rundir}/runs ${filter_tract_patch_cmd} --output ${rundir}/output  > ${rundir}/logs/$shost/$cslot/S2012Pipe-${modstring}.log"
+
+echo "${PIPE_TASKS_DIR}/bin/outlierRejectedCoadd.py sdss myCoaddDir ${filter_tract_patch_cmd}  --config coaddName=goodSeeing select.camcols=$CAMCOLS select.strip=$STRIP > ${rundir}/logs/$shost/$cslot/outlierRejectedCoadd-${modstring}.log"
+
+# ${CTRL_ORCA_DIR}/bin/wrapperProcessCcdSdss.py ${runid} ${workerid} sdss ${rundir}/runs ${filter_tract_patch_cmd} --output ${rundir}/output --config daf.persistence.butler.verbosity=10 >  ${rundir}/logs/$shost/$cslot/S2012Pipe-${modstring}.log  2>&1
+
+${PIPE_TASKS_DIR}/bin/outlierRejectedCoadd.py sdss myCoaddDir ${filter_tract_patch_cmd}  --config coaddName=goodSeeing select.camcols=$CAMCOLS select.strip=$STRIP > ${rundir}/logs/$shost/$cslot/outlierRejectedCoadd-${modstring}.log 2>&1
+
+time2=$(date -d "`date`" "+%s")
+
+let time3=$time2-$time1
+
+echo "===================== After outlierRejectedCoadd "
+
+echo STAMP2 $time2
+echo STAMP1 $time1
+
+echo TIMING $time3
+

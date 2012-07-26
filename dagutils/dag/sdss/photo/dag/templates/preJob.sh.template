@@ -1,0 +1,24 @@
+#!/bin/sh
+
+export HOME=$USERHOME
+export SHELL=/bin/sh
+export USER=$USERNAME
+source /etc/bashrc
+module add gnu/4.6.1
+
+export LSST_HOME=$LSST_HOME
+export EUPS_PATH=$EUPS_PATH
+
+cd $ORCA_DEFAULTROOT
+pwd
+
+mkdir -p $ORCA_RUNID
+cd $ORCA_RUNID
+
+mkdir -p logs
+mkdir -p forcedPhot
+
+ln -s $ORCA_DEFAULTROOT/$OUTREFRUN/myCoaddDir myCoaddDir
+
+
+

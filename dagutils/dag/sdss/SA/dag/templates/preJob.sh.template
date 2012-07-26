@@ -1,0 +1,25 @@
+#!/bin/sh
+
+export HOME=$USERHOME
+export SHELL=/bin/sh
+export USER=$USERNAME
+source /etc/bashrc
+module add gnu/4.6.1
+
+export LSST_HOME=$LSST_HOME
+export EUPS_PATH=$EUPS_PATH
+
+# processSdssCcd reference run
+# referenceRun="s2012prod_sd0202"
+
+cd $ORCA_DEFAULTROOT
+
+mkdir -p $ORCA_RUNID
+cd $ORCA_RUNID
+
+mkdir -p logs
+mkdir -p SourceAssoc
+
+# ln -s  $DEFAULTROOT/${referenceRun}/output output
+
+

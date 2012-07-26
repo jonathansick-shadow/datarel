@@ -1,0 +1,94 @@
+#!/bin/sh
+
+export HERE=$PWD
+
+export HOME=$USERHOME
+export SHELL=/bin/sh
+export USER=$USERNAME
+source /etc/bashrc
+
+module add gnu/4.6.1
+
+export LSST_HOME=$LSST_HOME
+export EUPS_PATH=$EUPS_PATH
+
+# processSdssCcd reference run
+# referenceRun="$REFRUN"
+
+/bin/hostname -f 
+shost=`/bin/hostname -s`
+
+# Parse command line args
+count=0
+check=0
+while [ $check == 0 ]; do
+
+skytiles=$1
+
+echo skytiles 
+echo $skytiles 
+names[$count]=$skytiles
+
+if [ $2 == 'X' ]
+    then
+    shift 2
+    count=`expr $count + 1`
+else
+    check=1
+fi
+
+done
+
+runid=$2 
+workerid=$3 
+rundir=${HERE}/$ORCA_RUNID
+cd ${rundir}
+
+cslot=${_CONDOR_SLOT}
+
+mkdir -p logs/$shost/$cslot
+
+source $ORCA_DEFAULTROOT/$REFRUN/env.sh
+
+temp=""
+
+cd ${rundir}
+
+for (( i = 0 ; i < ${#names[@]} ; i++ )) do
+echo "Loop iteration "
+echo $i 
+echo ${names[$i]}
+
+temp=$temp" --id "${names[$i]}
+
+done
+
+skytiles_cmd=$temp
+
+echo skytiles_cmd
+echo ${skytiles_cmd}
+
+
+time1=0
+time2=0
+time3=0
+
+modstring=${workerid}
+echo modstring
+echo ${modstring}
+
+time1=$(date -d "`date`" "+%s")
+
+echo "$AP_DIR/bin/sourceAssoc.py sdss $ORCA_DEFAULTROOT/$REFRUN/output --output SourceAssoc ${skytiles_cmd}  > ${rundir}/logs/$shost/$cslot/SourceAssoc-${modstring}.log"
+
+$AP_DIR/bin/sourceAssoc.py sdss $ORCA_DEFAULTROOT/$REFRUN/output --output SourceAssoc ${skytiles_cmd}  > ${rundir}/logs/$shost/$cslot/SourceAssoc-${modstring}.log 2>&1 
+
+
+time2=$(date -d "`date`" "+%s")
+
+let time3=$time2-$time1
+
+echo STAMP2 $time2
+echo STAMP1 $time1
+
+echo TIMING $time3

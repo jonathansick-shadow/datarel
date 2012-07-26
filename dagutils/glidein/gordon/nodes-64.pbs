@@ -1,0 +1,149 @@
+#!/bin/tcsh
+#  Sample Batch Script for a Serial job
+#
+#  Submit this script using the command: qsub <script_name>
+#
+#  Use the "qstat" command to check the status of a job.
+#
+# The following are embedded QSUB options. The syntax is #PBS (the # does
+# _not_  denote that the lines are commented out so do not remove).
+#
+# walltime : maximum wall clock time (hh:mm:ss)
+#PBS -l walltime=06:00:00
+#
+# nodes: number of 8-core nodes
+#   ppn: how many cores per node to use (1 through 8)
+#       (you are always charged for the entire node)
+#PBS -l nodes=64:ppn=1
+#
+# export all my environment variables to the job
+### #PBS -V
+#
+# job name (default = name of script file)
+#PBS -N testGor
+#        -------------------------------------------------- shimem1
+#PBS -q normal
+#
+##
+# Send a notification email when the job (b)egins and when the (e)nds
+# # remove the line below to disable email notification.
+#PBS -m be
+# #
+# #
+# # filename for standard output (default = <job_name>.o<job_id>)
+# # at end of job, it is in directory from which qsub was executed
+# # remove extra ## from the line below if you want to name your own file
+#PBS -o test64.out
+# #
+# # filename for standard error (default = <job_name>.e<job_id>)
+# # at end of job, it is in directory from which qsub was executed
+# # remove extra ## from the line below if you want to name your own file
+#PBS -e test64.err
+#
+# #
+# # End of embedded QSUB options
+# #
+# # set echo               # echo commands before execution; use for debugging
+# #
+#
+# set JOBID=`echo $PBS_JOBID | cut -d'.' -f1`
+#
+# # cd $SCR                # change to job scratch directory
+
+/bin/echo $PBS_JOBID 
+
+cd /oasis/scratch/ux453102/temp_project/lsst
+
+/bin/echo Beginning_Glidein_Setup
+
+hostname -f 
+
+set pbs_nodes=`cat ${PBS_NODEFILE}`
+
+# /bin/echo pbs_nodes
+/bin/echo ${pbs_nodes}
+
+set host = ( r g b y r g b y r g b y r g b y r g b y r g b y r g b y r g b y r g b y r g b y r g b y r g b y r g b y r g b y r g b y r g b y )
+
+set host[1] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[1]}'`
+set host[2] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[2]}'`
+set host[3] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[3]}'`
+set host[4] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[4]}'`
+set host[5] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[5]}'`
+set host[6] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[6]}'`
+set host[7] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[7]}'`
+set host[8] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[8]}'`
+set host[9] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[9]}'`
+set host[10] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[10]}'`
+set host[11] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[11]}'`
+set host[12] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[12]}'`
+set host[13] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[13]}'`
+set host[14] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[14]}'`
+set host[15] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[15]}'`
+set host[16] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[16]}'`
+
+set host[17] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[17]}'`
+set host[18] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[18]}'`
+set host[19] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[19]}'`
+set host[20] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[20]}'`
+set host[21] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[21]}'`
+set host[22] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[22]}'`
+set host[23] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[23]}'`
+set host[24] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[24]}'`
+set host[25] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[25]}'`
+set host[26] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[26]}'`
+set host[27] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[27]}'`
+set host[28] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[28]}'`
+set host[29] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[29]}'`
+set host[30] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[30]}'`
+set host[31] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[31]}'`
+set host[32] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[32]}'`
+
+set host[33] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[33]}'`
+set host[34] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[34]}'`
+set host[35] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[35]}'`
+set host[36] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[36]}'`
+set host[37] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[37]}'`
+set host[38] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[38]}'`
+set host[39] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[39]}'`
+set host[40] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[40]}'`
+set host[41] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[41]}'`
+set host[42] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[42]}'`
+set host[43] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[43]}'`
+set host[44] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[44]}'`
+set host[45] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[45]}'`
+set host[46] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[46]}'`
+set host[47] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[47]}'`
+set host[48] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[48]}'`
+
+set host[49] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[49]}'`
+set host[50] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[50]}'`
+set host[51] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[51]}'`
+set host[52] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[52]}'`
+set host[53] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[53]}'`
+set host[54] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[54]}'`
+set host[55] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[55]}'`
+set host[56] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[56]}'`
+set host[57] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[57]}'`
+set host[58] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[58]}'`
+set host[59] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[59]}'`
+set host[60] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[60]}'`
+set host[61] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[61]}'`
+set host[62] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[62]}'`
+set host[63] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[63]}'`
+set host[64] = `echo $pbs_nodes:q | awk '{split($0,a," "); print a[64]}'`
+
+
+
+
+foreach ahost ( $host )
+    echo  Hello
+    echo $ahost
+    ssh $ahost 'export CONDOR_CONFIG=/home/ux453102/Condor_glidein/glidein_lsst_condor_config;export _condor_CONDOR_HOST=lsst8.ncsa.uiuc.edu;export _condor_GLIDEIN_HOST=lsst8.ncsa.uiuc.edu;export _condor_LOCAL_DIR=/home/ux453102/condor_local;export _condor_SBIN=/oasis/projects/nsf/nsa101/ux453102/condor-7.4.4-r1/sbin;export _condor_NUM_CPUS=5;export _condor_UID_DOMAIN=ncsa.uiuc.edu;export _condor_FILESYSTEM_DOMAIN=ncsa.uiuc.edu;export _condor_MAIL=/bin/mail;export _condor_STARTD_NOCLAIM_SHUTDOWN=1800; /home/ux453102/Condor_glidein/glidein_startup_gordon -dyn -f' & 
+    sleep 2
+end
+
+
+wait
+
+date

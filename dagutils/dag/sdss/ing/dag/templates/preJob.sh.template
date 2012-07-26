@@ -1,0 +1,115 @@
+#!/bin/sh
+
+export HOME=$USERHOME
+export SHELL=/bin/sh
+export USER=$USERNAME
+source /etc/bashrc
+module add gnu/4.6.1
+
+export LSST_HOME=$LSST_HOME
+export EUPS_PATH=$EUPS_PATH
+
+# Select tasks to execute
+preparedb=1
+ingproc=1
+ingsa=1
+refmatch=1
+ingcoadd=1
+crefmatch=1
+finishdb=1
+
+cd $ORCA_DEFAULTROOT
+
+pwd
+
+mkdir -p $ORCA_RUNID
+cd $ORCA_RUNID
+
+mkdir -p logs
+
+# iSA 
+mkdir -p csv-SourceAssoc
+mkdir -p myCoadd-csv
+
+ln -s $ORCA_DEFAULTROOT/$SAREFRUN/output output
+ln -s $ORCA_DEFAULTROOT/$SAREFRUN/SourceAssoc SourceAssoc
+
+
+echo "source $ORCA_DEFAULTROOT/$REFRUN/env.sh"
+
+source $ORCA_DEFAULTROOT/$REFRUN/env.sh
+
+############### PREPAREDB #####################
+if [ $preparedb -eq 1 ]
+then
+
+echo "$DATAREL_DIR/bin/ingest/prepareDb.py --camera=sdss --user=$DBUSER --host=\"$DBHOST\" $DBNAME >& logs/prepareDbB.log"
+
+$DATAREL_DIR/bin/ingest/prepareDb.py --camera=sdss --user=$DBUSER --host="$DBHOST" $DBNAME  >& logs/prepareDb.log 2>&1
+
+fi
+
+
+############### ingestProc #####################
+if [ $ingproc -eq 1 ]
+then
+
+echo "$DATAREL_DIR/bin/ingest/ingestProcessed.py --camera=sdss --user=$DBUSER --host=\"$DBHOST\" --database=\"$DBNAME\" --registry=output/registry.sqlite3 --strict  .  $ORCA_DEFAULTROOT/$REFRUN/output >& logs/ingestProcessed.log"
+
+$DATAREL_DIR/bin/ingest/ingestProcessed.py --camera=sdss --user=$DBUSER --host="$DBHOST" --database="$DBNAME" --registry=output/registry.sqlite3 --strict  .  $ORCA_DEFAULTROOT/$REFRUN/output  >&  logs/ingestProcessed.log  2>&1
+
+fi
+
+
+############### ingestSourceAssoc #####################
+if [ $ingsa -eq 1 ]
+then
+
+echo "$DATAREL_DIR/bin/ingest/ingestSourceAssoc.py --camera=sdss --user=$DBUSER --host=\"$DBHOST\" --database=\"$DBNAME\" --strict --jobs=1 --create-views csv-SourceAssoc SourceAssoc  >&  logs/ingestSourceAssoc.log"
+
+$DATAREL_DIR/bin/ingest/ingestSourceAssoc.py --camera=sdss --user=$DBUSER --host="$DBHOST" --database="$DBNAME" --strict --jobs=1 --create-views csv-SourceAssoc SourceAssoc  >&  logs/ingestSourceAssoc.log  2>&1
+
+fi
+
+############### referenceMatch #####################
+if [ $refmatch -eq 1 ]
+then
+
+echo "$DATAREL_DIR/bin/ingest/referenceMatch.py --camera=sdss --user=$DBUSER --host=\"$DBHOST\" --database=\"$DBNAME\" --ref-catalog=$ORCA_DEFAULTROOT/$REFRUN/runs/refObject.csv --exposure-metadata=$ORCA_DEFAULTROOT/$ORCA_RUNID/Science_Ccd_Exposure_Metadata.csv $ORCA_DEFAULTROOT/$ORCA_RUNID/csv-SourceAssoc  >& logs/referenceMatch.log"
+
+$DATAREL_DIR/bin/ingest/referenceMatch.py --camera=sdss --user=$DBUSER --host="$DBHOST" --database="$DBNAME" --ref-catalog=$ORCA_DEFAULTROOT/$REFRUN/runs/refObject.csv --exposure-metadata=$ORCA_DEFAULTROOT/$ORCA_RUNID/Science_Ccd_Exposure_Metadata.csv $ORCA_DEFAULTROOT/$ORCA_RUNID/csv-SourceAssoc  >& logs/referenceMatch.log 2>&1 
+
+fi
+
+############### ingestCoadd #####################
+if [ $ingcoadd -eq 1 ]
+then
+
+echo "$DATAREL_DIR/bin/ingest/ingestCoadd.py --camera=sdss --user=$DBUSER --host=\"$DBHOST\" --database=\"$DBNAME\" --strict --coadd-names=goodSeeing --create-views myCoadd-csv $ORCA_DEFAULTROOT/$PCDDREFRUN"
+
+$DATAREL_DIR/bin/ingest/ingestCoadd.py --camera=sdss --user=$DBUSER --host="$DBHOST" --database="$DBNAME" --strict --coadd-names=goodSeeing --create-views myCoadd-csv $ORCA_DEFAULTROOT/$PCDDREFRUN >& logs/ingestCoadd.log 2>&1 
+
+fi
+
+############### Coadd referenceMatch #####################
+if [ $crefmatch -eq 1 ]
+then
+
+echo "$DATAREL_DIR/bin/ingest/referenceMatchCoadd.py --camera=sdss  --user=$DBUSER --host=\"$DBHOST\" --database=\"$DBNAME\" --coadd-names=goodSeeing --exposure-metadata=myCoadd-csv/GoodSeeingCoadd_Metadata.csv --ref-catalog=$ORCA_DEFAULTROOT/$REFRUN/runs/refObject.csv myCoadd-csv"
+
+$DATAREL_DIR/bin/ingest/referenceMatchCoadd.py --camera=sdss  --user=$DBUSER --host="$DBHOST" --database="$DBNAME" --coadd-names=goodSeeing --exposure-metadata=myCoadd-csv/GoodSeeingCoadd_Metadata.csv --ref-catalog=$ORCA_DEFAULTROOT/$REFRUN/runs/refObject.csv myCoadd-csv >& logs/referenceMatchCoadd.log 2>&1 
+
+fi
+
+############### finishdb #####################
+if [ $finishdb -eq 1 ]
+then
+
+echo "$DATAREL_DIR/bin/ingest/finishDb.py --camera=sdss --user=$DBUSER --host=\"$DBHOST\" --transpose $DBNAME  >& logs/finishDb.log" 
+
+$DATAREL_DIR/bin/ingest/finishDb.py --camera=sdss --user=$DBUSER --host="$DBHOST" --transpose $DBNAME  >& logs/finishDb.log 2>&1
+
+fi
+
+
+
