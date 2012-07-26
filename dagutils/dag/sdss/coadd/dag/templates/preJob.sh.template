@@ -1,8 +1,8 @@
 #!/bin/sh
 
-export HOME=/home/ux453102
+export HOME=/home/$USERHOME
 export SHELL=/bin/sh
-export USER=ux453102
+export USER=$USERNAME
 source /etc/bashrc
 module add gnu/4.6.1
 
@@ -13,11 +13,11 @@ referenceRun="s2012prod_sd0202"
 # skymap reference run
 skymapRun="v5-run0a"
 
-cd $DEFAULTROOT
+cd $ORCA_DEFAULTROOT
 pwd
 
-mkdir -p $RUNID
-cd $RUNID
+mkdir -p $ORCA_RUNID
+cd $ORCA_RUNID
 
 mkdir -p logs
 mkdir -p myCoaddDir

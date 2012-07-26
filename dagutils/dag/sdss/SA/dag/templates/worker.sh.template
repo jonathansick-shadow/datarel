@@ -2,74 +2,36 @@
 
 export HERE=$PWD
 
-echo HERE
-echo $HERE
-
-# the_pbs_id=`cat /home/ux453102/Condor_glidein/key`
-
-
-# rundir=${HERE}/ux453102/736724.trestles-fe1.sdsc.edu/$runid
-# rundir=${HERE}/ux453102/738213.trestles-fe1.sdsc.edu/$runid
-# rundir=${HERE}/ux453102/${the_pbs_id}/$runid
-
-
-# cd ${HERE}/$USER/$PBS_JOBID/$runid
-
-export HOME=/home/ux453102
-
+export HOME=$USERHOME
 export SHELL=/bin/sh
-export USER=ux453102
+export USER=$USERNAME
 source /etc/bashrc
-
-
-# v5_1 
-# export LSST_HOME=/oasis/scratch/ux453102/temp_project/lsst/stacks/beta-0618/lsst_home
-# export EUPS_PATH=/oasis/scratch/ux453102/temp_project/lsst/stacks/beta-0618/lsst_home
-
-# v5_2
-export LSST_HOME=/oasis/scratch/ux453102/temp_project/lsst/beta-0713/lsst_home
-export EUPS_PATH=/oasis/scratch/ux453102/temp_project/lsst/beta-0713/lsst_home
-
-
-
-# export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/home1/00342/ux453102/libXss/install/lib
-
-# module avail
-# module swap pgi gcc/4.4.5
 
 module add gnu/4.6.1
 
-echo ${HERE}
+export LSST_HOME=$LSST_HOME
+export EUPS_PATH=$EUPS_PATH
+
+
+# processSdssCcd reference run
+# referenceRun="$REFRUN"
 
 /bin/hostname -f 
 shost=`/bin/hostname -s`
-
-# $0 is the name of the command
-# $1 first parameter
-# $2 second parameter
-# $3 third parameter etc. etc
-# $# total number of parameters
-# $@ all the parameters will be listed
-
-# run=1033 filter=r camcol=4 field=124
-
-# why is this here 
-# export LSST_HOME=/oasis/scratch/ux453102/temp_project/lsst/stacks/beta-0618/lsst_home
 
 # Parse command line args
 count=0
 check=0
 while [ $check == 0 ]; do
 
-run_filter_camcol_field=$1
+skytiles=$1
 
-echo run_filter_camcol_field 
-echo $run_filter_camcol_field 
-names[$count]=$run_filter_camcol_field
+echo skytiles 
+echo $skytiles 
+names[$count]=$skytiles
 
 if [ $2 == 'X' ]
     then
-    echo YES 
     shift 2
     count=`expr $count + 1`
 else
@@ -78,49 +40,18 @@ fi
 
 done
 
-
 runid=$2 
-echo runid
-echo $runid
 workerid=$3 
-rundir=${HERE}/$runid
+rundir=${HERE}/$ORCA_RUNID
 cd ${rundir}
 
-
-
-
-# visit_raft_sensor=$1" "$2" "$3 
-# run_filter_camcol_field=$1" "$2" "$3" "$4 
-# echo full_data_id >> logs/debuglog
-# echo $run_filter_camcol_field >> logs/debuglog
-
-
-echo _CONDOR_SLOT
-echo ${_CONDOR_SLOT}
 cslot=${_CONDOR_SLOT}
 
 mkdir -p logs/$shost/$cslot
 
-
-# logdir=${rundir}/setup-logs
-# runlogdir=${rundir}/logs
-
-# htmldir=${rundir}/html
-
-# mkdir -p ${logdir}
-# mkdir -p ${runlogdir}
-# mkdir -p ${htmldir}
-
-# export LSST_HOME=/share1/projects/xsede/lsst/beta-0215/lsst_home
-# export LSST_HOME=/oasis/projects/nsf/nsa101/ux453102/beta-0214/lsst_home
-
-# export LSST_HOME=/oasis/scratch/ux453102/temp_project/lsst/beta-0214/lsst_home
-
-# source $DEFAULTROOT/s2012prod_im0103/env.sh
-source $DEFAULTROOT/s2012prod_sd0202/env.sh
+source $ORCA_DEFAULTROOT/$REFRUN/env.sh
 
 temp=""
-temp1=""
 
 cd ${rundir}
 
@@ -129,33 +60,19 @@ echo "Loop iteration "
 echo $i 
 echo ${names[$i]}
 
-# run_filter_camcol_field=$1" "$2" "$3" "$4 
 temp=$temp" --id "${names[$i]}
-temp1=$temp1" "${names[$i]} 
 
-# run_filter_camcol_field=${names[$i]}
 done
 
-run_filter_camcol_field_cmd=$temp
-run_filter_camcol_field=$temp1
+skytiles_cmd=$temp
 
-echo run_filter_camcol_field_cmd
-echo ${run_filter_camcol_field_cmd}
+echo skytiles_cmd
+echo ${skytiles_cmd}
 
-echo "==== Prior to S2012Pipe "
 
-# --input /scratch/00342/ux453102/base/lsst/pt1_2/data/obs/ImSim 
-
-# $PIPE_TASKS_DIR/bin/ processCcdLsstSim.py
-# --input /scratch/00342/ux453102/datarel-runs/w2012prod_im0138/output
-# --output /scratch/00342/ux453102/datarel-runs/w2012prod_im0138/output
-# --id visit=888382340 raft=2,1 sensor=0,2 > logs/W2012Pipe-${visit}.log 2>&1
-
-modstring=""
 time1=0
 time2=0
 time3=0
-modstring=`echo ${run_filter_camcol_field} | sed -e 's/ /:/g' -e 's/=/-/g' -e 's/,/_/g' -e 's/filter/f/g' -e 's/camcol/c/g' -e 's/field/f/g' -e 's/run/r/g'`
 
 modstring=${workerid}
 echo modstring
@@ -163,23 +80,16 @@ echo ${modstring}
 
 time1=$(date -d "`date`" "+%s")
 
+echo "$AP_DIR/bin/sourceAssoc.py sdss $ORCA_DEFAULTROOT/$REFRUN/output --output SourceAssoc ${skytiles_cmd}  > ${rundir}/logs/$shost/$cslot/SourceAssoc-${modstring}.log"
 
-echo "$AP_DIR/bin/sourceAssoc.py sdss output --output SourceAssoc  > ${rundir}/logs/$shost/$cslot/SourceAssoc-${modstring}.log"
-
-$AP_DIR/bin/sourceAssoc.py sdss output --output SourceAssoc  > ${rundir}/logs/$shost/$cslot/SourceAssoc-${modstring}.log 2>&1 
+$AP_DIR/bin/sourceAssoc.py sdss $ORCA_DEFAULTROOT/$REFRUN/output --output SourceAssoc ${skytiles_cmd}  > ${rundir}/logs/$shost/$cslot/SourceAssoc-${modstring}.log 2>&1 
 
 
 time2=$(date -d "`date`" "+%s")
 
 let time3=$time2-$time1
 
-echo "===================== After S2012Pipe "
-
 echo STAMP2 $time2
 echo STAMP1 $time1
 
 echo TIMING $time3
-
-
-date
-

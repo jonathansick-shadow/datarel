@@ -72,6 +72,19 @@ root.workflow["association"].task["isr"].dagGenerator.script = "/nfs/lsst/home/d
 # root.workflow["association"].task["isr"].dagGenerator.input = "/nfs/lsst/home/daues/work/ptest/dag/sdss/ccd/dag/input/144.sdss.input"
 # root.workflow["association"].task["isr"].dagGenerator.input = "/nfs/lsst/home/daues/work/ptest/dag/sdss/ccd/dag/input/4608.sdss.input"
 
+
 root.workflow["association"].task["isr"].dagGenerator.input = "/nfs/lsst/home/daues/work/ptest/dag/sdss/ccd/dag/input/2355.sdss.input"
+
+
+
+
+
+USERHOME=/home/ux453102
+USERNAME=ux453102
+
+DATADIR=/oasis/scratch/ux453102/temp_project/lsst/dr7-coadds/deep2/field3_camcol4
+
+EUPS_PATH=/oasis/scratch/ux453102/temp_project/lsst/beta-0713/lsst_home
+LSST_HOME=/oasis/scratch/ux453102/temp_project/lsst/beta-0713/lsst_home
 
 

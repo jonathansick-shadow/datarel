@@ -1,18 +1,18 @@
 #!/bin/sh
 
-export HOME=/home/ux453102
+export HOME=$USERHOME
 export SHELL=/bin/sh
-export USER=ux453102
+export USER=$USERNAME
 source /etc/bashrc
 module add gnu/4.6.1
 
 # dr7 coadd v5_2
-datadir="/oasis/scratch/ux453102/temp_project/lsst/dr7-coadds/deep2/field3_camcol4"
+datadir=$DATADIR
 
-cd $DEFAULTROOT
+cd $ORCA_DEFAULTROOT
 
-mkdir -p $RUNID
-cd $RUNID
+mkdir -p $ORCA_RUNID
+cd $ORCA_RUNID
 
 mkdir -p logs
 mkdir -p output
@@ -21,17 +21,16 @@ mkdir -p output/processCcd_config
 mkdir -p output/processCcd_metadata
 mkdir -p output/sci-results
 
-ln -s ${datadir}/registry.sqlite3 output/registry.sqlite3
-ln -s ${datadir} runs
+ln -s $DATADIR/registry.sqlite3 output/registry.sqlite3
 
-export LSST_HOME=/oasis/scratch/ux453102/temp_project/lsst/beta-0713/lsst_home
-export EUPS_PATH=/oasis/scratch/ux453102/temp_project/lsst/beta-0713/lsst_home
+export LSST_HOME=$LSST_HOME
+export EUPS_PATH=$EUPS_PATH
 
-cd ${LSST_HOME}
+cd $LSST_HOME
 source loadLSST.sh
 
-cd $DEFAULTROOT
-cd $RUNID
+cd $ORCA_DEFAULTROOT
+cd $ORCA_RUNID
 
 eups_setup -t v5_2 datarel -t beta > env.sh
 . ./env.sh

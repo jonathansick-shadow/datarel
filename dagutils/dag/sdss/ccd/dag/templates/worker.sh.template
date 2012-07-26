@@ -2,18 +2,12 @@
 
 export HERE=$PWD
 
-export HOME=/home/ux453102
+export HOME=$USERHOME
 export SHELL=/bin/sh
-export USER=ux453102
+export USER=$USERNAME
 source /etc/bashrc
 
-# v5_2
-export LSST_HOME=/oasis/scratch/ux453102/temp_project/lsst/beta-0713/lsst_home
-export EUPS_PATH=/oasis/scratch/ux453102/temp_project/lsst/beta-0713/lsst_home
-
 module add gnu/4.6.1
-
-echo ${HERE}
 
 /bin/hostname -f 
 shost=`/bin/hostname -s`
@@ -31,7 +25,6 @@ names[$count]=$run_filter_camcol_field
 
 if [ $5 == 'X' ]
     then
-    echo YES 
     shift 5
     count=`expr $count + 1`
 else
@@ -41,23 +34,21 @@ fi
 done
 
 runid=$5 
-echo runid
-echo $runid
 workerid=$6 
-rundir=${HERE}/$runid
+rundir=${HERE}/$ORCA_RUNID
 cd ${rundir}
 
-
-echo _CONDOR_SLOT
-echo ${_CONDOR_SLOT}
 cslot=${_CONDOR_SLOT}
 
 mkdir -p logs/$shost/$cslot
 
 source ./env.sh
 
+export LSST_HOME=$LSST_HOME
+export EUPS_PATH=$EUPS_PATH
+
+
 temp=""
-temp1=""
 
 cd ${rundir}
 
@@ -68,13 +59,11 @@ echo ${names[$i]}
 
 # run_filter_camcol_field=$1" "$2" "$3" "$4 
 temp=$temp" --id "${names[$i]}
-temp1=$temp1" "${names[$i]} 
 
 # run_filter_camcol_field=${names[$i]}
 done
 
 run_filter_camcol_field_cmd=$temp
-run_filter_camcol_field=$temp1
 
 echo run_filter_camcol_field_cmd
 echo ${run_filter_camcol_field_cmd}
@@ -82,36 +71,28 @@ echo ${run_filter_camcol_field_cmd}
 echo "==== Prior to S2012Pipe "
 
 
-modstring=""
 time1=0
 time2=0
 time3=0
-modstring=`echo ${run_filter_camcol_field} | sed -e 's/ /:/g' -e 's/=/-/g' -e 's/,/_/g' -e 's/filter/f/g' -e 's/camcol/c/g' -e 's/field/f/g' -e 's/run/r/g'`
 
 modstring=${workerid}
-echo modstring
-echo ${modstring}
 
 time1=$(date -d "`date`" "+%s")
 
 
-echo "${CTRL_ORCA_DIR}/bin/wrapperProcessCcdSdss.py ${runid} ${workerid} sdss ${rundir}/runs ${run_filter_camcol_field_cmd} --output ${rundir}/output  > ${rundir}/logs/$shost/$cslot/S2012Pipe-${modstring}.log"
+echo "${CTRL_ORCA_DIR}/bin/wrapperProcessCcdSdss.py $ORCA_RUNID ${workerid} sdss $DATADIR ${run_filter_camcol_field_cmd} --output ${rundir}/output  > ${rundir}/logs/$shost/$cslot/S2012Pipe-${modstring}.log"
 
-# v5_2 
-# --multiShear no longer needed 
-${CTRL_ORCA_DIR}/bin/wrapperProcessCcdSdss.py ${runid} ${workerid} sdss ${rundir}/runs ${run_filter_camcol_field_cmd} --output ${rundir}/output  >  ${rundir}/logs/$shost/$cslot/S2012Pipe-${modstring}.log  2>&1
+${CTRL_ORCA_DIR}/bin/wrapperProcessCcdSdss.py $ORCA_RUNID ${workerid} sdss $DATADIR ${run_filter_camcol_field_cmd} --output ${rundir}/output  >  ${rundir}/logs/$shost/$cslot/S2012Pipe-${modstring}.log  2>&1
 
 
 time2=$(date -d "`date`" "+%s")
 
 let time3=$time2-$time1
 
-echo "===================== After S2012Pipe "
+echo "==== After S2012Pipe "
 
 echo STAMP2 $time2
 echo STAMP1 $time1
 
 echo TIMING $time3
-
-date
 

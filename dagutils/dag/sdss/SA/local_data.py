@@ -76,3 +76,4 @@ root.workflow["association"].task["isr"].dagGenerator.input = "/nfs/lsst/home/da
 
 
 
+REFRUN="s2012prod_sd0202"
