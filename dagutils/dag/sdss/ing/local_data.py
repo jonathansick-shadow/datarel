@@ -97,6 +97,7 @@ root.workflow["association"].task["isr"].workerJob.script.keywords["LSST_HOME"] 
 
 root.workflow["association"].task["isr"].dagGenerator.dagName = "S2012Pipe"
 root.workflow["association"].task["isr"].dagGenerator.script = "$DATAREL_DIR/dagutils/dag/sdss/ing/dag/scripts/newgenerateDag.py"
+root.workflow["association"].task["isr"].dagGenerator.idsPerJob=1
 # root.workflow["association"].task["isr"].dagGenerator.input = "$DATAREL_DIR/dagutils/dag/sdss/ing/dag/input/80000.sdss.input"
 
 # root.workflow["association"].task["isr"].dagGenerator.input = "$DATAREL_DIR/dagutils/dag/sdss/ing/dag/input/19260.sdss.input"
