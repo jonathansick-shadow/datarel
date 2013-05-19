@@ -124,7 +124,7 @@ def genericTableSql(schema, csvConversionConfig, indexedFields):
 
     for item in schema.asList():
         name = item.field.getName()
-        dbcol = name.replace('.', '_')
+        dbcol = name.replace('.', '_').replace('-', '_')
         ty = item.key.getTypeString()
         if ty in _dbType:
             dbty = _dbType[ty]
