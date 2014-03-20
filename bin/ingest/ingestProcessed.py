@@ -23,16 +23,13 @@
 #
 
 import math
-import argparse
 import os
 import subprocess
 import sys
 
 import lsst.daf.base as dafBase
 import lsst.daf.persistence as dafPersistence
-import lsst.afw.coord as afwCoord
 import lsst.afw.image as afwImage
-import lsst.afw.geom as afwGeom
 import lsst.meas.algorithms as measAlg
 
 from lsst.datarel.csvFileWriter import CsvFileWriter

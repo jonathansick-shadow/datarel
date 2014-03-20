@@ -23,15 +23,11 @@
 #
 
 import math
-import argparse
 import os
-import re
 import subprocess
 import sys
 
-import lsst.daf.base as dafBase
 import lsst.daf.persistence as dafPersistence
-import lsst.afw.coord as afwCoord
 import lsst.afw.image as afwImage
 import lsst.afw.table as afwTable
 import lsst.meas.algorithms as measAlg
@@ -339,7 +335,6 @@ class CsvGenerator(object):
 def dbLoad(ns, sql, csvGenerator):
     """Load CSV files produced by CsvGenerator into database tables.
     """
-    camera = ns.camera
     for coaddName in ns.coaddNames:
         expTable = coaddExposureTable(coaddName)
         sourceTable = coaddSourceTable(coaddName)
