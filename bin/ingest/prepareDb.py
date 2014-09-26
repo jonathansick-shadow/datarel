@@ -53,9 +53,6 @@ loadTables = {
                ],
     "cfht":    ["Source",
                 "Object",
-                "RefObject",
-                "RefObjMatch",
-                "RefSrcMatch",
                 "Science_Ccd_Exposure",
                 "Science_Ccd_Exposure_Metadata",
                 "Science_Ccd_Exposure_To_Htm10"
