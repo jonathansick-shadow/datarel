@@ -34,7 +34,7 @@ __all__ = ['getMapperClass',
 _mapperClassName = {
     'lsstsim': 'lsst.obs.lsstSim.LsstSimMapper',
     'sdss': 'lsst.obs.sdss.SdssMapper',
-    'cfht': 'lsst.obs.cfht.CfhtMapper',
+    'cfht': 'lsst.obs.cfht.MegacamMapper',
 }
 
 
@@ -88,12 +88,13 @@ _keyTypes = {
         'patch': str,
     },
     'cfht': {
+        'runId': str,
+        'date': str,
         'visit': int,
+        'object': str,
         'filter': str,
         'ccdName': str,
-        'ampName': str,
         'ccd': int,
-        'amp': int,
         'skyTile': int,
         'tract': int,
         'patch': str,
@@ -280,13 +281,16 @@ class HfsScanner(object):
         and dataId is a key value dictionary identifying the file.
         """
         oneFound = False
+        print "in walk"
         while os.path.exists(root) and not oneFound:
             stack = [(0, root, rules, {})]
             while stack:
                 depth, path, rules, dataId = stack.pop()
+                print depth, path, rules, dataId
                 if os.path.isfile(path):
                     continue
                 pc = self._pathComponents[depth]
+                print "pc : ", pc.regex
                 if pc.simple:
                     # No need to list directory contents
                     entries = [pc.regex]
@@ -296,6 +300,7 @@ class HfsScanner(object):
                     entries = os.listdir(path)
                 depth += 1
                 for e in entries:
+                    print "e : ", e
                     subRules = rules
                     subDataId = dataId
                     if not pc.simple:
@@ -372,10 +377,7 @@ def _mungeCfht(k, v, dataId):
     if k == 'ccd':
         dataId['ccd'] = int(v)
         dataId['ccdName'] = v
-    elif k == 'amp':
-        dataId['amp'] = int(v)
-        dataId['ampName'] = v
-    elif _keyTypes['sdss'][k] == int:
+    elif _keyTypes['cfht'][k] == int:
         dataId[k] = int(v)
     else:
         dataId[k] = v 
@@ -400,7 +402,9 @@ class DatasetScanner(HfsScanner):
         camera = camera.lower()
         if camera not in _keyTypes:
             raise RuntimeError('{} camera not supported yet'.format(camera))
+        print _keyTypes[camera]
         for k in self._formatKeys:
+            print "k ", k
             if k not in _keyTypes[camera]:
                 raise RuntimeError('{} is not a valid dataId key for camera {}'.format(k, camera))
             self._formatKeys[k].munge = _mungeFunctions[camera]

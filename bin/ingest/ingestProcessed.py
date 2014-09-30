@@ -62,7 +62,7 @@ bytesPerPixel = 4 + 2 + 4
 minExposureSize = {
     'lsstsim': bytesPerPixel*4000*4000,
     'sdss': bytesPerPixel*2048*1361,
-    'cfht': bytesPerPixel*1*1, # TODO: what dimensions are appropriate here?
+    'cfht': bytesPerPixel*2048*4612, # I think this is the right values as CFHT images correspond to the full CCD, not the individuals amplifiers
 }
 
 
@@ -97,12 +97,15 @@ class CsvGenerator(object):
                 registry = os.path.join(root, 'registry.sqlite3')
             cls = getMapperClass(self.camera)
             cameraMapper = cls(root=root, registry=registry)
+            print "cameraMapper ", cameraMapper
             butler = dafPersistence.ButlerFactory(mapper=cameraMapper).create()
             scanner = DatasetScanner(dataset='calexp',
                                      camera=self.camera,
                                      cameraMapper=cameraMapper)
+            print "scanner ", dir(scanner)
             # scan the root for matching calexps
             for path, dataId in scanner.walk(root, self.namespace.rules):
+                print path, dataId
                 self.toCsv(butler, root, path, dataId, cursor)
         if cursor:
             cursor.close()
@@ -157,18 +160,30 @@ class CsvGenerator(object):
         fwhm = attr.computeGaussianWidth() * wcs.pixelScale().asArcseconds() * sigmaToFwhm
         # Build array of column values for one Science_Ccd_Exposure metadata row
         record = [scienceCcdExposureId]
-        if self.camera in ('lsstsim', 'cfht'):
+        if self.camera == 'lsstsim':
             filterName = md.get('FILTER').strip()
             filterId = afwImage.Filter(filterName, False).getId()
             obsStart = dafBase.DateTime(
                 md.get('MJD-OBS'), dafBase.DateTime.MJD, dafBase.DateTime.UTC)
             record.append(dataId['visit'])
-            if self.camera == 'lsstsim':
-                record.extend([dataId['raftId'], dataId['raft'], dataId['sensorNum'], dataId['sensor'],])
-            else:
-                # CFHT camera doesn't have rafts
-                record.extend([dataId['ccd'], dataId['ccdName'],])
+            record.extend([dataId['raftId'], dataId['raft'], dataId['sensorNum'], dataId['sensor'],])
             record.extend([filterId, filterName])
+        elif self.camera == 'cfht':
+            filterName = md.get('FILTER').strip()
+            filterId = afwImage.Filter(filterName, False).getId()
+            obsStart = dafBase.DateTime(
+                md.get('MJD-OBS'), dafBase.DateTime.MJD, dafBase.DateTime.UTC)
+            record.extend([
+                dataId['runId'],
+                dataId['object'],
+                dataId['date'],
+                filterId,
+                dataId['filter'],
+                dataId['visit'],
+                dataId['ccd'],
+                dataId['ccdName'],
+            ])
+            
         elif self.camera == 'sdss':
             filterId = afwImage.Filter(dataId['filter'], False).getId()
             # compute start-of-exposure time from middle-of-exposure time and exposure duration
@@ -203,8 +218,9 @@ class CsvGenerator(object):
             md.get('EXPTIME'),
             1, 1, 1,
         ])
-        if self.camera in ('lsstsim', 'cfht'):
+        if self.camera in ('lsstsim'):
             # SDSS calexps do not go through CCD assembly/ISR, so these keys aren't available
+            # Same thing fro CFHT as the exposures correspond to whole CCD chip not amplifiers
             record.extend([md.get('RDNOISE'), md.get('SATURATE'), md.get('GAINEFF'),])
         # Append zero point, FWHM, and relative FITS file path
         record.extend([md.get('FLUXMAG0'), md.get('FLUXMAG0ERR'), fwhm, path])
@@ -249,7 +265,7 @@ def dbLoad(ns, sql):
     if camera == 'lsstsim':
         loadStmt += 'visit, raft, raftName, ccd, ccdName, filterId, filterName,'
     elif camera == 'cfht':
-        loadStmt += 'visit, ccd, ccdName, filterId, filterName,'
+        loadStmt += 'runId, object, date, filterId, filterName, visit, ccd, ccdName,'
     elif camera == 'sdss':
         loadStmt += 'run, camcol, filterId, field, filterName,'
     loadStmt += """
@@ -266,7 +282,7 @@ def dbLoad(ns, sql):
             taiMjd, obsStart, expMidpt, expTime,
             nCombine, binX, binY,"""
     # ... and SDSS doesn't go through CCD assembly/ISR
-    if camera in ('lsstsim', 'cfht'):
+    if camera in ('lsstsim'):
         loadStmt += """
             readNoise, saturationLimit, gainEff,"""
     loadStmt += """
