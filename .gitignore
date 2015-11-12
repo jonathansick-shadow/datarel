@@ -24,3 +24,4 @@ doc/doxygen.conf
 tests/.tests
 version.py
 psf/
+bin/trimRegistry.py
